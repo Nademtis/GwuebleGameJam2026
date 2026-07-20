@@ -10,20 +10,20 @@ class_name Wagon
 var player_touching_left_handle : bool = false
 var player_touching_right_handle : bool = false
 
-#var is_pushing : bool = false
-#var push_initiated : bool = false
-
 #used for move player when starting a push
 var push_target: Vector2
-#var moving_to_push_position: bool = false
 
-#fore moving wagon
+#for moving wagon
 enum PushState {
 	IDLE,
 	BRACING,
 	PUSHING,
 	SLOWING
 }
+
+#for camera noise and zoom
+var brace_progress : float = 0.0
+var push_intensity : float = 0.0
 
 var push_state : PushState = PushState.IDLE
 var push_direction : int = 1 # 1right -1left
@@ -39,18 +39,22 @@ func _ready() -> void:
 		push_error("player ref not defined")
 
 func _physics_process(delta : float) -> void:
+	print("braceProgress: ", brace_progress)
+	print("PushIntensity: ", push_intensity)
+	
+	
 	match push_state:
 		PushState.IDLE:
-			print("IDLE")
+			#print("IDLE")
 			handle_idle()
 		PushState.BRACING:
-			print("BRACING")
+			#print("BRACING")
 			handle_bracing(delta)
 		PushState.PUSHING:
-			print("PUSHING")
+			#print("PUSHING")
 			handle_pushing(delta)
 		PushState.SLOWING:
-			print("SLOWING")
+			#print("SLOWING")
 			handle_slowing(delta)
 		
 
@@ -77,7 +81,7 @@ func start_bracing(going_right : bool) -> void:
 
 func handle_pushing(delta : float) -> void:
 
-	#stop pushing when player lets go.
+	#stop pushing when player let go
 	if push_direction == 1:
 		if player_ref.input_dir != Vector2.RIGHT:
 			push_state = PushState.SLOWING
@@ -92,6 +96,7 @@ func handle_pushing(delta : float) -> void:
 		max_push_speed,
 		push_acceleration * delta
 	)
+	push_intensity = push_speed / max_push_speed
 
 	velocity.x = push_speed * push_direction
 	velocity.y = 0
@@ -103,7 +108,6 @@ func handle_pushing(delta : float) -> void:
 	player_ref.move_and_slide()
 
 func handle_slowing(delta : float) -> void:
-
 	if player_ref.is_pushing:
 		if player_ref.input_dir != Vector2.RIGHT and push_direction == 1:
 			release_player()
@@ -116,6 +120,7 @@ func handle_slowing(delta : float) -> void:
 		0.0,
 		push_deceleration * delta
 	)
+	push_intensity = push_speed / max_push_speed
 
 	velocity.x = push_speed * push_direction
 	velocity.y = 0
@@ -135,6 +140,7 @@ func handle_slowing(delta : float) -> void:
 func release_player() -> void:
 	player_ref.is_pushing = false
 	player_ref.velocity = Vector2.ZERO
+	brace_progress = 0.0
 	#player_ref.velocity = Vector2(-push_direction * 100, 0) # fun bounce away when detaching from wagon
 
 func player_stopped_pushing() -> void:
@@ -145,13 +151,22 @@ func player_stopped_pushing() -> void:
 
 
 func handle_bracing(delta : float) -> void:
+
 	if not player_is_still_pushing():
 		release_player()
 		push_state = PushState.IDLE
+		brace_progress = 0.0
 		return
+
+	var distance : float = player_ref.global_position.distance_to(push_target)
+	var max_distance : float = 1 # approximate starting distance
+
+	brace_progress = clamp(1.0 - (distance / max_distance), 0.0, 1.0)
+	
 	player_ref.global_position = player_ref.global_position.lerp(push_target, 5.0 * delta)
-	if player_ref.global_position.distance_to(push_target) < 0.1:
+	if distance < 0.1:
 		player_ref.global_position = push_target
+		brace_progress = 1.0
 		push_state = PushState.PUSHING
 
 func player_is_still_pushing() -> bool:

@@ -4,12 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://cpgp65wlyb4x" path="res://scenes/player/player.tscn" id="2_gr3xe"]
 [ext_resource type="PackedScene" uid="uid://b6cy03gtiupis" path="res://scenes/wagon/wagon.tscn" id="3_ds0u5"]
 [ext_resource type="PackedScene" uid="uid://b7kajvrlpdt2r" path="res://scenes/camera/p_cam.tscn" id="4_ds0u5"]
+[ext_resource type="Script" uid="uid://ccjvvqoxad4x0" path="res://scenes/levels/camera_container.gd" id="4_eokde"]
+[ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="6_ulyey"]
 
 [sub_resource type="Curve2D" id="Curve2D_ulyey"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, -16, 104, 0, 0, 0, 0, 104, 104, 0, 0, 0, 0, 176, 104, 0, 0, 0, 0, 384, 104)
 }
 point_count = 4
+
+[sub_resource type="Resource" id="Resource_ganqv"]
+script = ExtResource("6_ulyey")
+amplitude = 0.0
+frequency = 0.0
+metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 
 [node name="level" type="Node2D" unique_id=976271308]
 
@@ -28,6 +36,7 @@ position = Vector2(164, 107)
 player_ref = NodePath("../Player")
 
 [node name="CameraContainer" type="Node" parent="." unique_id=1818375729]
+script = ExtResource("4_eokde")
 
 [node name="Path2D" type="Path2D" parent="CameraContainer" unique_id=2144073547]
 curve = SubResource("Curve2D_ulyey")
@@ -36,3 +45,4 @@ curve = SubResource("Curve2D_ulyey")
 position = Vector2(105, 104)
 follow_target = NodePath("../../../YSORT/Player")
 follow_path = NodePath("..")
+noise = SubResource("Resource_ganqv")
