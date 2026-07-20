@@ -3,20 +3,29 @@ class_name Player
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-@export var max_speed: float = 95
-@export var acceleration: float = 350.0
-@export var deceleration: float = 425.0
+@export var max_speed: float = 65
+@export var acceleration: float = 260.0
+@export var deceleration: float = 260.0
 
 var can_move : bool = true
 var input_dir: Vector2
 var move_dir: Vector2
 
+var is_pushing : bool = false
+var push_direction_is_right : bool = false
 
 func _physics_process(delta: float) -> void:
 	if can_move:
 		_movement(delta)
-	move_and_slide()
 	
+	if not is_pushing:
+		move_and_slide()
+
+
+func handle_pushing() -> void:
+	pass
+
+
 func _movement(delta: float) -> void:
 	input_dir = Input.get_vector("left", "right", "up", "down")
 
@@ -35,7 +44,16 @@ func _movement(delta: float) -> void:
 		)
 		
 func _update_animation(dir: Vector2) -> void:
-	#animated_sprite_2d.play("idle")
+	if is_pushing:
+		if push_direction_is_right:
+			animated_sprite_2d.play("p_right")
+		else:
+			animated_sprite_2d.flip_h = dir.x < 0
+			animated_sprite_2d.play("p_right")
+		return
+	
+	#todo should be idle
+	animated_sprite_2d.play("w_down")
 	
 	if dir == Vector2.ZERO:
 		#animated_sprite_2d.play("idle")

@@ -21,10 +21,11 @@ tile_set = ExtResource("1_eyte8")
 y_sort_enabled = true
 
 [node name="Player" parent="YSORT" unique_id=151895576 instance=ExtResource("2_gr3xe")]
-position = Vector2(119, 110)
+position = Vector2(137, 108)
 
-[node name="wagon" parent="YSORT" unique_id=2000177108 instance=ExtResource("3_ds0u5")]
+[node name="wagon" parent="YSORT" unique_id=2000177108 node_paths=PackedStringArray("player_ref") instance=ExtResource("3_ds0u5")]
 position = Vector2(164, 107)
+player_ref = NodePath("../Player")
 
 [node name="CameraContainer" type="Node" parent="." unique_id=1818375729]
 
@@ -32,6 +33,6 @@ position = Vector2(164, 107)
 curve = SubResource("Curve2D_ulyey")
 
 [node name="pCam" parent="CameraContainer/Path2D" unique_id=1039726236 node_paths=PackedStringArray("follow_target", "follow_path") instance=ExtResource("4_ds0u5")]
-position = Vector2(119, 104)
+position = Vector2(137, 104)
 follow_target = NodePath("../../../YSORT/Player")
 follow_path = NodePath("..")
