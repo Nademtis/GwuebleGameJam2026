@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cpgp65wlyb4x"]
+
+[ext_resource type="SpriteFrames" uid="uid://cyq04jrtyksg" path="res://scenes/player/assets/playerAnimAseprite_guy.ase_layer" id="1_8afob"]
+
+[node name="Player" type="CharacterBody2D" unique_id=151895576]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1660261766]
+position = Vector2(0, -16)
+sprite_frames = ExtResource("1_8afob")
+animation = &"w_down"
