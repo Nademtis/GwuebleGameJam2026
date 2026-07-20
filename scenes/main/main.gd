@@ -65,7 +65,6 @@ func remove_active_cam() -> void:
 			cam.priority = 0
 			
 
-
 func _on_window_focus_entered() -> void:
 	focus_menu.visible = false
 func _on_window_focus_exited() -> void:

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bj1osewc5mof1"]
+
+[node name="level" type="Node2D" unique_id=976271308]
+
+[node name="YSORT" type="Node2D" parent="." unique_id=1675188736]
+y_sort_enabled = true
