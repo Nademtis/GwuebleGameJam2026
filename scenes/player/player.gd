@@ -14,6 +14,7 @@ var move_dir: Vector2
 var is_pushing : bool = false
 var push_direction_is_right : bool = false
 
+
 func _physics_process(delta: float) -> void:
 	if can_move:
 		_movement(delta)

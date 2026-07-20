@@ -95,7 +95,7 @@ position = Vector2(22, -10)
 shape = SubResource("RectangleShape2D_ganqv")
 
 [node name="rightPlayerPushSpot" type="Marker2D" parent="handles/rightHandle" unique_id=378744217]
-position = Vector2(28, 0)
+position = Vector2(27, 0)
 
 [connection signal="body_entered" from="handles/leftHandle" to="." method="_on_left_handle_body_entered"]
 [connection signal="body_exited" from="handles/leftHandle" to="." method="_on_left_handle_body_exited"]
