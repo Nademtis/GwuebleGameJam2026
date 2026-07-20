@@ -26,10 +26,11 @@ func _physics_process(delta: float) -> void:
 func handle_pushing() -> void:
 	pass
 
+func _process(_delta: float) -> void:
+	input_dir = Input.get_vector("left", "right", "up", "down")
+	
 
 func _movement(delta: float) -> void:
-	input_dir = Input.get_vector("left", "right", "up", "down")
-
 	if input_dir != Vector2.ZERO:
 		#last_move_dir = input_dir.normalized()
 		_update_animation(input_dir)
