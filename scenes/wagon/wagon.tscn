@@ -10,7 +10,7 @@ radius = 8.0
 height = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ganqv"]
-size = Vector2(18, 29)
+size = Vector2(11.375, 16)
 
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774]
 script = ExtResource("1_1svnm")
@@ -81,7 +81,7 @@ shape = SubResource("CapsuleShape2D_ganqv")
 collision_layer = 4
 
 [node name="leftHandleCollsionShape" type="CollisionShape2D" parent="handles/leftHandle" unique_id=979729039]
-position = Vector2(-20, -10)
+position = Vector2(-18.375, -11)
 shape = SubResource("RectangleShape2D_ganqv")
 
 [node name="leftPlayerPushSpot" type="Marker2D" parent="handles/leftHandle" unique_id=199972813]
@@ -91,7 +91,7 @@ position = Vector2(-27, 0)
 collision_layer = 4
 
 [node name="rightHandleCollsionShape" type="CollisionShape2D" parent="handles/rightHandle" unique_id=982908636]
-position = Vector2(22, -10)
+position = Vector2(20.3125, -10)
 shape = SubResource("RectangleShape2D_ganqv")
 
 [node name="rightPlayerPushSpot" type="Marker2D" parent="handles/rightHandle" unique_id=378744217]

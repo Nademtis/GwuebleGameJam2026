@@ -3,10 +3,10 @@ extends CanvasLayer
 
 var timer : float = 0.0
 
-var show_debug : bool = false
+var show_debug : bool = true
 
 func _ready() -> void:
-	visible = false
+	visible = show_debug
 
 func _process(delta: float) -> void:
 	if not show_debug:
@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 	
 	timer += delta
 	
-	if timer >= 0.5:
+	if timer >= 0.25:
 		timer = 0.0
 		fps_label.text = "FPS: " + str(Engine.get_frames_per_second())
 		

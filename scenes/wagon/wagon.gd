@@ -55,8 +55,6 @@ func player_started_pushing(going_right : bool) -> void:
 		print("connected and going left")
 		player_ref.push_direction_is_right = false
 		push_target = right_player_push_spot.global_position
-	
-	
 
 func pushing() -> void:
 	print("wagon is moving")

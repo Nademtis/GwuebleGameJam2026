@@ -7,9 +7,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_ulyey"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 64, 104, 0, 0, 0, 0, 216, 104)
+"points": PackedVector2Array(0, 0, 0, 0, -16, 104, 0, 0, 0, 0, 104, 104, 0, 0, 0, 0, 176, 104, 0, 0, 0, 0, 384, 104)
 }
-point_count = 2
+point_count = 4
 
 [node name="level" type="Node2D" unique_id=976271308]
 
@@ -21,7 +21,7 @@ tile_set = ExtResource("1_eyte8")
 y_sort_enabled = true
 
 [node name="Player" parent="YSORT" unique_id=151895576 instance=ExtResource("2_gr3xe")]
-position = Vector2(137, 108)
+position = Vector2(105, 106)
 
 [node name="wagon" parent="YSORT" unique_id=2000177108 node_paths=PackedStringArray("player_ref") instance=ExtResource("3_ds0u5")]
 position = Vector2(164, 107)
@@ -33,6 +33,6 @@ player_ref = NodePath("../Player")
 curve = SubResource("Curve2D_ulyey")
 
 [node name="pCam" parent="CameraContainer/Path2D" unique_id=1039726236 node_paths=PackedStringArray("follow_target", "follow_path") instance=ExtResource("4_ds0u5")]
-position = Vector2(137, 104)
+position = Vector2(105, 104)
 follow_target = NodePath("../../../YSORT/Player")
 follow_path = NodePath("..")
