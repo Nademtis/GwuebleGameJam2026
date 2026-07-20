@@ -564,7 +564,7 @@ var _transform_noise: Transform2D = Transform2D()
 var _has_noise_resource: bool = false
 
 # NOTE - Temp solution until Godot has better plugin autoload recognition out-of-the-box.
-var _phantom_camera_manager: Node = null
+var _phantom_camera_manager: Node = PhantomCameraManager
 
 #endregion
 
@@ -704,7 +704,7 @@ func _validate_property(property: Dictionary) -> void:
 
 
 func _enter_tree() -> void:
-	_phantom_camera_manager = Engine.get_singleton(_constants.PCAM_MANAGER_NODE_NAME)
+	_phantom_camera_manager = PhantomCameraManager
 	_tween_skip = !tween_on_load
 
 	_phantom_camera_manager.pcam_added(self)

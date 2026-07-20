@@ -1,6 +1,15 @@
 [gd_scene format=4 uid="uid://bj1osewc5mof1"]
 
 [ext_resource type="TileSet" uid="uid://bw3gw2s6qpun7" path="res://scenes/tiles/TileSet.tres" id="1_eyte8"]
+[ext_resource type="PackedScene" uid="uid://cpgp65wlyb4x" path="res://scenes/player/player.tscn" id="2_gr3xe"]
+[ext_resource type="PackedScene" uid="uid://b6cy03gtiupis" path="res://scenes/wagon/wagon.tscn" id="3_ds0u5"]
+[ext_resource type="PackedScene" uid="uid://b7kajvrlpdt2r" path="res://scenes/camera/p_cam.tscn" id="4_ds0u5"]
+
+[sub_resource type="Curve2D" id="Curve2D_ulyey"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 64, 104, 0, 0, 0, 0, 216, 104)
+}
+point_count = 2
 
 [node name="level" type="Node2D" unique_id=976271308]
 
@@ -10,3 +19,19 @@ tile_set = ExtResource("1_eyte8")
 
 [node name="YSORT" type="Node2D" parent="." unique_id=1675188736]
 y_sort_enabled = true
+
+[node name="Player" parent="YSORT" unique_id=151895576 instance=ExtResource("2_gr3xe")]
+position = Vector2(119, 110)
+
+[node name="wagon" parent="YSORT" unique_id=2000177108 instance=ExtResource("3_ds0u5")]
+position = Vector2(164, 107)
+
+[node name="CameraContainer" type="Node" parent="." unique_id=1818375729]
+
+[node name="Path2D" type="Path2D" parent="CameraContainer" unique_id=2144073547]
+curve = SubResource("Curve2D_ulyey")
+
+[node name="pCam" parent="CameraContainer/Path2D" unique_id=1039726236 node_paths=PackedStringArray("follow_target", "follow_path") instance=ExtResource("4_ds0u5")]
+position = Vector2(119, 104)
+follow_target = NodePath("../../../YSORT/Player")
+follow_path = NodePath("..")

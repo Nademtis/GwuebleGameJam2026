@@ -10,8 +10,8 @@ extends Node2D
 
 
 var level_list : Array[String] = [
-"res://levels/level_1.tscn", 
-"res://levels/level_2.tscn", 
+"res://scenes/levels/level_template.tscn",
+#"res://levels/level_2.tscn", 
 ]
 
 var level_index : int = 0 # start with 0
@@ -26,6 +26,9 @@ func _ready() -> void:
 	
 	Events.connect("load_new_level", start_new_level.bind(false))
 	Events.connect("restart_current_level" , restart_level)
+
+	next_level_path = level_list[level_index]
+	_setup_new_level()
 
 func start_new_level(to_restart : bool) -> void:
 	if not to_restart:

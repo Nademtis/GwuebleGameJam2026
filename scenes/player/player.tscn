@@ -1,10 +1,20 @@
 [gd_scene format=3 uid="uid://cpgp65wlyb4x"]
 
 [ext_resource type="SpriteFrames" uid="uid://cyq04jrtyksg" path="res://scenes/player/assets/playerAnimAseprite_guy.ase_layer" id="1_8afob"]
+[ext_resource type="Script" uid="uid://bwqcidglvj737" path="res://scenes/player/player.gd" id="1_dovo2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
+radius = 3.0
 
 [node name="Player" type="CharacterBody2D" unique_id=151895576]
+collision_mask = 6
+script = ExtResource("1_dovo2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1660261766]
 position = Vector2(0, -16)
 sprite_frames = ExtResource("1_8afob")
-animation = &"w_down"
+animation = &"w_right"
+
+[node name="movementColl" type="CollisionShape2D" parent="." unique_id=916809112]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_ganqv")

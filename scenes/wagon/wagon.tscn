@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://b6cy03gtiupis"]
+
+[ext_resource type="Texture2D" uid="uid://do3dbqr37tos5" path="res://scenes/wagon/assets/wagonAseprite_wheel.ase_layer_tex" id="1_68lq8"]
+[ext_resource type="Texture2D" uid="uid://rgrqq0apy4kt" path="res://scenes/wagon/assets/wagonAseprite_base.ase_layer_tex" id="2_1svnm"]
+[ext_resource type="Texture2D" uid="uid://d3b044yifd5cr" path="res://scenes/wagon/assets/wagonAseprite_oven.ase_layer_tex" id="3_qwgqn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ganqv"]
+radius = 8.0
+height = 34.0
+
+[node name="wagon" type="Node2D" unique_id=2000177108]
+
+[node name="spriteContainer" type="Node2D" parent="." unique_id=1227653735]
+position = Vector2(0, -5)
+
+[node name="wheel" type="Sprite2D" parent="spriteContainer" unique_id=825719838]
+texture = ExtResource("1_68lq8")
+
+[node name="base" type="Sprite2D" parent="spriteContainer" unique_id=603617194]
+texture = ExtResource("2_1svnm")
+
+[node name="darkBackground" type="ColorRect" parent="spriteContainer" unique_id=933270378]
+offset_left = -10.0
+offset_top = -17.0
+offset_right = 12.0
+offset_bottom = -5.0
+color = Color(0.078431375, 0.13725491, 0.22745098, 1)
+
+[node name="DEMOlight" type="ColorRect" parent="spriteContainer" unique_id=649845054]
+visible = false
+offset_left = -10.0
+offset_top = -17.0
+offset_right = 12.0
+offset_bottom = -3.0
+color = Color(0.9317604, 0.5156656, 0.0894387, 1)
+
+[node name="oven" type="Sprite2D" parent="spriteContainer" unique_id=592345464]
+texture = ExtResource("3_qwgqn")
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false,
+"layer_section": false,
+"pending_changes": {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "",
+"source_uid": -1
+},
+"slice_section": false
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=412592041]
+position = Vector2(0, -2)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=798600356]
+position = Vector2(1, -6)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ganqv")
