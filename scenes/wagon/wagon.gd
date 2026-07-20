@@ -5,6 +5,8 @@ class_name Wagon
 @onready var left_player_push_spot: Marker2D = $handles/leftHandle/leftPlayerPushSpot
 @onready var right_player_push_spot: Marker2D = $handles/rightHandle/rightPlayerPushSpot
 
+@onready var horizontal_shaker: HorizontalShaker = $spriteContainer/HorizontalShaker
+
 var player_touching_left_handle : bool = false
 var player_touching_right_handle : bool = false
 

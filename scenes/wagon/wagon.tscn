@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://do3dbqr37tos5" path="res://scenes/wagon/assets/wagonAseprite_wheel.ase_layer_tex" id="1_68lq8"]
 [ext_resource type="Texture2D" uid="uid://rgrqq0apy4kt" path="res://scenes/wagon/assets/wagonAseprite_base.ase_layer_tex" id="2_1svnm"]
 [ext_resource type="Texture2D" uid="uid://d3b044yifd5cr" path="res://scenes/wagon/assets/wagonAseprite_oven.ase_layer_tex" id="3_qwgqn"]
+[ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="5_qwgqn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ganqv"]
 radius = 8.0
@@ -64,6 +65,12 @@ metadata/_aseprite_wizard_interface_config_ = {
 },
 "slice_section": false
 }
+
+[node name="HorizontalShaker" type="Node2D" parent="spriteContainer" unique_id=1143370652]
+script = ExtResource("5_qwgqn")
+shake_distance = 2.0
+shake_speed = 10.0
+metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=412592041]
 visible = false
