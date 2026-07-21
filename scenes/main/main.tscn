@@ -20,8 +20,8 @@ noise = SubResource("FastNoiseLite_4rcdg")
 shader = ExtResource("4_l3cfh")
 shader_parameter/ice_noise = SubResource("NoiseTexture2D_ha7a2")
 shader_parameter/frost_texture = SubResource("NoiseTexture2D_gvdt1")
-shader_parameter/distortion_strength = 0.0070000003325
-shader_parameter/freeze_amount = 0.090000004275
+shader_parameter/distortion_strength = 0.0
+shader_parameter/freeze_amount = 0.2000000095
 
 [sub_resource type="Animation" id="Animation_iuonh"]
 length = 0.001
