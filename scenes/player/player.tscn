@@ -9,10 +9,10 @@
 radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y3y78"]
-radius = 18.027756
+radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gvdt1"]
-radius = 21.0
+radius = 22.0
 
 [node name="Player" type="CharacterBody2D" unique_id=151895576 groups=["player"]]
 collision_mask = 6
@@ -38,14 +38,12 @@ shape = SubResource("CircleShape2D_ganqv")
 script = ExtResource("3_gmlin")
 
 [node name="pickupArea" type="Area2D" parent="Hands" unique_id=604935658 groups=["pickupRange"]]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hands/pickupArea" unique_id=1384603638]
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_y3y78")
 
 [node name="depositArea" type="Area2D" parent="Hands" unique_id=328740585]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hands/depositArea" unique_id=1684701864]
 position = Vector2(0, -9)

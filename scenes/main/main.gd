@@ -37,6 +37,8 @@ func start_new_level(to_restart : bool) -> void:
 	print("main booting level: ", level_index)
 	next_level_path = level_list[level_index]
 	animation_player.play("fade_to_black")
+	await animation_player.animation_finished
+	_setup_new_level()
 	#fade_out_sfx.play() # #todo
 
 func _setup_new_level() -> void:

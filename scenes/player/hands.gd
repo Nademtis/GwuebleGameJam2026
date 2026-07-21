@@ -26,18 +26,21 @@ func pickup(fuel : PickupableFuel) -> void:
 		print("hands filled - not pickup")
 		return
 
-	carried_fuel.append(fuel)
-	fuel.visible = false
+	fuel.fly_to_player(player_ref)
 
+func finish_pickup(fuel : PickupableFuel) -> void:
+	carried_fuel.append(fuel)
+	update_log_animation()
 
 func deposit_into(oven : Oven) -> void:
-	#print("should deposit to oven")
-	#var fuel_to_deposit = carried_fuel.pop_front()
 	for fuel : PickupableFuel in carried_fuel:
 		oven.add_fuel(fuel)
-		carried_fuel.pop_front()
-		print("deposited to oven")
-		#fuel.queue_free()
+		fuel.queue_free()
+
+	carried_fuel.clear()
+	update_log_animation()
+
+	print("deposited to oven")
 
 
 func update_log_animation() -> void:

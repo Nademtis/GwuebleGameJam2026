@@ -23,3 +23,5 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug"):
 		show_debug = !show_debug
 		visible = show_debug
+	if event.is_action_pressed("restart") and show_debug:
+		Events.emit_signal("restart_current_level")

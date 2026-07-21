@@ -20,7 +20,3 @@ region_rect = Rect2(0, 0, 16, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pickupRangeArea" unique_id=885164707]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_ganqv")
-
-[node name="PickupableFuel" type="Node2D" parent="." unique_id=720971881]
-script = ExtResource("1_4r1yh")
-metadata/_custom_type_script = "uid://d2bka5y3mwepw"
