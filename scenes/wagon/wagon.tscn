@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="5_q5jej"]
 [ext_resource type="Script" uid="uid://ckwthq7lvxir0" path="res://scenes/wagon/oven.gd" id="6_cgiqy"]
 [ext_resource type="Texture2D" uid="uid://cj3t4obbru6be" path="res://scenes/wagon/new_assest/new_wagon_lid_spritesheet.png" id="6_v4pry"]
+[ext_resource type="Script" uid="uid://dxad7k6ivpqix" path="res://scenes/wagon/lid.gd" id="7_go74l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w7sgt"]
 atlas = ExtResource("2_1k2nb")
@@ -114,6 +115,9 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y3y78"]
+radius = 30.066593
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ganqv"]
 radius = 8.0
 height = 26.0
@@ -188,6 +192,14 @@ sprite_frames = SubResource("SpriteFrames_y3y78")
 animation = &"close"
 frame = 5
 frame_progress = 1.0
+script = ExtResource("7_go74l")
+
+[node name="Area2D" type="Area2D" parent="spriteContainer/lid" unique_id=1540827793]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spriteContainer/lid/Area2D" unique_id=2014625478]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_y3y78")
+debug_color = Color(0, 0.6455244, 0.2648948, 0.41960785)
 
 [node name="HorizontalShaker" type="Node2D" parent="spriteContainer" unique_id=1143370652]
 script = ExtResource("5_q5jej")
@@ -230,8 +242,8 @@ shape = SubResource("RectangleShape2D_ganqv")
 position = Vector2(23, -2)
 
 [node name="Oven" type="Node2D" parent="." unique_id=1304160645]
-visible = false
 script = ExtResource("6_cgiqy")
+max_heat = null
 
 [node name="Area2D" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
 
@@ -239,6 +251,8 @@ script = ExtResource("6_cgiqy")
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_ganqv")
 
+[connection signal="body_entered" from="spriteContainer/lid/Area2D" to="spriteContainer/lid" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="spriteContainer/lid/Area2D" to="spriteContainer/lid" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="handles/leftHandle" to="." method="_on_left_handle_body_entered"]
 [connection signal="body_exited" from="handles/leftHandle" to="." method="_on_left_handle_body_exited"]
 [connection signal="body_entered" from="handles/rightHandle" to="." method="_on_right_handle_body_entered"]

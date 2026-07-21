@@ -41,6 +41,8 @@ func finish_pickup(fuel : PickupableFuel) -> void:
 
 func deposit_into(oven : Oven) -> void:
 	var logs_to_send := carried_fuel.duplicate()
+	oven.lid.open()
+	print("yup")
 	await deposit_logs_sequence(logs_to_send, oven)
 
 func deposit_logs_sequence(logs : Array[PickupableFuel], oven : Oven) -> void:
@@ -63,6 +65,9 @@ func deposit_logs_sequence(logs : Array[PickupableFuel], oven : Oven) -> void:
 
 		fuel.fly_to_oven(oven)
 		await get_tree().create_timer(deposit_delay).timeout
+	await get_tree().create_timer(deposit_delay).timeout
+	oven.lid.close()
+	
 
 func update_log_animation() -> void:
 	var log_count := carried_fuel.size()
@@ -122,4 +127,6 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 func _on_deposit_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("oven"):
 		var oven : Oven = area.get_parent()
+		if carried_fuel.is_empty():
+			return
 		await deposit_into(oven)

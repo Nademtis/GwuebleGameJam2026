@@ -1,6 +1,8 @@
 extends Node2D
 class_name Oven
 
+@onready var lid: Lid = $"../spriteContainer/lid"
+
 @export var max_heat : float = 50.0
 
 var heat : float = 0.0

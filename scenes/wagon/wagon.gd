@@ -42,7 +42,6 @@ func _physics_process(delta : float) -> void:
 	#print("braceProgress: ", brace_progress)
 	#print("PushIntensity: ", push_intensity)
 	
-	
 	match push_state:
 		PushState.IDLE:
 			#print("IDLE")
@@ -80,7 +79,6 @@ func start_bracing(going_right : bool) -> void:
 		push_target = right_player_push_spot.global_position
 
 func handle_pushing(delta : float) -> void:
-
 	#stop pushing when player let go
 	if push_direction == 1:
 		if player_ref.input_dir != Vector2.RIGHT:

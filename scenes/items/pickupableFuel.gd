@@ -53,7 +53,7 @@ func fly_to_oven(oven : Oven) -> void:
 	visible = true
 
 	start_position = global_position
-	end_position = Vector2(oven.global_position.x, oven.global_position.y - 32)
+	end_position = Vector2(oven.global_position.x, oven.global_position.y - 25)
 
 	# shadow stays on ground
 	shadow_start_position = start_position
@@ -77,7 +77,7 @@ func fly_to_player_process(delta : float) -> void:
 		acceleration * delta
 	)
 	global_position += direction * fly_speed * delta
-	if global_position.distance_to(target_player.global_position) < 1:
+	if global_position.distance_to(target_player.global_position) < 5:
 		finish_pickup()
 
 func fly_to_oven_process(delta : float) -> void:

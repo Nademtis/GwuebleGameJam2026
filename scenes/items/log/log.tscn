@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bn5v86wd2uler" path="res://scenes/items/log/assets/logSpritesheetAseprite.aseprite" id="1_pxkku"]
 
 [sub_resource type="Curve" id="Curve_505e0"]
-_data = [Vector2(0.21262458, 0), 0.0, 1.5826085, 0, 0, Vector2(1, 0.79999995), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.21262458, 0), 0.0, 1.5826085, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
