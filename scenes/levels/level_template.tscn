@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b6cy03gtiupis" path="res://scenes/wagon/wagon.tscn" id="3_ds0u5"]
 [ext_resource type="PackedScene" uid="uid://b7kajvrlpdt2r" path="res://scenes/camera/p_cam.tscn" id="4_ds0u5"]
 [ext_resource type="Script" uid="uid://ccjvvqoxad4x0" path="res://scenes/levels/camera_container.gd" id="4_eokde"]
+[ext_resource type="PackedScene" uid="uid://fvgk8k2dvy7g" path="res://scenes/items/log/log.tscn" id="4_ulyey"]
 [ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="6_ulyey"]
 
 [sub_resource type="Curve2D" id="Curve2D_ulyey"]
@@ -25,11 +26,6 @@ metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 tile_map_data = PackedByteArray("AAAFAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAABAAAAAAAFAAYAAAABAAAAAAAGAAYAAAABAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAABAAAAAAAIAAYAAAABAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAABAAAAAAAKAAUAAAAAAAAAAAAKAAQAAAAAAAAAAAALAAQAAAAAAAAAAAAKAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAAFAAcAAAAAAAAAAAAKAAYAAAABAAAAAAALAAUAAAAAAAAAAAAGAAgAAAAAAAAAAAAHAAgAAAAAAAAAAAAJAAcAAAAAAAAAAAAKAAcAAAAAAAAAAAALAAYAAAABAAAAAAAMAAYAAAABAAAAAAANAAUAAAAAAAAAAAANAAQAAAAAAAAAAAAMAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAgAAAAAAAAAAAAKAAgAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAANAAYAAAABAAAAAAAMAAQAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAJAAQAAAAAAAAAAAAHAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAQAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAABAAAAAAADAAcAAAAAAAAAAAADAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAFAAgAAAAAAAAAAAALAAgAAAAAAAAAAAANAAcAAAAAAAAAAAAMAAUAAAAAAAAAAAAEAAcAAAAAAAAAAAAFAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAgAAAAAAAAAAAANAAgAAAAAAAAAAAAKAAkAAAAAAAAAAAAJAAkAAAAAAAAAAAAJAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAGAAoAAAAAAAAAAAAFAAoAAAAAAAAAAAA=")
 tile_set = ExtResource("1_eyte8")
 
-[node name="Line2D" type="Line2D" parent="." unique_id=623298476]
-points = PackedVector2Array(119, 121, 137, 134, 160, 140, 184, 132, 205, 122, 216, 133, 229, 145, 244, 121, 243, 105, 230, 91, 216, 85, 197, 72, 199, 65, 192, 142)
-width = 2.0
-default_color = Color(1, 1, 0.26666668, 1)
-
 [node name="YSORT" type="Node2D" parent="." unique_id=1675188736]
 y_sort_enabled = true
 
@@ -39,6 +35,20 @@ position = Vector2(108, 107)
 [node name="wagon" parent="YSORT" unique_id=2000177108 node_paths=PackedStringArray("player_ref") instance=ExtResource("3_ds0u5")]
 position = Vector2(164, 107)
 player_ref = NodePath("../Player")
+
+[node name="LogContainer" type="Node2D" parent="YSORT" unique_id=1991217267]
+
+[node name="Log" parent="YSORT/LogContainer" unique_id=72816142 instance=ExtResource("4_ulyey")]
+position = Vector2(81, 64)
+
+[node name="Log2" parent="YSORT/LogContainer" unique_id=662851503 instance=ExtResource("4_ulyey")]
+position = Vector2(98, 148)
+
+[node name="Log3" parent="YSORT/LogContainer" unique_id=557206288 instance=ExtResource("4_ulyey")]
+position = Vector2(186, 135)
+
+[node name="Log4" parent="YSORT/LogContainer" unique_id=1217324104 instance=ExtResource("4_ulyey")]
+position = Vector2(183, 70)
 
 [node name="CameraContainer" type="Node" parent="." unique_id=1818375729]
 script = ExtResource("4_eokde")

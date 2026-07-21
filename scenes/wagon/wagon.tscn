@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://rgrqq0apy4kt" path="res://scenes/wagon/assets/wagonAseprite_base.ase_layer_tex" id="2_1svnm"]
 [ext_resource type="Texture2D" uid="uid://d3b044yifd5cr" path="res://scenes/wagon/assets/wagonAseprite_oven.ase_layer_tex" id="3_qwgqn"]
 [ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="5_qwgqn"]
+[ext_resource type="Script" uid="uid://ckwthq7lvxir0" path="res://scenes/wagon/oven.gd" id="6_n4enn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ganqv"]
 radius = 8.0
@@ -12,6 +13,9 @@ height = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ganqv"]
 size = Vector2(11.375, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
+radius = 13.038404
 
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774]
 script = ExtResource("1_1svnm")
@@ -83,6 +87,7 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_ganqv")
 
 [node name="handles" type="Node2D" parent="." unique_id=995195635]
+visible = false
 
 [node name="leftHandle" type="Area2D" parent="handles" unique_id=1022169205]
 collision_layer = 4
@@ -103,6 +108,15 @@ shape = SubResource("RectangleShape2D_ganqv")
 
 [node name="rightPlayerPushSpot" type="Marker2D" parent="handles/rightHandle" unique_id=378744217]
 position = Vector2(27, 0)
+
+[node name="Oven" type="Node2D" parent="." unique_id=1304160645]
+script = ExtResource("6_n4enn")
+
+[node name="Area2D" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/Area2D" unique_id=1077417948]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_ganqv")
 
 [connection signal="body_entered" from="handles/leftHandle" to="." method="_on_left_handle_body_entered"]
 [connection signal="body_exited" from="handles/leftHandle" to="." method="_on_left_handle_body_exited"]

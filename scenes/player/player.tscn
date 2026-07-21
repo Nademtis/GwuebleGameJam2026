@@ -2,9 +2,16 @@
 
 [ext_resource type="SpriteFrames" uid="uid://cyq04jrtyksg" path="res://scenes/player/assets/playerAnimAseprite_guy.ase_layer" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bwqcidglvj737" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Script" uid="uid://brl7oy653xx02" path="res://scenes/player/hands.gd" id="3_gmlin"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 4.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y3y78"]
+radius = 29.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gvdt1"]
+radius = 40.04997
 
 [node name="Player" type="CharacterBody2D" unique_id=151895576 groups=["player"]]
 collision_mask = 6
@@ -16,5 +23,25 @@ sprite_frames = ExtResource("1_8afob")
 animation = &"w_right"
 
 [node name="movementColl" type="CollisionShape2D" parent="." unique_id=916809112]
+visible = false
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_ganqv")
+
+[node name="Hands" type="Node2D" parent="." unique_id=754007253]
+script = ExtResource("3_gmlin")
+
+[node name="pickupArea" type="Area2D" parent="Hands" unique_id=604935658 groups=["pickupRange"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hands/pickupArea" unique_id=1384603638]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_y3y78")
+
+[node name="depositArea" type="Area2D" parent="Hands" unique_id=328740585]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hands/depositArea" unique_id=1684701864]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_gvdt1")
+debug_color = Color(0.74509805, 0.4627451, 0.06666667, 0.101960786)
+
+[connection signal="area_entered" from="Hands/pickupArea" to="Hands" method="_on_pickup_area_area_entered"]
+[connection signal="area_entered" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_entered"]

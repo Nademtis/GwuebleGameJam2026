@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://fvgk8k2dvy7g"]
+
+[ext_resource type="Script" uid="uid://d2bka5y3mwepw" path="res://scenes/items/pickupableFuel.gd" id="1_4r1yh"]
+[ext_resource type="Texture2D" uid="uid://bn5v86wd2uler" path="res://scenes/items/log/assets/logSpritesheetAseprite.aseprite" id="1_pxkku"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
+radius = 6.0827627
+
+[node name="Log" type="Node2D" unique_id=72816142]
+script = ExtResource("1_4r1yh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1551764024]
+position = Vector2(2, -8)
+texture = ExtResource("1_pxkku")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="pickupRangeArea" type="Area2D" parent="." unique_id=1073815457]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickupRangeArea" unique_id=885164707]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_ganqv")
+
+[node name="PickupableFuel" type="Node2D" parent="." unique_id=720971881]
+script = ExtResource("1_4r1yh")
+metadata/_custom_type_script = "uid://d2bka5y3mwepw"

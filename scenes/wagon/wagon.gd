@@ -39,7 +39,7 @@ func _ready() -> void:
 		push_error("player ref not defined")
 
 func _physics_process(delta : float) -> void:
-	print("braceProgress: ", brace_progress)
+	#print("braceProgress: ", brace_progress)
 	#print("PushIntensity: ", push_intensity)
 	
 	
