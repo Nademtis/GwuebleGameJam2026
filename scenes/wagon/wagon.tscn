@@ -128,6 +128,15 @@ size = Vector2(11.375, 16)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 13.038404
 
+[sub_resource type="Gradient" id="Gradient_go74l"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_40rin"]
+gradient = SubResource("Gradient_go74l")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.504, 0)
+
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774]
 script = ExtResource("1_hmvk8")
 
@@ -152,10 +161,40 @@ offset_right = 8.0
 offset_bottom = -5.0
 color = Color(0.078431375, 0.13725491, 0.22745098, 1)
 
-[node name="fire1" type="Sprite2D" parent="spriteContainer/darkBackground" unique_id=2096847535]
-modulate = Color(0.92156863, 0.5882353, 0.38039216, 1)
-position = Vector2(7, 5)
+[node name="fireContainer" type="Node2D" parent="spriteContainer/darkBackground" unique_id=454661155]
+
+[node name="fire1" type="Sprite2D" parent="spriteContainer/darkBackground/fireContainer" unique_id=2096847535]
+modulate = Color(0.70980394, 0.34901962, 0.27058825, 1)
+position = Vector2(7, 6)
 texture = ExtResource("4_q5jej")
+
+[node name="fire1shaker" type="Node2D" parent="spriteContainer/darkBackground/fireContainer/fire1" unique_id=1400196874]
+script = ExtResource("5_q5jej")
+shake_distance = 0.3
+metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
+
+[node name="fire2" type="Sprite2D" parent="spriteContainer/darkBackground/fireContainer" unique_id=2020334920]
+modulate = Color(0.92156863, 0.5882353, 0.38039216, 1)
+position = Vector2(7, 8)
+texture = ExtResource("4_q5jej")
+
+[node name="fire2shaker" type="Node2D" parent="spriteContainer/darkBackground/fireContainer/fire2" unique_id=1895921193]
+position = Vector2(0, -3)
+script = ExtResource("5_q5jej")
+shake_distance = 0.5
+shake_speed = 17.0
+metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
+
+[node name="fire3" type="Sprite2D" parent="spriteContainer/darkBackground/fireContainer" unique_id=330130797]
+modulate = Color(0.9999996, 0.6959402, 0.5093783, 1)
+position = Vector2(7, 11)
+texture = ExtResource("4_q5jej")
+
+[node name="fire3shaker" type="Node2D" parent="spriteContainer/darkBackground/fireContainer/fire3" unique_id=780942178]
+script = ExtResource("5_q5jej")
+shake_distance = 0.9
+shake_speed = 19.0
+metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
 
 [node name="ovenFront" type="Sprite2D" parent="spriteContainer" unique_id=592345464]
 clip_children = 2
@@ -195,6 +234,7 @@ frame_progress = 1.0
 script = ExtResource("7_go74l")
 
 [node name="Area2D" type="Area2D" parent="spriteContainer/lid" unique_id=1540827793]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="spriteContainer/lid/Area2D" unique_id=2014625478]
 position = Vector2(0, 10)
@@ -243,13 +283,33 @@ position = Vector2(23, -2)
 
 [node name="Oven" type="Node2D" parent="." unique_id=1304160645]
 script = ExtResource("6_cgiqy")
-max_heat = null
 
 [node name="Area2D" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/Area2D" unique_id=1077417948]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_ganqv")
+
+[node name="ovenLight1" type="PointLight2D" parent="Oven" unique_id=787252953]
+position = Vector2(1, -13)
+color = Color(1, 0.6392157, 0.4117647, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_40rin")
+
+[node name="ovenLight2" type="PointLight2D" parent="Oven" unique_id=1043776040]
+position = Vector2(1, -13)
+color = Color(0.9999991, 0.5229503, 0.15826103, 1)
+energy = 0.6
+texture = SubResource("GradientTexture2D_40rin")
+texture_scale = 0.75
+
+[node name="ovenLight3" type="PointLight2D" parent="Oven" unique_id=856872269]
+position = Vector2(1, -13)
+color = Color(1, 0.6392157, 0.4117647, 1)
+energy = 0.85
+texture = SubResource("GradientTexture2D_40rin")
+texture_scale = 0.45
 
 [connection signal="body_entered" from="spriteContainer/lid/Area2D" to="spriteContainer/lid" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="spriteContainer/lid/Area2D" to="spriteContainer/lid" method="_on_area_2d_body_exited"]
