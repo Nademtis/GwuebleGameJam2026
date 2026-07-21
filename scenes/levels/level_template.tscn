@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b7kajvrlpdt2r" path="res://scenes/camera/p_cam.tscn" id="4_ds0u5"]
 [ext_resource type="Script" uid="uid://ccjvvqoxad4x0" path="res://scenes/levels/camera_container.gd" id="4_eokde"]
 [ext_resource type="PackedScene" uid="uid://fvgk8k2dvy7g" path="res://scenes/items/log/log.tscn" id="4_ulyey"]
+[ext_resource type="PackedScene" uid="uid://rksfpe4rc5ic" path="res://scenes/wagon/wagon_new.tscn" id="5_j81xe"]
 [ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="6_ulyey"]
 
 [sub_resource type="Curve2D" id="Curve2D_ulyey"]
@@ -36,6 +37,10 @@ position = Vector2(108, 107)
 position = Vector2(164, 107)
 player_ref = NodePath("../Player")
 
+[node name="Wagon" parent="YSORT" unique_id=756693774 node_paths=PackedStringArray("player_ref") instance=ExtResource("5_j81xe")]
+position = Vector2(66, 110)
+player_ref = NodePath("../Player")
+
 [node name="LogContainer" type="Node2D" parent="YSORT" unique_id=1991217267]
 
 [node name="Log" parent="YSORT/LogContainer" unique_id=72816142 instance=ExtResource("4_ulyey")]
@@ -60,4 +65,5 @@ curve = SubResource("Curve2D_ulyey")
 position = Vector2(108, 104)
 follow_target = NodePath("../../../YSORT/Player")
 follow_path = NodePath("..")
+draw_limits = true
 noise = SubResource("Resource_ganqv")

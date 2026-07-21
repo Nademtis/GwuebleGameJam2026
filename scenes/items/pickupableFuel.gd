@@ -76,10 +76,7 @@ func fly_to_player_process(delta : float) -> void:
 		max_fly_speed,
 		acceleration * delta
 	)
-
 	global_position += direction * fly_speed * delta
-
-
 	if global_position.distance_to(target_player.global_position) < 5:
 		finish_pickup()
 

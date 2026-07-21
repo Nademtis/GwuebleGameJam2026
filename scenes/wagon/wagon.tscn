@@ -77,7 +77,6 @@ shake_speed = 10.0
 metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=412592041]
-visible = false
 position = Vector2(-1, -2)
 collision_layer = 4
 
@@ -87,7 +86,6 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_ganqv")
 
 [node name="handles" type="Node2D" parent="." unique_id=995195635]
-visible = false
 
 [node name="leftHandle" type="Area2D" parent="handles" unique_id=1022169205]
 collision_layer = 4
