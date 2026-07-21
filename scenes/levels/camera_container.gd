@@ -2,7 +2,7 @@ extends Node
 class_name CameraContainer
 @onready var p_cam: PhantomCamera2D = $Path2D/pCam
 
-@onready var wagon: Wagon = $"../YSORT/wagon"
+@onready var wagon: Wagon = $"../YSORT/Wagon"
 @export var camera_smoothing : float= 7.5
 
 @export var bracing_curve: Curve

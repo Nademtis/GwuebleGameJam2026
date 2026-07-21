@@ -1,15 +1,122 @@
-[gd_scene format=3 uid="uid://b6cy03gtiupis"]
+[gd_scene format=3 uid="uid://rksfpe4rc5ic"]
 
-[ext_resource type="Script" uid="uid://cc8cxautpdsko" path="res://scenes/wagon/wagon.gd" id="1_1svnm"]
-[ext_resource type="Texture2D" uid="uid://do3dbqr37tos5" path="res://scenes/wagon/assets/wagonAseprite_wheel.ase_layer_tex" id="1_68lq8"]
-[ext_resource type="Texture2D" uid="uid://rgrqq0apy4kt" path="res://scenes/wagon/assets/wagonAseprite_base.ase_layer_tex" id="2_1svnm"]
-[ext_resource type="Texture2D" uid="uid://d3b044yifd5cr" path="res://scenes/wagon/assets/wagonAseprite_oven.ase_layer_tex" id="3_qwgqn"]
-[ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="5_qwgqn"]
-[ext_resource type="Script" uid="uid://ckwthq7lvxir0" path="res://scenes/wagon/oven.gd" id="6_n4enn"]
+[ext_resource type="Script" uid="uid://cc8cxautpdsko" path="res://scenes/wagon/wagon.gd" id="1_hmvk8"]
+[ext_resource type="Texture2D" uid="uid://bqejao32wnknl" path="res://scenes/wagon/new_assest/new_wagonAseprite_wheels.ase_layer_tex" id="2_1k2nb"]
+[ext_resource type="Texture2D" uid="uid://clbcpfp8c72a7" path="res://scenes/wagon/new_assest/new_wagonAseprite_wagon.ase_layer_tex" id="3_cmnqr"]
+[ext_resource type="Texture2D" uid="uid://b1h3g6dlwvd4y" path="res://scenes/wagon/new_assest/new_wagonAseprite_fire.ase_layer_tex" id="4_q5jej"]
+[ext_resource type="Texture2D" uid="uid://dfpfk2eoc48dt" path="res://scenes/wagon/new_assest/new_wagonAseprite_oven_front.ase_layer_tex" id="5_cgiqy"]
+[ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="5_q5jej"]
+[ext_resource type="Script" uid="uid://ckwthq7lvxir0" path="res://scenes/wagon/oven.gd" id="6_cgiqy"]
+[ext_resource type="Texture2D" uid="uid://cj3t4obbru6be" path="res://scenes/wagon/new_assest/new_wagon_lid_spritesheet.png" id="6_v4pry"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7sgt"]
+atlas = ExtResource("2_1k2nb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ganqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7sgt")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2ew4"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anf1u"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwqlu"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o62i0"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uflmn"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krci8"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ssj3c"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_853kv"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_raq4v"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enlxm"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a542s"]
+atlas = ExtResource("6_v4pry")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y3y78"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2ew4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anf1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwqlu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o62i0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uflmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krci8")
+}],
+"loop": 0,
+"name": &"close",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ssj3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_853kv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_raq4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enlxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a542s")
+}],
+"loop": 0,
+"name": &"open",
+"speed": 12.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ganqv"]
 radius = 8.0
-height = 40.0
+height = 26.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ganqv"]
 size = Vector2(11.375, 16)
@@ -18,34 +125,38 @@ size = Vector2(11.375, 16)
 radius = 13.038404
 
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774]
-script = ExtResource("1_1svnm")
+script = ExtResource("1_hmvk8")
 
 [node name="spriteContainer" type="Node2D" parent="." unique_id=1227653735]
 position = Vector2(-1, -5)
 
-[node name="wheel" type="Sprite2D" parent="spriteContainer" unique_id=825719838]
-texture = ExtResource("1_68lq8")
+[node name="wheel" type="AnimatedSprite2D" parent="spriteContainer" unique_id=1637443051]
+position = Vector2(1, -20)
+sprite_frames = SubResource("SpriteFrames_ganqv")
+metadata/_edit_lock_ = true
 
 [node name="base" type="Sprite2D" parent="spriteContainer" unique_id=603617194]
-texture = ExtResource("2_1svnm")
+position = Vector2(1, -20)
+texture = ExtResource("3_cmnqr")
+metadata/_edit_lock_ = true
 
 [node name="darkBackground" type="ColorRect" parent="spriteContainer" unique_id=933270378]
-offset_left = -10.0
-offset_top = -17.0
-offset_right = 12.0
+clip_children = 2
+offset_left = -6.0
+offset_top = -25.0
+offset_right = 8.0
 offset_bottom = -5.0
 color = Color(0.078431375, 0.13725491, 0.22745098, 1)
 
-[node name="DEMOlight" type="ColorRect" parent="spriteContainer" unique_id=649845054]
-visible = false
-offset_left = -10.0
-offset_top = -17.0
-offset_right = 12.0
-offset_bottom = -3.0
-color = Color(0.9317604, 0.5156656, 0.0894387, 1)
+[node name="fire1" type="Sprite2D" parent="spriteContainer/darkBackground" unique_id=2096847535]
+modulate = Color(0.92156863, 0.5882353, 0.38039216, 1)
+position = Vector2(7, 5)
+texture = ExtResource("4_q5jej")
 
-[node name="oven" type="Sprite2D" parent="spriteContainer" unique_id=592345464]
-texture = ExtResource("3_qwgqn")
+[node name="ovenFront" type="Sprite2D" parent="spriteContainer" unique_id=592345464]
+clip_children = 2
+position = Vector2(1, -20)
+texture = ExtResource("5_cgiqy")
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
 "layer_section": false,
@@ -69,46 +180,58 @@ metadata/_aseprite_wizard_interface_config_ = {
 },
 "slice_section": false
 }
+metadata/_edit_lock_ = true
+
+[node name="lid" type="AnimatedSprite2D" parent="spriteContainer" unique_id=1072525212]
+position = Vector2(1, -20)
+sprite_frames = SubResource("SpriteFrames_y3y78")
+animation = &"close"
+frame = 5
+frame_progress = 1.0
 
 [node name="HorizontalShaker" type="Node2D" parent="spriteContainer" unique_id=1143370652]
-script = ExtResource("5_qwgqn")
+script = ExtResource("5_q5jej")
 shake_distance = 2.0
 shake_speed = 10.0
 metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=412592041]
+visible = false
 position = Vector2(-1, -2)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=798600356]
-position = Vector2(1, -5)
+position = Vector2(1, -7)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_ganqv")
 
 [node name="handles" type="Node2D" parent="." unique_id=995195635]
+visible = false
 
 [node name="leftHandle" type="Area2D" parent="handles" unique_id=1022169205]
+position = Vector2(5, -1)
 collision_layer = 4
 
 [node name="leftHandleCollsionShape" type="CollisionShape2D" parent="handles/leftHandle" unique_id=979729039]
-position = Vector2(-18.375, -11)
+position = Vector2(-19.375, -11)
 shape = SubResource("RectangleShape2D_ganqv")
 
 [node name="leftPlayerPushSpot" type="Marker2D" parent="handles/leftHandle" unique_id=199972813]
-position = Vector2(-27, 0)
+position = Vector2(-28, -1)
 
 [node name="rightHandle" type="Area2D" parent="handles" unique_id=646541289]
 collision_layer = 4
 
 [node name="rightHandleCollsionShape" type="CollisionShape2D" parent="handles/rightHandle" unique_id=982908636]
-position = Vector2(20.3125, -10)
+position = Vector2(14.3125, -12)
 shape = SubResource("RectangleShape2D_ganqv")
 
 [node name="rightPlayerPushSpot" type="Marker2D" parent="handles/rightHandle" unique_id=378744217]
-position = Vector2(27, 0)
+position = Vector2(23, -2)
 
 [node name="Oven" type="Node2D" parent="." unique_id=1304160645]
-script = ExtResource("6_n4enn")
+visible = false
+script = ExtResource("6_cgiqy")
 
 [node name="Area2D" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
 

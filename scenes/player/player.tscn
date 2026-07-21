@@ -27,7 +27,7 @@ animation = &"down_3_log"
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1660261766]
 position = Vector2(0, -16)
 sprite_frames = ExtResource("1_8afob")
-animation = &"w_right"
+animation = &"w_down"
 
 [node name="movementColl" type="CollisionShape2D" parent="." unique_id=916809112]
 visible = false
@@ -51,6 +51,7 @@ shape = SubResource("CircleShape2D_gvdt1")
 debug_color = Color(0.74509805, 0.4627451, 0.06666667, 0.101960786)
 
 [node name="logFRONTHandsAnimatedSprite2D" type="AnimatedSprite2D" parent="Hands" unique_id=574999338]
+visible = false
 position = Vector2(3, -10)
 sprite_frames = ExtResource("2_lvxji")
 animation = &"right_3_log"
