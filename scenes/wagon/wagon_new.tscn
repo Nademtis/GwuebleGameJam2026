@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://rksfpe4rc5ic"]
+
+[ext_resource type="Script" uid="uid://cc8cxautpdsko" path="res://scenes/wagon/wagon.gd" id="1_hmvk8"]
+[ext_resource type="Texture2D" uid="uid://do3dbqr37tos5" path="res://scenes/wagon/assets/wagonAseprite_wheel.ase_layer_tex" id="2_3tqmk"]
+[ext_resource type="Texture2D" uid="uid://rgrqq0apy4kt" path="res://scenes/wagon/assets/wagonAseprite_base.ase_layer_tex" id="3_1k2nb"]
+[ext_resource type="Texture2D" uid="uid://d3b044yifd5cr" path="res://scenes/wagon/assets/wagonAseprite_oven.ase_layer_tex" id="4_cmnqr"]
+[ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="5_q5jej"]
+[ext_resource type="Script" uid="uid://ckwthq7lvxir0" path="res://scenes/wagon/oven.gd" id="6_cgiqy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ganqv"]
+radius = 8.0
+height = 40.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ganqv"]
+size = Vector2(11.375, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
+radius = 13.038404
+
+[node name="Wagon" type="CharacterBody2D" unique_id=756693774]
+script = ExtResource("1_hmvk8")
+
+[node name="spriteContainer" type="Node2D" parent="." unique_id=1227653735]
+position = Vector2(-1, -5)
+
+[node name="wheel" type="Sprite2D" parent="spriteContainer" unique_id=825719838]
+texture = ExtResource("2_3tqmk")
+
+[node name="base" type="Sprite2D" parent="spriteContainer" unique_id=603617194]
+texture = ExtResource("3_1k2nb")
+
+[node name="darkBackground" type="ColorRect" parent="spriteContainer" unique_id=933270378]
+offset_left = -10.0
+offset_top = -17.0
+offset_right = 12.0
+offset_bottom = -5.0
+color = Color(0.078431375, 0.13725491, 0.22745098, 1)
+
+[node name="DEMOlight" type="ColorRect" parent="spriteContainer" unique_id=649845054]
+visible = false
+offset_left = -10.0
+offset_top = -17.0
+offset_right = 12.0
+offset_bottom = -3.0
+color = Color(0.9317604, 0.5156656, 0.0894387, 1)
+
+[node name="oven" type="Sprite2D" parent="spriteContainer" unique_id=592345464]
+texture = ExtResource("4_cmnqr")
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": false,
+"layer_section": false,
+"pending_changes": {
+"convert_fps_field": 60.0,
+"convert_ms_field": 16.0,
+"convert_to_fps": false,
+"embed_tex": true,
+"i_mode": 0,
+"keep_anim_length": false,
+"layers": [],
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": false,
+"player": "",
+"scale": "1.0",
+"slice": "",
+"source": "",
+"source_uid": -1
+},
+"slice_section": false
+}
+
+[node name="HorizontalShaker" type="Node2D" parent="spriteContainer" unique_id=1143370652]
+script = ExtResource("5_q5jej")
+shake_distance = 2.0
+shake_speed = 10.0
+metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=412592041]
+visible = false
+position = Vector2(-1, -2)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=798600356]
+position = Vector2(1, -5)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ganqv")
+
+[node name="handles" type="Node2D" parent="." unique_id=995195635]
+visible = false
+
+[node name="leftHandle" type="Area2D" parent="handles" unique_id=1022169205]
+collision_layer = 4
+
+[node name="leftHandleCollsionShape" type="CollisionShape2D" parent="handles/leftHandle" unique_id=979729039]
+position = Vector2(-18.375, -11)
+shape = SubResource("RectangleShape2D_ganqv")
+
+[node name="leftPlayerPushSpot" type="Marker2D" parent="handles/leftHandle" unique_id=199972813]
+position = Vector2(-27, 0)
+
+[node name="rightHandle" type="Area2D" parent="handles" unique_id=646541289]
+collision_layer = 4
+
+[node name="rightHandleCollsionShape" type="CollisionShape2D" parent="handles/rightHandle" unique_id=982908636]
+position = Vector2(20.3125, -10)
+shape = SubResource("RectangleShape2D_ganqv")
+
+[node name="rightPlayerPushSpot" type="Marker2D" parent="handles/rightHandle" unique_id=378744217]
+position = Vector2(27, 0)
+
+[node name="Oven" type="Node2D" parent="." unique_id=1304160645]
+script = ExtResource("6_cgiqy")
+
+[node name="Area2D" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/Area2D" unique_id=1077417948]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_ganqv")
+
+[connection signal="body_entered" from="handles/leftHandle" to="." method="_on_left_handle_body_entered"]
+[connection signal="body_exited" from="handles/leftHandle" to="." method="_on_left_handle_body_exited"]
+[connection signal="body_entered" from="handles/rightHandle" to="." method="_on_right_handle_body_entered"]
+[connection signal="body_exited" from="handles/rightHandle" to="." method="_on_right_handle_body_exited"]
