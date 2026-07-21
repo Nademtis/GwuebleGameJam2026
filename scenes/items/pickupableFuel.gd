@@ -131,7 +131,7 @@ func update_shadow(progress : float, height : float) -> void:
 
 	# fades when high
 	shadow.modulate.a = lerp(
-		1.0,
+		0.25,
 		shadow_height_fade,
 		height_percent
 	)
