@@ -3,7 +3,7 @@ class_name CameraContainer
 @onready var p_cam: PhantomCamera2D = $Path2D/pCam
 
 @onready var wagon: Wagon = $"../YSORT/wagon"
-@export var camera_smoothing : float= 5.0
+@export var camera_smoothing : float= 7.5
 
 @export var bracing_curve: Curve
 
@@ -15,10 +15,10 @@ var original_zoom : Vector2 # when running around
 var bracing_zoom : Vector2 # when bracing the wagon
 var pushing_zoom : Vector2 # when pushing
 
-var max_noise_amplitude_bracing : float = 4.0
+var max_noise_amplitude_bracing : float = 2.0
 var max_noise_frequency_bracing : float = 0.5
 
-var max_noise_amplitude_pushing : float = 2.2
+var max_noise_amplitude_pushing : float = 1.2
 var max_noise_frequency_pushing : float = 0.4
 
 var no_noise : float = 0.0
@@ -29,8 +29,8 @@ var current_frequency : float = 0.0
 
 func _ready() -> void:
 	original_zoom = p_cam.zoom
-	bracing_zoom = Vector2(original_zoom.x + 0.75, original_zoom.y + 0.75)
-	pushing_zoom = Vector2(original_zoom.x - 1.2, original_zoom.y - 1.2)
+	bracing_zoom = Vector2(original_zoom.x + 0.25, original_zoom.y + 0.25)
+	pushing_zoom = Vector2(original_zoom.x - 0.75, original_zoom.y - 0.75)
 	
 
 func _process(delta: float) -> void:
