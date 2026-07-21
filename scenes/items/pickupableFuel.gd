@@ -7,17 +7,48 @@ class_name PickupableFuel
 @export var weight : float = 0.1
 @export var type : FuelType = FuelType.LOG
 
+
 enum FuelType {
 	LOG,
 }
 
+#from ground --> player
 var flying_to_player := false
 var target_player : Node2D
-
 var fly_speed := 50.0
 var max_fly_speed := 500.0
 var acceleration := 900.0
 
+#from player--> oven
+var flying_to_oven := false
+var target_oven : Oven
+var start_position : Vector2
+var end_position : Vector2
+var flight_time : float = 0.0
+@export var oven_flight_duration : float = 0.6
+@export var oven_arc_height : float = 80.0
+@export var oven_acceleration_curve : Curve
+
+func _process(delta: float) -> void:
+	if flying_to_player:
+		fly_to_player_process(delta)
+
+	if flying_to_oven:
+		fly_to_oven_process(delta)
+
+func fly_to_oven(oven : Oven) -> void:
+	self.z_index += 1
+	target_oven = oven
+
+	flying_to_oven = true
+	visible = true
+
+	start_position = global_position
+	end_position = oven.global_position
+
+	flight_time = 0.0
+
+	pickup_range_area.set_deferred("monitoring", false)
 
 func fly_to_player(player: Node2D) -> void:
 	target_player = player
@@ -25,14 +56,9 @@ func fly_to_player(player: Node2D) -> void:
 	
 	pickup_range_area.set_deferred("monitorable", false)
 
-
-func _process(delta: float) -> void:
-	if not flying_to_player:
-		return
-
+func fly_to_player_process(delta : float) -> void:
 	var direction := global_position.direction_to(target_player.global_position)
 
-	# accelerate over time
 	fly_speed = move_toward(
 		fly_speed,
 		max_fly_speed,
@@ -41,10 +67,34 @@ func _process(delta: float) -> void:
 
 	global_position += direction * fly_speed * delta
 
-	# close enough in pixels
+
 	if global_position.distance_to(target_player.global_position) < 5:
 		finish_pickup()
 
+func fly_to_oven_process(delta : float) -> void:
+
+	flight_time += delta
+	var progress := flight_time / oven_flight_duration
+	progress = clamp(progress,0.0,1.0)
+
+	var curved_progress := progress
+	if oven_acceleration_curve:
+		curved_progress = oven_acceleration_curve.sample(progress)
+	else:
+		# slow start, fast end
+		curved_progress = pow(progress, 2.5)
+
+	# move horizontally
+	var fuel_position := start_position.lerp(
+		end_position,
+		curved_progress
+	)
+	# adds arc
+	var height := sin(progress * PI) * oven_arc_height
+	fuel_position.y -= height
+	global_position = fuel_position
+	if progress >= 1.0:
+		finish_oven_deposit()
 
 func finish_pickup() -> void:
 	flying_to_player = false
@@ -52,3 +102,8 @@ func finish_pickup() -> void:
 	
 	var hands := target_player.get_node("Hands") as Hands
 	hands.finish_pickup(self)
+
+func finish_oven_deposit() -> void:
+	flying_to_oven = false
+	target_oven.add_fuel(self)
+	queue_free()

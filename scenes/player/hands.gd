@@ -8,6 +8,13 @@ const RIGHT_HANDS_POSITION : Vector2 = Vector2(3.0,-10)
 const LEFT_HANDS_POSITION : Vector2 = Vector2(-3.0,-10)
 
 
+#when depositing logs. add some random to it and delay yessss
+@export var deposit_delay : float = 0.25
+@export var random_flight_duration_min : float = 0.45
+@export var random_flight_duration_max : float = 0.7
+
+@export var random_arc_min : float = 10.0
+@export var random_arc_max : float = 15.0
 
 @export var max_logs := 3
 
@@ -33,15 +40,29 @@ func finish_pickup(fuel : PickupableFuel) -> void:
 	update_log_animation()
 
 func deposit_into(oven : Oven) -> void:
-	for fuel : PickupableFuel in carried_fuel:
-		oven.add_fuel(fuel)
-		fuel.queue_free()
+	var logs_to_send := carried_fuel.duplicate()
+	await deposit_logs_sequence(logs_to_send, oven)
 
-	carried_fuel.clear()
-	update_log_animation()
+func deposit_logs_sequence(logs : Array[PickupableFuel], oven : Oven) -> void:
 
-	print("deposited to oven")
+	for fuel : PickupableFuel in logs:
+		# remove one log visually from hands
+		carried_fuel.erase(fuel)
+		update_log_animation()
+		fuel.global_position = player_ref.global_position
+		
+		fuel.oven_flight_duration = randf_range(
+			random_flight_duration_min,
+			random_flight_duration_max
+		)
+		
+		fuel.oven_arc_height = randf_range(
+			random_arc_min,
+			random_arc_max
+		)
 
+		fuel.fly_to_oven(oven)
+		await get_tree().create_timer(deposit_delay).timeout
 
 func update_log_animation() -> void:
 	var log_count := carried_fuel.size()
@@ -100,4 +121,5 @@ func _on_pickup_area_area_entered(area: Area2D) -> void:
 
 func _on_deposit_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("oven"):
-		deposit_into(area.get_parent())
+		var oven : Oven = area.get_parent()
+		await deposit_into(oven)
