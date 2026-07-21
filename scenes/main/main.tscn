@@ -6,19 +6,19 @@
 [ext_resource type="Shader" uid="uid://cx8wclejgyyou" path="res://misc/shaders/ice_lens.gdshader" id="4_l3cfh"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_l3cfh"]
-noise_type = 2
+frequency = 0.008
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gvdt1"]
 noise = SubResource("FastNoiseLite_l3cfh")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_4rcdg"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d6oyh"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ha7a2"]
-noise = SubResource("FastNoiseLite_4rcdg")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_505e0"]
+noise = SubResource("FastNoiseLite_d6oyh")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ganqv"]
 shader = ExtResource("4_l3cfh")
-shader_parameter/ice_noise = SubResource("NoiseTexture2D_ha7a2")
+shader_parameter/ice_noise = SubResource("NoiseTexture2D_505e0")
 shader_parameter/frost_texture = SubResource("NoiseTexture2D_gvdt1")
 shader_parameter/distortion_strength = 0.0
 shader_parameter/freeze_amount = 0.2000000095
