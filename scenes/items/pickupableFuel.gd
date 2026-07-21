@@ -7,6 +7,7 @@ class_name PickupableFuel
 @export var weight : float = 0.1
 @export var type : FuelType = FuelType.LOG
 
+@onready var shadow: Sprite2D = $shadow
 
 enum FuelType {
 	LOG,
@@ -29,6 +30,13 @@ var flight_time : float = 0.0
 @export var oven_arc_height : float = 80.0
 @export var oven_acceleration_curve : Curve
 
+#log shadow
+@export var shadow_min_scale : float = 0.3
+@export var shadow_max_scale : float = 1.0
+@export var shadow_height_fade : float = 0.75
+var shadow_start_position : Vector2
+var shadow_end_position : Vector2
+
 func _process(delta: float) -> void:
 	if flying_to_player:
 		fly_to_player_process(delta)
@@ -37,17 +45,21 @@ func _process(delta: float) -> void:
 		fly_to_oven_process(delta)
 
 func fly_to_oven(oven : Oven) -> void:
-	self.z_index += 1
-	target_oven = oven
 
+	self.z_index += 1
+
+	target_oven = oven
 	flying_to_oven = true
 	visible = true
 
 	start_position = global_position
 	end_position = oven.global_position
 
-	flight_time = 0.0
+	# shadow stays on ground
+	shadow_start_position = start_position
+	shadow_end_position = end_position
 
+	flight_time = 0.0
 	pickup_range_area.set_deferred("monitoring", false)
 
 func fly_to_player(player: Node2D) -> void:
@@ -92,9 +104,37 @@ func fly_to_oven_process(delta : float) -> void:
 	# adds arc
 	var height := sin(progress * PI) * oven_arc_height
 	fuel_position.y -= height
+	
+	update_shadow(progress, height)
+	
 	global_position = fuel_position
 	if progress >= 1.0:
 		finish_oven_deposit()
+
+func update_shadow(progress : float, height : float) -> void:
+
+	# linear movement along ground
+	shadow.global_position = shadow_start_position.lerp(
+		shadow_end_position,
+		progress
+	)
+	# shrink when higher
+	var height_percent := height / oven_arc_height
+
+	var scale_amount : float = lerp(
+		shadow_max_scale,
+		shadow_min_scale,
+		height_percent
+	)
+
+	shadow.scale = Vector2.ONE * scale_amount
+
+	# fades when high
+	shadow.modulate.a = lerp(
+		1.0,
+		shadow_height_fade,
+		height_percent
+	)
 
 func finish_pickup() -> void:
 	flying_to_player = false

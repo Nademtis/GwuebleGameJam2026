@@ -16,7 +16,14 @@ oven_flight_duration = 0.75
 oven_arc_height = 10.0
 oven_acceleration_curve = SubResource("Curve_505e0")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1551764024]
+[node name="shadow" type="Sprite2D" parent="." unique_id=174104865]
+self_modulate = Color(1, 1, 1, 0.11764706)
+position = Vector2(2, -7)
+texture = ExtResource("1_pxkku")
+region_enabled = true
+region_rect = Rect2(0, 16, 16, 16)
+
+[node name="log" type="Sprite2D" parent="." unique_id=1551764024]
 position = Vector2(2, -8)
 texture = ExtResource("1_pxkku")
 region_enabled = true
