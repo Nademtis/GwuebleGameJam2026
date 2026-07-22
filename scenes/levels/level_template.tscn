@@ -13,7 +13,6 @@
 [ext_resource type="Script" uid="uid://dimvdouy8g0sv" path="res://addons/phantom_camera/scripts/resources/phantom_camera_noise_2d.gd" id="6_ulyey"]
 [ext_resource type="PackedScene" uid="uid://b7e08xa256frv" path="res://scenes/snow/snow_blob.tscn" id="7_fwulr"]
 [ext_resource type="Shader" uid="uid://cx8wclejgyyou" path="res://misc/shaders/ice_lens.gdshader" id="12_a381f"]
-[ext_resource type="Environment" uid="uid://cq2irltn5tsre" path="res://misc/Environment.tres" id="13_g1ai2"]
 [ext_resource type="Shader" uid="uid://duqswbbpgvn4i" path="res://misc/shaders/multiLayerSnow.gdshader" id="15_i403b"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fwulr"]
@@ -52,13 +51,14 @@ seamless = true
 width = 480
 height = 200
 noise = SubResource("FastNoiseLite_d6oyh")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ganqv"]
 shader = ExtResource("12_a381f")
 shader_parameter/ice_noise = SubResource("NoiseTexture2D_505e0")
 shader_parameter/frost_texture = SubResource("NoiseTexture2D_gvdt1")
-shader_parameter/distortion_strength = 0.0
-shader_parameter/freeze_amount = 0.5590000265525
+shader_parameter/distortion_strength = 0.010000000475
+shader_parameter/freeze_amount = 0.5750000273125
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i403b"]
 shader = ExtResource("15_i403b")
@@ -230,9 +230,6 @@ offset_right = 668.0
 offset_bottom = 79.0
 text = "Flimbus productions xD"
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=600167549]
-environment = ExtResource("13_g1ai2")
-
 [node name="snowShader" type="ColorRect" parent="." unique_id=2117673713]
 material = SubResource("ShaderMaterial_i403b")
 anchors_preset = 15
@@ -241,23 +238,6 @@ anchor_bottom = 1.0
 offset_left = -232.0
 offset_top = -45.0
 offset_right = 631.0
-offset_bottom = 212.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.81127876, 0.0005163467, 0.81158507, 0)
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1626034091]
-
-[node name="snowShader2" type="ColorRect" parent="CanvasLayer" unique_id=1663784299]
-visible = false
-material = SubResource("ShaderMaterial_i403b")
-custom_minimum_size = Vector2(24.185, 16.8)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -232.0
-offset_top = -7.0
-offset_right = 662.0
 offset_bottom = 212.0
 grow_horizontal = 2
 grow_vertical = 2
