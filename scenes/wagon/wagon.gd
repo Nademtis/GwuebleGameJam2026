@@ -5,6 +5,10 @@ class_name Wagon
 @onready var left_player_push_spot: Marker2D = $handles/leftHandle/leftPlayerPushSpot
 @onready var right_player_push_spot: Marker2D = $handles/rightHandle/rightPlayerPushSpot
 
+
+@onready var wheels_animated_sprite_2d_1: AnimatedSprite2D = $spriteContainer/wheelContainer/wheelsAnimatedSprite2d
+@onready var wheels_animated_sprite_2d_2: AnimatedSprite2D = $spriteContainer/wheelContainer/wheelsAnimatedSprite2d2
+
 @onready var horizontal_shaker: HorizontalShaker = $spriteContainer/HorizontalShaker
 
 var player_touching_left_handle : bool = false
@@ -34,14 +38,11 @@ var push_direction : int = 1 # 1right -1left
 
 var push_speed : float = 0.0
 
-#lights
-
-
-
-
 func _ready() -> void:
 	if not player_ref:
 		push_error("player ref not defined")
+		
+	randomize_wheel_start_frame()
 
 func _physics_process(delta : float) -> void:
 	#print("braceProgress: ", brace_progress)
@@ -60,7 +61,9 @@ func _physics_process(delta : float) -> void:
 		PushState.SLOWING:
 			#print("SLOWING")
 			handle_slowing(delta)
-		
+			
+	anim_wheels()
+			
 
 func handle_idle() -> void:
 	if player_touching_left_handle:
@@ -86,10 +89,13 @@ func start_bracing(going_right : bool) -> void:
 func handle_pushing(delta : float) -> void:
 	#stop pushing when player let go
 	if push_direction == 1:
+
 		if player_ref.input_dir != Vector2.RIGHT:
 			push_state = PushState.SLOWING
 			return
 	else:
+		#wheels_animated_sprite_2d_1.play("turn")
+		#wheels_animated_sprite_2d_2.play("turn")
 		if player_ref.input_dir != Vector2.LEFT:
 			push_state = PushState.SLOWING
 			return
@@ -105,6 +111,7 @@ func handle_pushing(delta : float) -> void:
 	velocity.y = 0
 
 	move_and_slide()
+	
 
 	#asign the same velocity to player
 	player_ref.velocity = velocity
@@ -177,6 +184,35 @@ func player_is_still_pushing() -> bool:
 		return player_ref.input_dir == Vector2.RIGHT
 	else:
 		return player_ref.input_dir == Vector2.LEFT
+
+func anim_wheels() -> void:
+	if push_state == PushState.IDLE or push_state == PushState.BRACING:
+		wheels_animated_sprite_2d_1.stop()
+		wheels_animated_sprite_2d_2.stop()
+		return
+
+	if !wheels_animated_sprite_2d_1.is_playing():
+		wheels_animated_sprite_2d_1.play("turn")
+		wheels_animated_sprite_2d_2.play("turn")
+
+	var speed : float = max(push_speed / max_push_speed, 0.1)
+
+	wheels_animated_sprite_2d_1.speed_scale = speed * push_direction
+	wheels_animated_sprite_2d_2.speed_scale = speed * push_direction
+	
+	
+	
+func randomize_wheel_start_frame() -> void:
+	var frame_count := wheels_animated_sprite_2d_1.sprite_frames.get_frame_count("turn")
+	
+	var frame1 := randi_range(0, frame_count - 1)
+	var frame2 := frame1
+
+	while frame2 == frame1:
+		frame2 = randi_range(0, frame_count - 1)
+
+	wheels_animated_sprite_2d_1.frame = frame1
+	wheels_animated_sprite_2d_2.frame = frame2
 
 func _on_left_handle_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):

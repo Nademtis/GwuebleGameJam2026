@@ -58,6 +58,7 @@ const FIRE_3_SHAKE_SPEED: float = 19.0
 @export var light_3_max_scale := 1.4
 
 func _ready() -> void:
+	visible = true
 	heat = max_heat/2
 	
 	_set_fire_shaker(fire_1_shaker, FIRE_1_SHAKE_DISTANCE, FIRE_1_SHAKE_SPEED)
@@ -77,7 +78,7 @@ func _process(delta : float) -> void:
 
 func update_fire_visuals(delta: float) -> void:
 	#var heat_percent : float = heat / max_heat
-	print("heat: ", heat)
+	#print("heat: ", heat)
 	update_single_fire(fire_1, FIRE_1_MIN_Y, 0.0, 0.65, delta)
 	update_single_fire(fire_2, FIRE_2_MIN_Y, 0.33, 0.66, delta)
 	update_single_fire(fire_3, FIRE_3_MIN_Y, 0.50, 0.95, delta)

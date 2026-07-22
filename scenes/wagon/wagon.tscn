@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cc8cxautpdsko" path="res://scenes/wagon/wagon.gd" id="1_hmvk8"]
 [ext_resource type="Texture2D" uid="uid://bqejao32wnknl" path="res://scenes/wagon/new_assest/new_wagonAseprite_wheels.ase_layer_tex" id="2_1k2nb"]
+[ext_resource type="SpriteFrames" uid="uid://ui3yrni77btb" path="res://scenes/wagon/new_assest/wheel/wheelsAnimAseprite_wheel.ase_layer" id="3_40rin"]
 [ext_resource type="Texture2D" uid="uid://clbcpfp8c72a7" path="res://scenes/wagon/new_assest/new_wagonAseprite_wagon.ase_layer_tex" id="3_cmnqr"]
 [ext_resource type="Texture2D" uid="uid://b1h3g6dlwvd4y" path="res://scenes/wagon/new_assest/new_wagonAseprite_fire.ase_layer_tex" id="4_q5jej"]
 [ext_resource type="Texture2D" uid="uid://dfpfk2eoc48dt" path="res://scenes/wagon/new_assest/new_wagonAseprite_oven_front.ase_layer_tex" id="5_cgiqy"]
@@ -144,9 +145,27 @@ script = ExtResource("1_hmvk8")
 position = Vector2(-1, -5)
 
 [node name="wheel" type="AnimatedSprite2D" parent="spriteContainer" unique_id=1637443051]
+visible = false
 position = Vector2(1, -20)
 sprite_frames = SubResource("SpriteFrames_ganqv")
 metadata/_edit_lock_ = true
+
+[node name="wheelContainer" type="Node2D" parent="spriteContainer" unique_id=964676221]
+position = Vector2(1, -4)
+
+[node name="wheelsAnimatedSprite2d" type="AnimatedSprite2D" parent="spriteContainer/wheelContainer" unique_id=2095336224]
+position = Vector2(15, -8)
+sprite_frames = ExtResource("3_40rin")
+animation = &"turn"
+frame = 7
+frame_progress = 0.18569948
+
+[node name="wheelsAnimatedSprite2d2" type="AnimatedSprite2D" parent="spriteContainer/wheelContainer" unique_id=13270112]
+position = Vector2(0, -8)
+sprite_frames = ExtResource("3_40rin")
+animation = &"turn"
+frame = 11
+frame_progress = 0.26604968
 
 [node name="base" type="Sprite2D" parent="spriteContainer" unique_id=603617194]
 position = Vector2(1, -20)
@@ -282,6 +301,7 @@ shape = SubResource("RectangleShape2D_ganqv")
 position = Vector2(23, -2)
 
 [node name="Oven" type="Node2D" parent="." unique_id=1304160645]
+visible = false
 script = ExtResource("6_cgiqy")
 
 [node name="Area2D" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]

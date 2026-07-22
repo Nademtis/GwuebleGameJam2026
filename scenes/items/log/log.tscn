@@ -30,6 +30,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="pickupRangeArea" type="Area2D" parent="." unique_id=1073815457]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pickupRangeArea" unique_id=885164707]
 position = Vector2(0, -4)
