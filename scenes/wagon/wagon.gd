@@ -9,6 +9,12 @@ class_name Wagon
 @onready var wheels_animated_sprite_2d_1: AnimatedSprite2D = $spriteContainer/wheelContainer/wheelsAnimatedSprite2d
 @onready var wheels_animated_sprite_2d_2: AnimatedSprite2D = $spriteContainer/wheelContainer/wheelsAnimatedSprite2d2
 
+var wheel_frame_1 := 0
+var wheel_progress_1 := 0.0
+
+var wheel_frame_2 := 0
+var wheel_progress_2 := 0.0
+
 @onready var horizontal_shaker: HorizontalShaker = $spriteContainer/HorizontalShaker
 
 var player_touching_left_handle : bool = false
@@ -42,7 +48,14 @@ func _ready() -> void:
 	if not player_ref:
 		push_error("player ref not defined")
 		
-	randomize_wheel_start_frame()
+		
+	randomize()
+	var frame_count := wheels_animated_sprite_2d_1.sprite_frames.get_frame_count("turn")
+	wheel_frame_1 = randi_range(0, frame_count - 1)
+	wheel_frame_2 = randi_range(0, frame_count - 1)
+
+	wheels_animated_sprite_2d_1.frame = wheel_frame_1
+	wheels_animated_sprite_2d_2.frame = wheel_frame_2
 
 func _physics_process(delta : float) -> void:
 	#print("braceProgress: ", brace_progress)
@@ -186,33 +199,40 @@ func player_is_still_pushing() -> bool:
 		return player_ref.input_dir == Vector2.LEFT
 
 func anim_wheels() -> void:
+	# STOPPING
 	if push_state == PushState.IDLE or push_state == PushState.BRACING:
-		wheels_animated_sprite_2d_1.stop()
-		wheels_animated_sprite_2d_2.stop()
+		if wheels_animated_sprite_2d_1.is_playing():
+			wheel_frame_1 = wheels_animated_sprite_2d_1.frame
+			wheel_progress_1 = wheels_animated_sprite_2d_1.frame_progress
+			
+			wheel_frame_2 = wheels_animated_sprite_2d_2.frame
+			wheel_progress_2 = wheels_animated_sprite_2d_2.frame_progress
+
+			wheels_animated_sprite_2d_1.stop()
+			wheels_animated_sprite_2d_2.stop()
+
+			# keep the last visual frame - save it for next start. Maybe this works
+			wheels_animated_sprite_2d_1.set_frame_and_progress(wheel_frame_1, wheel_progress_1)
+			wheels_animated_sprite_2d_2.set_frame_and_progress(wheel_frame_2, wheel_progress_2)
 		return
 
-	if !wheels_animated_sprite_2d_1.is_playing():
-		wheels_animated_sprite_2d_1.play("turn")
-		wheels_animated_sprite_2d_2.play("turn")
+	# STARTING MOVEMENT
+	if not wheels_animated_sprite_2d_1.is_playing():
+		if push_direction == 1:
+			wheels_animated_sprite_2d_1.play("turn")
+			wheels_animated_sprite_2d_2.play("turn")
+		else:
+			wheels_animated_sprite_2d_1.play_backwards("turn")
+			wheels_animated_sprite_2d_2.play_backwards("turn")
 
+		# restore from previous frame
+		wheels_animated_sprite_2d_1.set_frame_and_progress(wheel_frame_1,wheel_progress_1)
+		wheels_animated_sprite_2d_2.set_frame_and_progress(wheel_frame_2, wheel_progress_2)
 	var speed : float = max(push_speed / max_push_speed, 0.1)
 
-	wheels_animated_sprite_2d_1.speed_scale = speed * push_direction
-	wheels_animated_sprite_2d_2.speed_scale = speed * push_direction
+	wheels_animated_sprite_2d_1.speed_scale = speed
+	wheels_animated_sprite_2d_2.speed_scale = speed
 	
-	
-	
-func randomize_wheel_start_frame() -> void:
-	var frame_count := wheels_animated_sprite_2d_1.sprite_frames.get_frame_count("turn")
-	
-	var frame1 := randi_range(0, frame_count - 1)
-	var frame2 := frame1
-
-	while frame2 == frame1:
-		frame2 = randi_range(0, frame_count - 1)
-
-	wheels_animated_sprite_2d_1.frame = frame1
-	wheels_animated_sprite_2d_2.frame = frame2
 
 func _on_left_handle_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
