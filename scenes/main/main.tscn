@@ -3,25 +3,7 @@
 [ext_resource type="Script" uid="uid://d3mkafg843wsf" path="res://scenes/main/main.gd" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://06kpi22rrm3p" path="res://misc/debugOverlay.gd" id="3_k2fmo"]
-[ext_resource type="Shader" uid="uid://cx8wclejgyyou" path="res://misc/shaders/ice_lens.gdshader" id="4_l3cfh"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_l3cfh"]
-frequency = 0.008
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gvdt1"]
-noise = SubResource("FastNoiseLite_l3cfh")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_d6oyh"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_505e0"]
-noise = SubResource("FastNoiseLite_d6oyh")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ganqv"]
-shader = ExtResource("4_l3cfh")
-shader_parameter/ice_noise = SubResource("NoiseTexture2D_505e0")
-shader_parameter/frost_texture = SubResource("NoiseTexture2D_gvdt1")
-shader_parameter/distortion_strength = 0.0
-shader_parameter/freeze_amount = 0.2000000095
+[ext_resource type="Environment" uid="uid://cq2irltn5tsre" path="res://misc/Environment.tres" id="4_l3cfh"]
 
 [sub_resource type="Animation" id="Animation_iuonh"]
 length = 0.001
@@ -82,6 +64,7 @@ script = ExtResource("1_0wfyh")
 [node name="MusicManager" type="Node" parent="." unique_id=1509223270]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1506560489]
+top_level = true
 editor_draw_limits = true
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D" unique_id=565760207]
@@ -103,16 +86,6 @@ offset_bottom = 23.0
 theme_override_font_sizes/font_size = 32
 text = "FPS: "
 
-[node name="freezeOverlay" type="CanvasLayer" parent="." unique_id=1518527209]
-
-[node name="freezeShader" type="ColorRect" parent="freezeOverlay" unique_id=65444471]
-material = SubResource("ShaderMaterial_ganqv")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="fadeInOut" type="CanvasLayer" parent="." unique_id=2005028278]
 
 [node name="ColorRect" type="ColorRect" parent="fadeInOut" unique_id=2023182412]
@@ -125,3 +98,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="fadeInOut" unique_id=655319899]
 libraries/ = SubResource("AnimationLibrary_6q06x")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1633071072]
+environment = ExtResource("4_l3cfh")

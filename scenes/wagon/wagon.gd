@@ -167,7 +167,7 @@ func release_player() -> void:
 	#player_ref.velocity = Vector2(-push_direction * 100, 0) # fun bounce away when detaching from wagon
 
 func player_stopped_pushing() -> void:
-	print("player stopped pushing")
+	#print("player stopped pushing")
 	#push_initiated = false
 	player_ref.is_pushing = false
 	#moving_to_push_position = false

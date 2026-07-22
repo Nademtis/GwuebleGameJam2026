@@ -30,7 +30,7 @@ func _process(_delta: float) -> void:
 
 func pickup(fuel : PickupableFuel) -> void:
 	if carried_fuel.size() >= max_logs:
-		print("hands filled - not pickup")
+		#print("hands filled - not pickup")
 		return
 
 	fuel.fly_to_player(player_ref)
@@ -42,7 +42,6 @@ func finish_pickup(fuel : PickupableFuel) -> void:
 func deposit_into(oven : Oven) -> void:
 	var logs_to_send := carried_fuel.duplicate()
 	oven.lid.open()
-	print("yup")
 	await deposit_logs_sequence(logs_to_send, oven)
 
 func deposit_logs_sequence(logs : Array[PickupableFuel], oven : Oven) -> void:

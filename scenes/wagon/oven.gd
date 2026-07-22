@@ -45,11 +45,11 @@ const FIRE_3_SHAKE_SPEED: float = 19.0
 
 @export var light_lerp_speed := 4.0
 @export var light_1_min_energy := 0.0
-@export var light_1_max_energy := 0.75
+@export var light_1_max_energy := 0.35
 @export var light_2_min_energy := 0.0
-@export var light_2_max_energy := 1.1
+@export var light_2_max_energy := 0.5
 @export var light_3_min_energy := 0.0
-@export var light_3_max_energy := 1.5
+@export var light_3_max_energy := 0.7
 @export var light_1_min_scale := 0.7
 @export var light_1_max_scale := 1.0
 @export var light_2_min_scale := 0.7
@@ -190,7 +190,7 @@ func update_single_light(
 func add_fuel(fuel : PickupableFuel) -> void:
 	heat += fuel.heat
 	heat = clamp(heat,0.0, max_heat)
-	print("added heat - new heat: ", heat)
+	#print("added heat - new heat: ", heat)
 	
 func _set_fire_shaker(shaker : HorizontalShaker, shake_distance : float, shake_speed : float) -> void:
 	shaker.shake_distance = shake_distance

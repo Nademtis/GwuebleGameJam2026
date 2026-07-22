@@ -1,0 +1,6 @@
+[gd_resource type="Environment" format=3 uid="uid://cq2irltn5tsre"]
+
+[resource]
+background_mode = 3
+tonemap_mode = 2
+tonemap_exposure = 0.25
