@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b7e08xa256frv" path="res://scenes/snow/snow_blob.tscn" id="7_fwulr"]
 [ext_resource type="Shader" uid="uid://cx8wclejgyyou" path="res://misc/shaders/ice_lens.gdshader" id="12_a381f"]
 [ext_resource type="Environment" uid="uid://cq2irltn5tsre" path="res://misc/Environment.tres" id="13_g1ai2"]
+[ext_resource type="Shader" uid="uid://duqswbbpgvn4i" path="res://misc/shaders/multiLayerSnow.gdshader" id="15_i403b"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fwulr"]
 scenes/1/scene = ExtResource("7_fwulr")
@@ -58,6 +59,20 @@ shader_parameter/ice_noise = SubResource("NoiseTexture2D_505e0")
 shader_parameter/frost_texture = SubResource("NoiseTexture2D_gvdt1")
 shader_parameter/distortion_strength = 0.0
 shader_parameter/freeze_amount = 0.350000016625
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i403b"]
+shader = ExtResource("15_i403b")
+shader_parameter/rain_amount = 0.0
+shader_parameter/near_rain_length = 0.00999999977648
+shader_parameter/far_rain_length = 0.00999999977648
+shader_parameter/near_rain_width = 0.70400003018012
+shader_parameter/far_rain_width = 0.66100002813762
+shader_parameter/near_rain_transparency = 1.0
+shader_parameter/far_rain_transparency = 0.5
+shader_parameter/rain_color = Color(1, 1, 1, 0.74509805)
+shader_parameter/base_rain_speed = 0.5
+shader_parameter/additional_rain_speed = 0.79600003455012
+shader_parameter/slant = -0.06899995577749996
 
 [node name="level" type="Node2D" unique_id=976271308]
 
@@ -219,3 +234,17 @@ text = "Flimbus productions xD"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=600167549]
 environment = ExtResource("13_g1ai2")
+
+[node name="snowShader" type="ColorRect" parent="." unique_id=2117673713]
+material = SubResource("ShaderMaterial_i403b")
+custom_minimum_size = Vector2(24.185, 16.8)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -7.0
+offset_right = 727.0
+offset_bottom = 212.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.81127876, 0.0005163467, 0.81158507, 0)
