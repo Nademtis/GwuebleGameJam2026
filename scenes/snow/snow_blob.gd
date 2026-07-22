@@ -21,7 +21,12 @@ func _process(delta: float) -> void:
 
 
 func melt_player(amount : float) -> void:
-	# player only melts to middle
+	# player should only melts to middle
+	
+	#don't change if allready melted more
+	if amount < target_melt_amount:
+		return
+		
 	target_melt_amount = clamp(
 		target_melt_amount + amount,
 		0.0,
