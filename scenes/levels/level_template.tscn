@@ -58,21 +58,21 @@ shader = ExtResource("12_a381f")
 shader_parameter/ice_noise = SubResource("NoiseTexture2D_505e0")
 shader_parameter/frost_texture = SubResource("NoiseTexture2D_gvdt1")
 shader_parameter/distortion_strength = 0.0
-shader_parameter/freeze_amount = 0.350000016625
+shader_parameter/freeze_amount = 0.5590000265525
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i403b"]
 shader = ExtResource("15_i403b")
-shader_parameter/rain_amount = 0.0
+shader_parameter/rain_amount = 500.0
 shader_parameter/near_rain_length = 0.00999999977648
 shader_parameter/far_rain_length = 0.00999999977648
-shader_parameter/near_rain_width = 0.70400003018012
-shader_parameter/far_rain_width = 0.66100002813762
+shader_parameter/near_rain_width = 1.0
+shader_parameter/far_rain_width = 0.5
 shader_parameter/near_rain_transparency = 1.0
-shader_parameter/far_rain_transparency = 0.5
+shader_parameter/far_rain_transparency = 0.33200001251012
 shader_parameter/rain_color = Color(1, 1, 1, 0.74509805)
-shader_parameter/base_rain_speed = 0.5
-shader_parameter/additional_rain_speed = 0.79600003455012
-shader_parameter/slant = -0.06899995577749996
+shader_parameter/base_rain_speed = 0.10000000149012
+shader_parameter/additional_rain_speed = 0.27000000956512
+shader_parameter/slant = -0.08399995649000003
 
 [node name="level" type="Node2D" unique_id=976271308]
 
@@ -185,9 +185,9 @@ draw_limits = true
 noise = SubResource("Resource_ganqv")
 
 [node name="SnowDustShaderGoingLeft" type="Parallax2D" parent="." unique_id=1320158369]
-scroll_scale = Vector2(1, 0)
+scroll_scale = Vector2(0, 0)
 repeat_size = Vector2(480, 200)
-autoscroll = Vector2(-17, 5)
+autoscroll = Vector2(-40, 5)
 repeat_times = 3
 follow_viewport = false
 
@@ -223,8 +223,6 @@ follow_viewport = false
 position = Vector2(0, -9)
 texture = ExtResource("3_hq32h")
 
-[node name="freezeOverlay" type="CanvasLayer" parent="." unique_id=769087579]
-
 [node name="Label" type="Label" parent="." unique_id=1695724556]
 offset_left = 400.0
 offset_top = 56.0
@@ -237,13 +235,29 @@ environment = ExtResource("13_g1ai2")
 
 [node name="snowShader" type="ColorRect" parent="." unique_id=2117673713]
 material = SubResource("ShaderMaterial_i403b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -45.0
+offset_right = 631.0
+offset_bottom = 212.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.81127876, 0.0005163467, 0.81158507, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1626034091]
+
+[node name="snowShader2" type="ColorRect" parent="CanvasLayer" unique_id=1663784299]
+visible = false
+material = SubResource("ShaderMaterial_i403b")
 custom_minimum_size = Vector2(24.185, 16.8)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -232.0
 offset_top = -7.0
-offset_right = 727.0
+offset_right = 662.0
 offset_bottom = 212.0
 grow_horizontal = 2
 grow_vertical = 2
