@@ -136,8 +136,8 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_40rin"]
 gradient = SubResource("Gradient_go74l")
 fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.504, 0)
+fill_from = Vector2(0.48290598, 0.47008547)
+fill_to = Vector2(0.4957265, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gvdt1"]
 radius = 31.0
@@ -307,10 +307,9 @@ position = Vector2(23, -2)
 [node name="Oven" type="Node2D" parent="." unique_id=1304160645]
 script = ExtResource("6_cgiqy")
 
-[node name="Area2D" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
-visible = false
+[node name="depositArea" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/Area2D" unique_id=1077417948]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/depositArea" unique_id=1077417948]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_ganqv")
 
