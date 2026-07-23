@@ -25,7 +25,7 @@ var fuel_queue : Array[PickupableFuel] = []
 @export_group("Snow Melt")
 @export var snow_melt_min_scale :float= 0.01
 @export var snow_melt_max_scale : float= 1.0
-@export var snow_melt_lerp_speed :float= 5.0
+@export var snow_melt_lerp_speed :float= 3.0
 
 
 #region fire const
@@ -54,7 +54,7 @@ const FIRE_3_SHAKE_SPEED: float = 19.0
 
 @export_group("Oven Lights")
 
-@export var light_lerp_speed := 4.0
+@export var light_lerp_speed := 2.0
 
 @export var light_1_min_energy := 0.0
 @export var light_1_max_energy := 0.60
