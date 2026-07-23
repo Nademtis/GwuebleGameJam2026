@@ -8,6 +8,7 @@ class_name Oven
 var heat : float = 0.0
 var fuel_queue : Array[PickupableFuel] = []
 
+#region firestuff
 
 @onready var fire_1_shaker: HorizontalShaker = $"../spriteContainer/darkBackground/fireContainer/fire1/fire1shaker"
 @onready var fire_2_shaker: HorizontalShaker = $"../spriteContainer/darkBackground/fireContainer/fire2/fire2shaker"
@@ -19,6 +20,8 @@ var fuel_queue : Array[PickupableFuel] = []
 
 @export var fire_lerp_speed : float = 5.0
 
+#endregion firestuff
+
 @onready var snow_melt_area: SnowMelterOven = $snowMeltArea
 @onready var snow_melt_collision_shape_2d: CollisionShape2D = $snowMeltArea/snowMeltCollisionShape2d
 
@@ -27,6 +30,9 @@ var fuel_queue : Array[PickupableFuel] = []
 @export var snow_melt_max_scale : float= 1.0
 @export var snow_melt_lerp_speed :float= 3.0
 
+#everything player heat
+@onready var player_heat_collision_shape_2d: CollisionShape2D = $playerHeatArea/playerHeatCollisionShape2D
+const HEAT_AREA_MULTIPLIER : float = 1.15
 
 #region fire const
 #fire sprites can never go below this value. that would exceed the oven
@@ -87,28 +93,31 @@ func _ready() -> void:
 	fire_2_shaker.start_shaking()
 	fire_3_shaker.start_shaking()
 
-
-
-
 func _process(delta : float) -> void:
 	heat = max(heat - delta, 0.0)
 	update_fire_visuals(delta)
 	update_light_visuals(delta)
-	update_snow_melt_area(delta)
+	update_snow_melt_area_and_heat_area(delta)
 
-func update_snow_melt_area(delta: float) -> void:
+func update_snow_melt_area_and_heat_area(delta: float) -> void:
 	var heat_percent := heat / max_heat
-	
-	#print(heat_percent)
 
-	var target_scale : float = lerp(
+	var snow_target_scale : float = lerp(
 		snow_melt_min_scale,
 		snow_melt_max_scale,
 		heat_percent
 	)
 
+	# Snow melting area
 	snow_melt_collision_shape_2d.scale = snow_melt_collision_shape_2d.scale.lerp(
-		Vector2.ONE * target_scale,
+		Vector2.ONE * snow_target_scale,
+		snow_melt_lerp_speed * delta
+	)
+	
+	# player heat area
+	var player_heat_target_scale := snow_target_scale * HEAT_AREA_MULTIPLIER
+	player_heat_collision_shape_2d.scale = player_heat_collision_shape_2d.scale.lerp(
+		Vector2.ONE * player_heat_target_scale,
 		snow_melt_lerp_speed * delta
 	)
 	

@@ -197,34 +197,10 @@ offset_top = 29.0
 offset_right = 1674.0
 offset_bottom = 221.0
 
-[node name="snowShader_Medium2" parent="." unique_id=1732794010 instance=ExtResource("18_j5y0x")]
-offset_left = -273.0
-offset_top = 11.0
-offset_right = 1621.0
-offset_bottom = 203.0
-
-[node name="snowShader_Medium3" parent="." unique_id=1823112191 instance=ExtResource("18_j5y0x")]
-offset_left = -235.0
-offset_top = 27.0
-offset_right = 1659.0
-offset_bottom = 219.0
-
 [node name="snowShader_chill" parent="." unique_id=460907029 instance=ExtResource("17_quo62")]
 offset_left = -264.0
 offset_top = -30.0
 offset_right = 1153.0
 offset_bottom = 225.0
-
-[node name="snowShader_chill2" parent="." unique_id=643593580 instance=ExtResource("17_quo62")]
-offset_left = -295.0
-offset_top = -31.0
-offset_right = 1122.0
-offset_bottom = 224.0
-
-[node name="snowShader_chill3" parent="." unique_id=1770501951 instance=ExtResource("17_quo62")]
-offset_left = -237.0
-offset_top = -12.0
-offset_right = 1180.0
-offset_bottom = 243.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1817430227]

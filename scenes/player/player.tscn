@@ -5,6 +5,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bfxshyes3st6v" path="res://scenes/items/log/logSpriteFrames.tres" id="2_lvxji"]
 [ext_resource type="Script" uid="uid://brl7oy653xx02" path="res://scenes/player/hands.gd" id="3_gmlin"]
 [ext_resource type="Script" uid="uid://bc4m3ftv7b24a" path="res://scenes/player/snow_melter_area.gd" id="5_p47bc"]
+[ext_resource type="Script" uid="uid://cfjybfw36mbs3" path="res://scenes/player/heat_receiver.gd" id="6_75vfm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 4.0
@@ -17,6 +18,9 @@ radius = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7gsxw"]
 radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gyig5"]
+radius = 6.0
 
 [node name="Player" type="CharacterBody2D" unique_id=151895576 groups=["player"]]
 collision_mask = 14
@@ -70,7 +74,17 @@ rotation = 1.5706849
 shape = SubResource("CircleShape2D_7gsxw")
 debug_color = Color(0.7707409, 0.17310733, 0.98724526, 0.41960785)
 
+[node name="heatReceiver" type="Area2D" parent="." unique_id=822156674]
+collision_mask = 32
+script = ExtResource("6_75vfm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heatReceiver" unique_id=1776786609]
+position = Vector2(0, -9)
+shape = SubResource("CircleShape2D_gyig5")
+
 [connection signal="area_entered" from="Hands/pickupArea" to="Hands" method="_on_pickup_area_area_entered"]
 [connection signal="area_entered" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_entered"]
 [connection signal="area_exited" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_exited"]
 [connection signal="area_entered" from="SnowMelterArea" to="SnowMelterArea" method="_on_area_entered"]
+[connection signal="area_entered" from="heatReceiver" to="heatReceiver" method="_on_area_entered"]
+[connection signal="area_exited" from="heatReceiver" to="heatReceiver" method="_on_area_exited"]
