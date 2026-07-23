@@ -2,6 +2,7 @@ extends Node2D
 class_name PickupableFuel
 
 @onready var pickup_range_area: Area2D = $pickupRangeArea
+@onready var debug_label: Label = $DebugLabel
 
 @export var heat : float = 5
 @export var weight : float = 0.1
@@ -29,9 +30,9 @@ enum FuelType {
 #from ground --> player
 var flying_to_player := false
 var target_player : Node2D
-var fly_speed := 10.0 # 50.0 felt good
-var max_fly_speed := 250.0 # 500 
-var acceleration := 250.0 # 900
+var fly_speed := 10.0 # 10.0 good 
+var max_fly_speed := 250.0 # 250 
+var acceleration := 255.0 # 250
 
 #from player--> oven
 var flying_to_oven := false
@@ -49,6 +50,9 @@ var flight_time : float = 0.0
 @export var shadow_height_fade : float = 0.75
 var shadow_start_position : Vector2
 var shadow_end_position : Vector2
+
+func _ready() -> void:
+	debug_label.queue_free()
 
 func _process(delta: float) -> void:
 	if flying_to_player:
@@ -80,6 +84,7 @@ func fly_to_player(player: Node2D) -> void:
 	if digging_up or flying_to_player:
 		return
 
+	print("removed coll on this log")
 	pickup_range_area.set_deferred("monitorable", false)
 
 
@@ -204,4 +209,8 @@ func finish_pickup() -> void:
 func finish_oven_deposit() -> void:
 	flying_to_oven = false
 	target_oven.add_fuel(self)
+	
+	#todo await something
+	visible = false
+	await get_tree().create_timer(3).timeout
 	queue_free()

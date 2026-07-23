@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://rhhp0jdurrng"]
+
+[ext_resource type="Script" uid="uid://cbadvu3lkipcu" path="res://scenes/snow/snow_blob.gd" id="1_53pso"]
+[ext_resource type="Texture2D" uid="uid://rh0agmecwjiy" path="res://scenes/snow/assets/snowSpriteSheetAseprite.aseprite" id="2_8rqfo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_53pso"]
+atlas = ExtResource("2_8rqfo")
+region = Rect2(0, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rqfo"]
+atlas = ExtResource("2_8rqfo")
+region = Rect2(16, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tyg8"]
+atlas = ExtResource("2_8rqfo")
+region = Rect2(32, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ist1c"]
+atlas = ExtResource("2_8rqfo")
+region = Rect2(48, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyybe"]
+atlas = ExtResource("2_8rqfo")
+region = Rect2(64, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubg1g"]
+atlas = ExtResource("2_8rqfo")
+region = Rect2(80, 112, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbkw7"]
+atlas = ExtResource("2_8rqfo")
+region = Rect2(96, 112, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_00eg2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_53pso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rqfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tyg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ist1c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qyybe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubg1g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbkw7")
+}],
+"loop": 1,
+"name": &"snow",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ganqv"]
+size = Vector2(5, 6)
+
+[node name="snowBlob1" type="Node2D" unique_id=401965258]
+script = ExtResource("1_53pso")
+
+[node name="snowAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=675842919]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_00eg2")
+animation = &"snow"
+
+[node name="meltArea" type="Area2D" parent="." unique_id=265147896 groups=["snow"]]
+visible = false
+position = Vector2(0, -8)
+collision_layer = 8
+collision_mask = 17
+
+[node name="meltbox" type="CollisionShape2D" parent="meltArea" unique_id=192855941]
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_ganqv")

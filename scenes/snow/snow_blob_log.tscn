@@ -64,7 +64,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ganqv"]
 size = Vector2(5, 6)
 
-[node name="Log" type="Node2D" unique_id=401965258]
+[node name="SnowLog" type="Node2D" unique_id=401965258]
 script = ExtResource("1_pmkoe")
 
 [node name="snowAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=675842919]

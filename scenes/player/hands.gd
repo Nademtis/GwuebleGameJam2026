@@ -73,8 +73,17 @@ func deposit_logs_sequence(logs : Array[PickupableFuel], oven : Oven) -> void:
 func update_log_animation() -> void:
 	var log_count := carried_amount
 
-	if log_count > 3 or log_count <0:
+	#edge case for wierd wstuff
+	if log_count > 3:
+		log_count = 3
+		carried_amount = 3
 		push_error("LOG COUNT IS: ", log_count)
+	
+	#edge case for wierd stuff
+	if log_count < 0:
+		carried_amount = 0
+		return
+		
 
 	# Hide both when empty
 	if log_count == 0:

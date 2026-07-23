@@ -37,3 +37,13 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pickupRangeArea" unique_id=885164707]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_ganqv")
+
+[node name="DebugLabel" type="Label" parent="." unique_id=74645277]
+z_index = 5
+offset_left = -8.0
+offset_top = -10.0
+offset_right = 32.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_font_sizes/font_size = 8
+text = "LOG"
