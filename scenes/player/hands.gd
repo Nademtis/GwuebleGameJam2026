@@ -19,6 +19,7 @@ const LEFT_HANDS_POSITION : Vector2 = Vector2(-3.0,-10)
 @export var max_logs := 3
 
 var carried_fuel : Array[PickupableFuel] = []
+var carried_amount : int = 0
 var player_ref : Player
 
 func _ready() -> void:
@@ -36,7 +37,8 @@ func pickup(fuel : PickupableFuel) -> void:
 	fuel.fly_to_player(player_ref)
 
 func finish_pickup() -> void:
-	update_log_animation()
+	#update_log_animation()
+	carried_amount += 1
 
 func deposit_into(oven : Oven) -> void:
 	var logs_to_send := carried_fuel.duplicate()
@@ -48,6 +50,7 @@ func deposit_logs_sequence(logs : Array[PickupableFuel], oven : Oven) -> void:
 	for fuel : PickupableFuel in logs:
 		# remove one log visually from hands
 		carried_fuel.erase(fuel)
+		carried_amount -= 1
 		update_log_animation()
 		fuel.global_position = player_ref.global_position
 		
@@ -68,7 +71,10 @@ func deposit_logs_sequence(logs : Array[PickupableFuel], oven : Oven) -> void:
 	
 
 func update_log_animation() -> void:
-	var log_count := carried_fuel.size()
+	var log_count := carried_amount
+
+	if log_count > 3 or log_count <0:
+		push_error("LOG COUNT IS: ", log_count)
 
 	# Hide both when empty
 	if log_count == 0:

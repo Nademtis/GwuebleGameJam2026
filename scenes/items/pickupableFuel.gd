@@ -76,11 +76,12 @@ func fly_to_oven(oven : Oven) -> void:
 
 func fly_to_player(player: Node2D) -> void:
 	target_player = player
+	
+	if digging_up or flying_to_player:
+		return
 
 	pickup_range_area.set_deferred("monitorable", false)
 
-	if digging_up or flying_to_player:
-		return
 
 	if is_buried_in_snow:
 		play_dig_up_animation()
