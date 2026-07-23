@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cferfu1ml6jry"]
+
+[ext_resource type="Script" uid="uid://cbadvu3lkipcu" path="res://scenes/snow/snow_blob.gd" id="1_pmkoe"]
+[ext_resource type="Texture2D" uid="uid://rh0agmecwjiy" path="res://scenes/snow/assets/snowSpriteSheetAseprite.aseprite" id="2_ogxlc"]
+[ext_resource type="PackedScene" uid="uid://fvgk8k2dvy7g" path="res://scenes/items/log/log.tscn" id="2_w7h2m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmkoe"]
+atlas = ExtResource("2_ogxlc")
+region = Rect2(0, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogxlc"]
+atlas = ExtResource("2_ogxlc")
+region = Rect2(16, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7h2m"]
+atlas = ExtResource("2_ogxlc")
+region = Rect2(32, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmdeg"]
+atlas = ExtResource("2_ogxlc")
+region = Rect2(48, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mhok"]
+atlas = ExtResource("2_ogxlc")
+region = Rect2(64, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1i2v"]
+atlas = ExtResource("2_ogxlc")
+region = Rect2(80, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ria1f"]
+atlas = ExtResource("2_ogxlc")
+region = Rect2(96, 72, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gsrid"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmkoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogxlc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7h2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmdeg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mhok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1i2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ria1f")
+}],
+"loop": 1,
+"name": &"snow",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ganqv"]
+size = Vector2(5, 6)
+
+[node name="Log" type="Node2D" unique_id=401965258]
+script = ExtResource("1_pmkoe")
+
+[node name="Log" parent="." unique_id=72816142 instance=ExtResource("2_w7h2m")]
+position = Vector2(1, 1)
+
+[node name="snowAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=675842919]
+modulate = Color(1, 1, 1, 0.78431374)
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_gsrid")
+animation = &"snow"
+
+[node name="meltArea" type="Area2D" parent="." unique_id=265147896 groups=["snow"]]
+visible = false
+position = Vector2(0, -8)
+collision_layer = 8
+collision_mask = 17
+
+[node name="meltbox" type="CollisionShape2D" parent="meltArea" unique_id=192855941]
+position = Vector2(-0.5, 4)
+shape = SubResource("RectangleShape2D_ganqv")
