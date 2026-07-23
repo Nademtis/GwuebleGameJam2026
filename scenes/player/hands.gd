@@ -28,7 +28,7 @@ var is_in_oven_deposit_range : bool = false
 var is_currently_depositing : bool = false
 
 var should_deposit_again_timer : float = 0.0
-const DEPOSIT_CHECK_MAX_TIME : float = 0.25
+const DEPOSIT_CHECK_MAX_TIME : float = 0.5
 
 func _ready() -> void:
 	player_ref = get_parent()
@@ -37,7 +37,6 @@ func _process(_delta: float) -> void:
 	update_log_animation()
 	
 	should_deposit_again_timer -= _delta
-	
 	if should_deposit_again_timer <= 0:
 		await check_to_deposit()
 		should_deposit_again_timer = DEPOSIT_CHECK_MAX_TIME
@@ -54,6 +53,7 @@ func finish_pickup(fuel: PickupableFuel) -> void:
 	carried_fuel.append(fuel)
 
 func deposit_into() -> void:
+	is_currently_depositing = true
 	var logs_to_send := carried_fuel.duplicate()
 	oven.lid.open()
 	await deposit_logs_sequence(logs_to_send)
@@ -65,7 +65,7 @@ func deposit_logs_sequence(logs : Array[PickupableFuel]) -> void:
 			continue
 		
 		carried_fuel.erase(fuel)
-		update_log_animation()
+		update_log_animation() # called in process
 		
 		fuel.global_position = player_ref.global_position
 		fuel.oven_flight_duration = randf_range(
@@ -156,7 +156,6 @@ func check_to_deposit() -> void:
 	if carried_fuel.is_empty(): # don't deposit if player has no fuel
 		return
 	
-	is_currently_depositing = true
 	await deposit_into()
 
 func _on_deposit_area_area_entered(area: Area2D) -> void:

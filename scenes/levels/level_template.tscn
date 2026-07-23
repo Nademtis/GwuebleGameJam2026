@@ -170,14 +170,15 @@ follow_viewport = false
 position = Vector2(0, -9)
 texture = ExtResource("3_hq32h")
 
-[node name="SnowDustShaderGoingLeft" type="Parallax2D" parent="." unique_id=1320158369]
-scroll_scale = Vector2(0, 0)
+[node name="Node2D" type="Node2D" parent="." unique_id=1359863244]
+position = Vector2(754, 460)
+
+[node name="SnowDustShaderGoingLeft" type="Parallax2D" parent="Node2D" unique_id=1320158369]
 repeat_size = Vector2(480, 200)
 autoscroll = Vector2(-40, 5)
-repeat_times = 3
-follow_viewport = false
+repeat_times = 2
 
-[node name="freezeShader" type="ColorRect" parent="SnowDustShaderGoingLeft" unique_id=2128556216]
+[node name="freezeShader" type="ColorRect" parent="Node2D/SnowDustShaderGoingLeft" unique_id=2128556216]
 material = SubResource("ShaderMaterial_ganqv")
 anchors_preset = 15
 anchor_right = 1.0
@@ -188,5 +189,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="snowShader_Medium" parent="." unique_id=73950667 instance=ExtResource("18_j5y0x")]
+offset_top = 22.0
+offset_right = 1643.0
+offset_bottom = 214.0
 
 [node name="snowShader_chill" parent="." unique_id=1732794010 instance=ExtResource("17_quo62")]
+offset_top = -21.0
+offset_right = 1166.0
+offset_bottom = 234.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1817430227]
