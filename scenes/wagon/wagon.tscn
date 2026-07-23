@@ -263,6 +263,7 @@ shake_speed = 10.0
 metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=412592041]
+visible = false
 position = Vector2(-1, -2)
 collision_layer = 4
 
@@ -272,6 +273,7 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_ganqv")
 
 [node name="handles" type="Node2D" parent="." unique_id=995195635]
+visible = false
 
 [node name="leftHandle" type="Area2D" parent="handles" unique_id=1022169205]
 position = Vector2(5, -1)
@@ -305,7 +307,6 @@ position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_ganqv")
 
 [node name="lightContainer" type="Node2D" parent="Oven" unique_id=1507388662]
-visible = false
 position = Vector2(0, -12)
 
 [node name="ovenLight1" type="PointLight2D" parent="Oven/lightContainer" unique_id=787252953]
@@ -326,7 +327,6 @@ texture = ExtResource("11_130wf")
 texture_scale = 0.45
 
 [node name="snowMeltArea" type="Area2D" parent="Oven" unique_id=1768253092]
-visible = false
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("11_affv2")

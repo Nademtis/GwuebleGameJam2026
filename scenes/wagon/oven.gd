@@ -23,9 +23,9 @@ var fuel_queue : Array[PickupableFuel] = []
 @onready var snow_melt_collision_shape_2d: CollisionShape2D = $snowMeltArea/snowMeltCollisionShape2d
 
 @export_group("Snow Melt")
-@export var snow_melt_min_scale := 0.01
-@export var snow_melt_max_scale := 0.93
-@export var snow_melt_lerp_speed := 4.0
+@export var snow_melt_min_scale :float= 0.01
+@export var snow_melt_max_scale : float= 1.0
+@export var snow_melt_lerp_speed :float= 5.0
 
 
 #region fire const
@@ -45,8 +45,6 @@ const FIRE_2_SHAKE_SPEED: float = 17.0
 const FIRE_3_SHAKE_DISTANCE: float = 0.9
 const FIRE_3_SHAKE_SPEED: float = 19.0
 #endregion fire
-
-
 
 #region light
 #lights
@@ -68,7 +66,7 @@ const FIRE_3_SHAKE_SPEED: float = 19.0
 @export var light_3_max_energy := 0.3
 
 @export var light_1_min_scale := 0.01
-@export var light_1_max_scale := 0.73 # 0.8 seems like a good max hitbox for snow
+@export var light_1_max_scale := 0.65 # 0.8 seems like a good max hitbox for snow
 
 @export var light_2_min_scale := 0.01
 @export var light_2_max_scale := 0.65

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c6an35nm27old"]
+
+[ext_resource type="Shader" uid="uid://duqswbbpgvn4i" path="res://misc/shaders/multiLayerSnow.gdshader" id="1_caauv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i403b"]
+shader = ExtResource("1_caauv")
+shader_parameter/rain_amount = 500.0
+shader_parameter/near_rain_length = 0.00999999977648
+shader_parameter/far_rain_length = 0.00999999977648
+shader_parameter/near_rain_width = 1.0
+shader_parameter/far_rain_width = 0.5
+shader_parameter/near_rain_transparency = 1.0
+shader_parameter/far_rain_transparency = 0.33200001251012
+shader_parameter/rain_color = Color(1, 1, 1, 0.74509805)
+shader_parameter/base_rain_speed = 0.10000000149012
+shader_parameter/additional_rain_speed = 0.27000000956512
+shader_parameter/slant = -0.08399995649000003
+
+[node name="snowShader_chill" type="ColorRect" unique_id=1732794010]
+material = SubResource("ShaderMaterial_i403b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -251.0
+offset_top = -39.0
+offset_right = 612.0
+offset_bottom = 218.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.81127876, 0.0005163467, 0.81158507, 0)
+metadata/_edit_lock_ = true
