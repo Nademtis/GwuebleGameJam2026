@@ -89,8 +89,16 @@ func fly_to_player(player: Node2D) -> void:
 
 
 	if is_buried_in_snow:
-		play_dig_up_animation()
 		var parent : SnowBlob = get_parent()
+		
+		print("this snow melt_amouunt was: ", parent.melt_amount)
+		
+		#do this because snow has allready melted. this is shit code tbh
+		if parent.melt_amount > 0.9:
+			start_flying_to_player()
+			return
+			
+		play_dig_up_animation()
 		parent.melt_player(0.8)
 	else:
 		start_flying_to_player()
