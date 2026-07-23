@@ -132,7 +132,7 @@ size = Vector2(11.375, 16)
 radius = 13.038404
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gvdt1"]
-radius = 31.0
+radius = 64.0
 
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774]
 script = ExtResource("1_hmvk8")
@@ -298,6 +298,21 @@ position = Vector2(23, -2)
 
 [node name="Oven" type="Node2D" parent="." unique_id=1304160645]
 script = ExtResource("6_cgiqy")
+max_heat = null
+fire_lerp_speed = null
+light_lerp_speed = null
+light_1_min_energy = null
+light_1_max_energy = null
+light_2_min_energy = null
+light_2_max_energy = null
+light_3_min_energy = null
+light_3_max_energy = null
+light_1_min_scale = null
+light_1_max_scale = null
+light_2_min_scale = null
+light_2_max_scale = null
+light_3_min_scale = null
+light_3_max_scale = null
 
 [node name="depositArea" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
 visible = false
@@ -307,6 +322,7 @@ position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_ganqv")
 
 [node name="lightContainer" type="Node2D" parent="Oven" unique_id=1507388662]
+visible = false
 position = Vector2(0, -12)
 
 [node name="ovenLight1" type="PointLight2D" parent="Oven/lightContainer" unique_id=787252953]
@@ -327,12 +343,11 @@ texture = ExtResource("11_130wf")
 texture_scale = 0.45
 
 [node name="snowMeltArea" type="Area2D" parent="Oven" unique_id=1768253092]
-visible = false
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("11_affv2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/snowMeltArea" unique_id=1422621120]
+[node name="snowMeltCollisionShape2d" type="CollisionShape2D" parent="Oven/snowMeltArea" unique_id=1422621120]
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_gvdt1")
 

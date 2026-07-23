@@ -19,6 +19,16 @@ var fuel_queue : Array[PickupableFuel] = []
 
 @export var fire_lerp_speed : float = 5.0
 
+@onready var snow_melt_area: SnowMelterOven = $snowMeltArea
+@onready var snow_melt_collision_shape_2d: CollisionShape2D = $snowMeltArea/snowMeltCollisionShape2d
+
+@export_group("Snow Melt")
+@export var snow_melt_min_scale := 0.01
+@export var snow_melt_max_scale := 0.93
+@export var snow_melt_lerp_speed := 4.0
+
+
+#region fire const
 #fire sprites can never go below this value. that would exceed the oven
 const FIRE_1_MIN_Y : float = 6.0
 const FIRE_2_MIN_Y : float = 8.0
@@ -34,12 +44,15 @@ const FIRE_2_SHAKE_SPEED: float = 17.0
 
 const FIRE_3_SHAKE_DISTANCE: float = 0.9
 const FIRE_3_SHAKE_SPEED: float = 19.0
+#endregion fire
 
+
+
+#region light
 #lights
 @onready var oven_light_1: PointLight2D = $lightContainer/ovenLight1
 @onready var oven_light_2: PointLight2D = $lightContainer/ovenLight2
 @onready var oven_light_3: PointLight2D = $lightContainer/ovenLight3
-
 
 @export_group("Oven Lights")
 
@@ -62,6 +75,7 @@ const FIRE_3_SHAKE_SPEED: float = 19.0
 
 @export var light_3_min_scale := 0.01
 @export var light_3_max_scale := 0.5
+#endregion light
 
 func _ready() -> void:
 	visible = true
@@ -76,11 +90,30 @@ func _ready() -> void:
 	fire_3_shaker.start_shaking()
 
 
-	
+
+
 func _process(delta : float) -> void:
 	heat = max(heat - delta, 0.0)
 	update_fire_visuals(delta)
 	update_light_visuals(delta)
+	update_snow_melt_area(delta)
+
+func update_snow_melt_area(delta: float) -> void:
+	var heat_percent := heat / max_heat
+	
+	#print(heat_percent)
+
+	var target_scale : float = lerp(
+		snow_melt_min_scale,
+		snow_melt_max_scale,
+		heat_percent
+	)
+
+	snow_melt_collision_shape_2d.scale = snow_melt_collision_shape_2d.scale.lerp(
+		Vector2.ONE * target_scale,
+		snow_melt_lerp_speed * delta
+	)
+	
 
 func update_fire_visuals(delta: float) -> void:
 	#var heat_percent : float = heat / max_heat
@@ -96,6 +129,8 @@ func update_single_fire(
 	end_percent: float,
 	delta: float
 ) -> void:
+	
+	
 	var heat_percent := heat / max_heat
 	var t := inverse_lerp(
 		start_percent,
@@ -191,6 +226,9 @@ func update_single_light(
 		target_scale,
 		light_lerp_speed * delta
 	)
+	
+	#if light == oven_light_1: # updates the melt size
+	#	update_snow_melt_area(target_scale, delta)
 	
 
 func add_fuel(fuel : PickupableFuel) -> void:

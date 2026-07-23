@@ -5,6 +5,7 @@ class_name Wagon
 @onready var left_player_push_spot: Marker2D = $handles/leftHandle/leftPlayerPushSpot
 @onready var right_player_push_spot: Marker2D = $handles/rightHandle/rightPlayerPushSpot
 
+@onready var light_container: Node2D = $Oven/lightContainer
 
 @onready var wheels_animated_sprite_2d_1: AnimatedSprite2D = $spriteContainer/wheelContainer/wheelsAnimatedSprite2d
 @onready var wheels_animated_sprite_2d_2: AnimatedSprite2D = $spriteContainer/wheelContainer/wheelsAnimatedSprite2d2
@@ -38,7 +39,7 @@ var push_intensity : float = 0.0
 var push_state : PushState = PushState.IDLE
 var push_direction : int = 1 # 1right -1left
 
-@export var max_push_speed : float = 30.0
+@export var max_push_speed : float = 42.0
 @export var push_acceleration : float = 20.0
 @export var push_deceleration : float = 25.0
 
@@ -48,6 +49,7 @@ func _ready() -> void:
 	if not player_ref:
 		push_error("player ref not defined")
 		
+	light_container.visible = true
 		
 	randomize()
 	var frame_count := wheels_animated_sprite_2d_1.sprite_frames.get_frame_count("turn")
