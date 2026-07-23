@@ -84,7 +84,7 @@ func fly_to_player(player: Node2D) -> void:
 	if digging_up or flying_to_player:
 		return
 
-	print("removed coll on this log")
+	#print("removed coll on this log")
 	pickup_range_area.set_deferred("monitorable", false)
 
 
@@ -204,7 +204,7 @@ func finish_pickup() -> void:
 	visible = false
 
 	var hands := target_player.get_node("Hands") as Hands
-	hands.finish_pickup()
+	hands.finish_pickup(self)
 	
 func finish_oven_deposit() -> void:
 	flying_to_oven = false

@@ -44,23 +44,24 @@ const FIRE_3_SHAKE_SPEED: float = 19.0
 @export_group("Oven Lights")
 
 @export var light_lerp_speed := 4.0
+
 @export var light_1_min_energy := 0.0
 @export var light_1_max_energy := 0.60
 
 @export var light_2_min_energy := 0.0
-@export var light_2_max_energy := 0.25
+@export var light_2_max_energy := 0.2
 
 @export var light_3_min_energy := 0.0
-@export var light_3_max_energy := 0.25
+@export var light_3_max_energy := 0.3
 
-@export var light_1_min_scale := 0
-@export var light_1_max_scale := 0.8
+@export var light_1_min_scale := 0.01
+@export var light_1_max_scale := 0.73 # 0.8 seems like a good max hitbox for snow
 
-@export var light_2_min_scale := 0
-@export var light_2_max_scale := 0.6
+@export var light_2_min_scale := 0.01
+@export var light_2_max_scale := 0.65
 
-@export var light_3_min_scale := 0
-@export var light_3_max_scale := 0.3
+@export var light_3_min_scale := 0.01
+@export var light_3_max_scale := 0.5
 
 func _ready() -> void:
 	visible = true

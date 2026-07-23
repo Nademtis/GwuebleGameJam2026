@@ -19,7 +19,7 @@ const LEFT_HANDS_POSITION : Vector2 = Vector2(-3.0,-10)
 @export var max_logs := 3
 
 var carried_fuel : Array[PickupableFuel] = []
-var carried_amount : int = 0
+var pending_pickups: Array[PickupableFuel] = []
 var player_ref : Player
 
 func _ready() -> void:
@@ -30,15 +30,15 @@ func _process(_delta: float) -> void:
 	update_log_animation()
 
 func pickup(fuel : PickupableFuel) -> void:
-	if carried_fuel.size() >= max_logs:
-		#print("hands filled - not pickup")
+	if carried_fuel.size() + pending_pickups.size() >= max_logs:
 		return
-	carried_fuel.append(fuel)
+
+	pending_pickups.append(fuel)
 	fuel.fly_to_player(player_ref)
 
-func finish_pickup() -> void:
-	#update_log_animation()
-	carried_amount += 1
+func finish_pickup(fuel: PickupableFuel) -> void:
+	pending_pickups.erase(fuel)
+	carried_fuel.append(fuel)
 
 func deposit_into(oven : Oven) -> void:
 	var logs_to_send := carried_fuel.duplicate()
@@ -46,43 +46,41 @@ func deposit_into(oven : Oven) -> void:
 	await deposit_logs_sequence(logs_to_send, oven)
 
 func deposit_logs_sequence(logs : Array[PickupableFuel], oven : Oven) -> void:
-
 	for fuel : PickupableFuel in logs:
-		# remove one log visually from hands
-		carried_fuel.erase(fuel)
-		carried_amount -= 1
-		update_log_animation()
-		fuel.global_position = player_ref.global_position
+		if not is_instance_valid(fuel):
+			continue
 		
+		carried_fuel.erase(fuel)
+		update_log_animation()
+		
+		fuel.global_position = player_ref.global_position
 		fuel.oven_flight_duration = randf_range(
 			random_flight_duration_min,
 			random_flight_duration_max
 		)
-		
 		fuel.oven_arc_height = randf_range(
 			random_arc_min,
 			random_arc_max
 		)
-
 		fuel.fly_to_oven(oven)
 		await get_tree().create_timer(deposit_delay).timeout
-	await get_tree().create_timer(deposit_delay).timeout
 	oven.lid.close()
 	
 
 func update_log_animation() -> void:
-	var log_count := carried_amount
+	var log_count := carried_fuel.size()
 
 	#edge case for wierd wstuff
 	if log_count > 3:
 		push_error("LOG COUNT IS: ", log_count)
-		log_count = 3
-		carried_amount = 3
+		#log_count = 3
+		#carried_amount = 3
 	
 	#edge case for wierd stuff
 	if log_count < 0:
 		push_error("LOG COUNT IS: ", log_count)
-		carried_amount = 0
+		#carried_amount = 0
+		#return
 		
 
 	# Hide both when empty
