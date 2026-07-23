@@ -46,6 +46,7 @@ var push_direction : int = 1 # 1right -1left
 var push_speed : float = 0.0
 
 func _ready() -> void:
+	
 	if not player_ref:
 		push_error("player ref not defined")
 		

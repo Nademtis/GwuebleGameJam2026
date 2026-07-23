@@ -31,8 +31,8 @@ enum FuelType {
 var flying_to_player := false
 var target_player : Node2D
 var fly_speed := 10.0 # 10.0 good 
-var max_fly_speed := 250.0 # 250 
-var acceleration := 255.0 # 250
+var max_fly_speed := 285.0 # 250 #was maybe too slow
+var acceleration := 275.0 # 250
 
 #from player--> oven
 var flying_to_oven := false

@@ -15,8 +15,8 @@ radius = 14.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_gvdt1"]
 radius = 22.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ha7a2"]
-size = Vector2(9.99844, 12)
+[sub_resource type="CircleShape2D" id="CircleShape2D_7gsxw"]
+radius = 7.0
 
 [node name="Player" type="CharacterBody2D" unique_id=151895576 groups=["player"]]
 collision_mask = 14
@@ -67,9 +67,10 @@ script = ExtResource("5_p47bc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SnowMelterArea" unique_id=1136207724]
 position = Vector2(-3.5762787e-07, -1.9999999)
 rotation = 1.5706849
-shape = SubResource("RectangleShape2D_ha7a2")
+shape = SubResource("CircleShape2D_7gsxw")
 debug_color = Color(0.7707409, 0.17310733, 0.98724526, 0.41960785)
 
 [connection signal="area_entered" from="Hands/pickupArea" to="Hands" method="_on_pickup_area_area_entered"]
 [connection signal="area_entered" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_entered"]
+[connection signal="area_exited" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_exited"]
 [connection signal="area_entered" from="SnowMelterArea" to="SnowMelterArea" method="_on_area_entered"]

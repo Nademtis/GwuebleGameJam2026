@@ -3,7 +3,7 @@ class_name Oven
 
 @onready var lid: Lid = $"../spriteContainer/lid"
 
-@export var max_heat : float = 20.0
+@export var max_heat : float = 15.0
 
 var heat : float = 0.0
 var fuel_queue : Array[PickupableFuel] = []
