@@ -84,6 +84,8 @@ func fly_to_player(player: Node2D) -> void:
 
 	if is_buried_in_snow:
 		play_dig_up_animation()
+		var parent : SnowBlob = get_parent()
+		parent.melt_player(0.8)
 	else:
 		start_flying_to_player()
 
@@ -196,7 +198,7 @@ func finish_pickup() -> void:
 	visible = false
 
 	var hands := target_player.get_node("Hands") as Hands
-	hands.finish_pickup(self)
+	hands.finish_pickup()
 	
 func finish_oven_deposit() -> void:
 	flying_to_oven = false

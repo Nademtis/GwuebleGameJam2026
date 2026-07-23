@@ -32,11 +32,10 @@ func pickup(fuel : PickupableFuel) -> void:
 	if carried_fuel.size() >= max_logs:
 		#print("hands filled - not pickup")
 		return
-
+	carried_fuel.append(fuel)
 	fuel.fly_to_player(player_ref)
 
-func finish_pickup(fuel : PickupableFuel) -> void:
-	carried_fuel.append(fuel)
+func finish_pickup() -> void:
 	update_log_animation()
 
 func deposit_into(oven : Oven) -> void:

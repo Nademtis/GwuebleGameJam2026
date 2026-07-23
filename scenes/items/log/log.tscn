@@ -17,7 +17,7 @@ oven_arc_height = 10.0
 oven_acceleration_curve = SubResource("Curve_505e0")
 
 [node name="shadow" type="Sprite2D" parent="." unique_id=174104865]
-self_modulate = Color(1, 1, 1, 0.11764706)
+self_modulate = Color(1, 1, 1, 0.05882353)
 position = Vector2(2, -7)
 texture = ExtResource("1_pxkku")
 region_enabled = true

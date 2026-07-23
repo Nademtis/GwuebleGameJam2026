@@ -128,13 +128,13 @@ player_ref = NodePath("../Player")
 y_sort_enabled = true
 
 [node name="Log" parent="YSORT/LogContainer" unique_id=72816142 instance=ExtResource("4_ulyey")]
-position = Vector2(117, 95)
+position = Vector2(11, 116)
 
 [node name="Log2" parent="YSORT/LogContainer" unique_id=662851503 instance=ExtResource("4_ulyey")]
-position = Vector2(99, 94)
+position = Vector2(18, 138)
 
 [node name="Log3" parent="YSORT/LogContainer" unique_id=557206288 instance=ExtResource("4_ulyey")]
-position = Vector2(137, 96)
+position = Vector2(19, 102)
 
 [node name="Log4" parent="YSORT/LogContainer" unique_id=1191789370 instance=ExtResource("4_ulyey")]
 position = Vector2(39, 95)
@@ -214,10 +214,11 @@ material = SubResource("ShaderMaterial_i403b")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -232.0
-offset_top = -45.0
-offset_right = 631.0
-offset_bottom = 212.0
+offset_left = -251.0
+offset_top = -39.0
+offset_right = 612.0
+offset_bottom = 218.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.81127876, 0.0005163467, 0.81158507, 0)
+metadata/_edit_lock_ = true

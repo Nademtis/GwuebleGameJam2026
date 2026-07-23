@@ -8,6 +8,7 @@ class_name SnowBlob
 var melt_amount : float = 0.0
 var target_melt_amount : float = 0.0
 
+
 func _ready() -> void:
 	pass
 	snow_animated_sprite.frame = 0
