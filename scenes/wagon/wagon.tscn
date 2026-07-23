@@ -140,7 +140,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.504, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gvdt1"]
-radius = 40.1995
+radius = 31.0
 
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774]
 script = ExtResource("1_hmvk8")
@@ -340,7 +340,7 @@ collision_mask = 8
 script = ExtResource("11_affv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/snowMeltArea" unique_id=1422621120]
-position = Vector2(0, -15)
+position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_gvdt1")
 
 [connection signal="body_entered" from="spriteContainer/lid/Area2D" to="spriteContainer/lid" method="_on_area_2d_body_entered"]

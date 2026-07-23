@@ -67,9 +67,6 @@ size = Vector2(5, 6)
 [node name="Log" type="Node2D" unique_id=401965258]
 script = ExtResource("1_pmkoe")
 
-[node name="Log" parent="." unique_id=72816142 instance=ExtResource("2_w7h2m")]
-position = Vector2(1, 1)
-
 [node name="snowAnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=675842919]
 modulate = Color(1, 1, 1, 0.78431374)
 position = Vector2(0, -8)
@@ -85,3 +82,7 @@ collision_mask = 17
 [node name="meltbox" type="CollisionShape2D" parent="meltArea" unique_id=192855941]
 position = Vector2(-0.5, 4)
 shape = SubResource("RectangleShape2D_ganqv")
+
+[node name="Log" parent="." unique_id=72816142 instance=ExtResource("2_w7h2m")]
+position = Vector2(1, 1)
+is_buried_in_snow = true

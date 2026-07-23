@@ -7,7 +7,20 @@ class_name PickupableFuel
 @export var weight : float = 0.1
 @export var type : FuelType = FuelType.LOG
 
+@export var is_buried_in_snow : bool = false
+
 @onready var shadow: Sprite2D = $shadow
+
+@onready var sprite_container: Node2D = $spriteContainer # this sprite container has only the log sprite as the child
+var digging_up := false
+@export_group("Dig Up")
+@export var dig_up_peak_height := 15.0
+@export var dig_up_peak_duration := 0.3
+@export var dig_up_settle_height := 13.0
+@export var dig_up_settle_duration := 0.1
+#@export var dig_up_height := 12.0
+#@export var dig_up_duration := 0.15
+@export var fly_height := 5.0
 
 enum FuelType {
 	LOG,
@@ -16,9 +29,9 @@ enum FuelType {
 #from ground --> player
 var flying_to_player := false
 var target_player : Node2D
-var fly_speed := 50.0
-var max_fly_speed := 500.0
-var acceleration := 900.0
+var fly_speed := 10.0 # 50.0 felt good
+var max_fly_speed := 250.0 # 500 
+var acceleration := 250.0 # 900
 
 #from player--> oven
 var flying_to_oven := false
@@ -45,7 +58,6 @@ func _process(delta: float) -> void:
 		fly_to_oven_process(delta)
 
 func fly_to_oven(oven : Oven) -> void:
-
 	self.z_index += 1
 
 	target_oven = oven
@@ -64,19 +76,35 @@ func fly_to_oven(oven : Oven) -> void:
 
 func fly_to_player(player: Node2D) -> void:
 	target_player = player
-	flying_to_player = true
-	
+
 	pickup_range_area.set_deferred("monitorable", false)
 
-func fly_to_player_process(delta : float) -> void:
-	var direction := global_position.direction_to(target_player.global_position)
+	if digging_up or flying_to_player:
+		return
 
+	if is_buried_in_snow:
+		play_dig_up_animation()
+	else:
+		start_flying_to_player()
+
+
+
+func start_flying_to_player() -> void:
+	
+	if is_buried_in_snow:
+		sprite_container.position.y = -fly_height
+	flying_to_player = true
+	
+func fly_to_player_process(delta: float) -> void:
+	var direction := global_position.direction_to(target_player.global_position)
 	fly_speed = move_toward(
 		fly_speed,
 		max_fly_speed,
 		acceleration * delta
 	)
+
 	global_position += direction * fly_speed * delta
+
 	if global_position.distance_to(target_player.global_position) < 5:
 		finish_pickup()
 
@@ -133,13 +161,43 @@ func update_shadow(progress : float, height : float) -> void:
 		height_percent
 	)
 
+func play_dig_up_animation() -> void:
+	digging_up = true
+	z_index += 1
+
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_ease(Tween.EASE_OUT)
+
+	# Pop out of the snow.
+	tween.tween_property(
+		sprite_container,
+		"position:y",
+		-dig_up_peak_height,
+		dig_up_peak_duration
+	)
+
+	# Settle slightly.
+	tween.tween_property(
+		sprite_container,
+		"position:y",
+		-dig_up_settle_height,
+		dig_up_settle_duration
+	)
+
+	tween.finished.connect(func() -> void:
+		digging_up = false
+		start_flying_to_player()
+	)
+
 func finish_pickup() -> void:
 	flying_to_player = false
+	sprite_container.position = Vector2.ZERO
 	visible = false
-	
+
 	var hands := target_player.get_node("Hands") as Hands
 	hands.finish_pickup(self)
-
+	
 func finish_oven_deposit() -> void:
 	flying_to_oven = false
 	target_oven.add_fuel(self)

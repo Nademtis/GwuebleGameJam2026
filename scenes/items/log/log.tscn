@@ -23,7 +23,9 @@ texture = ExtResource("1_pxkku")
 region_enabled = true
 region_rect = Rect2(0, 16, 16, 16)
 
-[node name="log" type="Sprite2D" parent="." unique_id=1551764024]
+[node name="spriteContainer" type="Node2D" parent="." unique_id=1242944521]
+
+[node name="log" type="Sprite2D" parent="spriteContainer" unique_id=1551764024]
 position = Vector2(2, -8)
 texture = ExtResource("1_pxkku")
 region_enabled = true
