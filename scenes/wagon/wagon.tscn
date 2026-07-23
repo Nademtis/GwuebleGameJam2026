@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ckwthq7lvxir0" path="res://scenes/wagon/oven.gd" id="6_cgiqy"]
 [ext_resource type="Texture2D" uid="uid://cj3t4obbru6be" path="res://scenes/wagon/new_assest/new_wagon_lid_spritesheet.png" id="6_v4pry"]
 [ext_resource type="Script" uid="uid://dxad7k6ivpqix" path="res://scenes/wagon/lid.gd" id="7_go74l"]
+[ext_resource type="Texture2D" uid="uid://brsvv437dufor" path="res://scenes/wagon/oven/nice_oven_light_1.tres" id="11_130wf"]
 [ext_resource type="Script" uid="uid://dkaw6ovkq2idp" path="res://scenes/wagon/snow_melt_Oven.gd" id="11_affv2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w7sgt"]
@@ -129,15 +130,6 @@ size = Vector2(11.375, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 13.038404
-
-[sub_resource type="Gradient" id="Gradient_go74l"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_40rin"]
-gradient = SubResource("Gradient_go74l")
-fill = 1
-fill_from = Vector2(0.48290598, 0.47008547)
-fill_to = Vector2(0.4957265, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gvdt1"]
 radius = 31.0
@@ -308,32 +300,34 @@ position = Vector2(23, -2)
 script = ExtResource("6_cgiqy")
 
 [node name="depositArea" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/depositArea" unique_id=1077417948]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_ganqv")
 
-[node name="ovenLight1" type="PointLight2D" parent="Oven" unique_id=787252953]
-position = Vector2(1, -13)
+[node name="lightContainer" type="Node2D" parent="Oven" unique_id=1507388662]
+position = Vector2(0, -12)
+
+[node name="ovenLight1" type="PointLight2D" parent="Oven/lightContainer" unique_id=787252953]
 color = Color(1, 0.6392157, 0.4117647, 1)
 energy = 0.5
-texture = SubResource("GradientTexture2D_40rin")
+texture = ExtResource("11_130wf")
 
-[node name="ovenLight2" type="PointLight2D" parent="Oven" unique_id=1043776040]
-position = Vector2(1, -13)
+[node name="ovenLight2" type="PointLight2D" parent="Oven/lightContainer" unique_id=1043776040]
 color = Color(0.9999991, 0.5229503, 0.15826103, 1)
 energy = 0.6
-texture = SubResource("GradientTexture2D_40rin")
+texture = ExtResource("11_130wf")
 texture_scale = 0.75
 
-[node name="ovenLight3" type="PointLight2D" parent="Oven" unique_id=856872269]
-position = Vector2(1, -13)
+[node name="ovenLight3" type="PointLight2D" parent="Oven/lightContainer" unique_id=856872269]
 color = Color(1, 0.6392157, 0.4117647, 1)
 energy = 0.85
-texture = SubResource("GradientTexture2D_40rin")
+texture = ExtResource("11_130wf")
 texture_scale = 0.45
 
 [node name="snowMeltArea" type="Area2D" parent="Oven" unique_id=1768253092]
+visible = false
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("11_affv2")

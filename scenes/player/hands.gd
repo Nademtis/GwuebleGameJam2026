@@ -75,14 +75,14 @@ func update_log_animation() -> void:
 
 	#edge case for wierd wstuff
 	if log_count > 3:
+		push_error("LOG COUNT IS: ", log_count)
 		log_count = 3
 		carried_amount = 3
-		push_error("LOG COUNT IS: ", log_count)
 	
 	#edge case for wierd stuff
 	if log_count < 0:
+		push_error("LOG COUNT IS: ", log_count)
 		carried_amount = 0
-		return
 		
 
 	# Hide both when empty

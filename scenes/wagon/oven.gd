@@ -36,26 +36,31 @@ const FIRE_3_SHAKE_DISTANCE: float = 0.9
 const FIRE_3_SHAKE_SPEED: float = 19.0
 
 #lights
-@onready var oven_light_1: PointLight2D = $ovenLight1
-@onready var oven_light_2: PointLight2D = $ovenLight2
-@onready var oven_light_3: PointLight2D = $ovenLight3
+@onready var oven_light_1: PointLight2D = $lightContainer/ovenLight1
+@onready var oven_light_2: PointLight2D = $lightContainer/ovenLight2
+@onready var oven_light_3: PointLight2D = $lightContainer/ovenLight3
 
 
 @export_group("Oven Lights")
 
 @export var light_lerp_speed := 4.0
 @export var light_1_min_energy := 0.0
-@export var light_1_max_energy := 0.25
+@export var light_1_max_energy := 0.60
+
 @export var light_2_min_energy := 0.0
-@export var light_2_max_energy := 0.5
+@export var light_2_max_energy := 0.25
+
 @export var light_3_min_energy := 0.0
-@export var light_3_max_energy := 0.75
-@export var light_1_min_scale := 0.7
-@export var light_1_max_scale := 1.0
-@export var light_2_min_scale := 0.7
-@export var light_2_max_scale := 1.2
-@export var light_3_min_scale := 0.7
-@export var light_3_max_scale := 1.4
+@export var light_3_max_energy := 0.25
+
+@export var light_1_min_scale := 0
+@export var light_1_max_scale := 0.8
+
+@export var light_2_min_scale := 0
+@export var light_2_max_scale := 0.6
+
+@export var light_3_min_scale := 0
+@export var light_3_max_scale := 0.3
 
 func _ready() -> void:
 	visible = true
