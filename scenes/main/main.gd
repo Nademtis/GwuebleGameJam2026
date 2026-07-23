@@ -28,7 +28,7 @@ func _ready() -> void:
 	Events.connect("restart_current_level" , restart_level)
 
 	next_level_path = level_list[level_index]
-	_setup_new_level()
+	await _setup_new_level()
 
 func start_new_level(to_restart : bool) -> void:
 	if not to_restart:
@@ -38,7 +38,7 @@ func start_new_level(to_restart : bool) -> void:
 	next_level_path = level_list[level_index]
 	animation_player.play("fade_to_black")
 	await animation_player.animation_finished
-	_setup_new_level()
+	await _setup_new_level()
 	#fade_out_sfx.play() # #todo
 
 func _setup_new_level() -> void:
@@ -61,7 +61,7 @@ func _setup_new_level() -> void:
 
 
 func restart_level() -> void:
-	start_new_level(true)
+	await start_new_level(true)
 
 func remove_active_cam() -> void:
 	var list : Array[PhantomCamera2D] = PhantomCameraManager.get_phantom_camera_2ds()

@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 		fly_to_player_process(delta)
 
 	if flying_to_oven:
-		fly_to_oven_process(delta)
+		await fly_to_oven_process(delta)
 
 func fly_to_oven(oven : Oven) -> void:
 	self.z_index += 1
@@ -142,7 +142,7 @@ func fly_to_oven_process(delta : float) -> void:
 	
 	global_position = fuel_position
 	if progress >= 1.0:
-		finish_oven_deposit()
+		await finish_oven_deposit()
 
 func update_shadow(progress : float, height : float) -> void:
 
@@ -185,7 +185,7 @@ func play_dig_up_animation() -> void:
 		dig_up_peak_duration
 	)
 
-	# Settle slightly.
+	# settle slightly. down. look good mhh
 	tween.tween_property(
 		sprite_container,
 		"position:y",
@@ -199,12 +199,14 @@ func play_dig_up_animation() -> void:
 	)
 
 func finish_pickup() -> void:
+
 	flying_to_player = false
+
 	sprite_container.position = Vector2.ZERO
 	visible = false
 
 	var hands := target_player.get_node("Hands") as Hands
-	hands.finish_pickup(self)
+	hands.receive_log(self)
 	
 func finish_oven_deposit() -> void:
 	flying_to_oven = false

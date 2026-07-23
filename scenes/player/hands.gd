@@ -21,7 +21,8 @@ var oven : Oven
 @export var max_logs := 3
 
 var carried_fuel : Array[PickupableFuel] = []
-var pending_pickups: Array[PickupableFuel] = []
+var incoming_pickups : int = 0
+
 var player_ref : Player
 
 var is_in_oven_deposit_range : bool = false
@@ -41,44 +42,86 @@ func _process(_delta: float) -> void:
 		await check_to_deposit()
 		should_deposit_again_timer = DEPOSIT_CHECK_MAX_TIME
 			
-func pickup(fuel : PickupableFuel) -> void:
-	if carried_fuel.size() + pending_pickups.size() >= max_logs:
+func pickup(fuel: PickupableFuel) -> void:
+
+	if is_currently_depositing:
 		return
 
-	pending_pickups.append(fuel)
+	if carried_fuel.size() + incoming_pickups >= max_logs:
+		return
+
+	incoming_pickups += 1
 	fuel.fly_to_player(player_ref)
 
-func finish_pickup(fuel: PickupableFuel) -> void:
-	pending_pickups.erase(fuel)
+func receive_log(fuel: PickupableFuel) -> void:
+
+	incoming_pickups -= 1
 	carried_fuel.append(fuel)
 
-func deposit_into() -> void:
-	is_currently_depositing = true
-	var logs_to_send := carried_fuel.duplicate()
-	oven.lid.open()
-	await deposit_logs_sequence(logs_to_send)
-	is_currently_depositing = false
+	update_log_animation()
 
-func deposit_logs_sequence(logs : Array[PickupableFuel]) -> void:
+func deposit_into() -> void:
+
+	if is_currently_depositing:
+		return
+
+	is_currently_depositing = true
+
+	oven.lid.open()
+
+	var logs := carried_fuel.duplicate()
+
 	for fuel : PickupableFuel in logs:
 		if not is_instance_valid(fuel):
+			push_error("not valid fuel :()")
 			continue
-		
 		carried_fuel.erase(fuel)
-		update_log_animation() # called in process
-		
+
+		update_log_animation()
+
 		fuel.global_position = player_ref.global_position
+
 		fuel.oven_flight_duration = randf_range(
 			random_flight_duration_min,
 			random_flight_duration_max
 		)
+
 		fuel.oven_arc_height = randf_range(
 			random_arc_min,
 			random_arc_max
 		)
+
 		fuel.fly_to_oven(oven)
+
 		await get_tree().create_timer(deposit_delay).timeout
+
+
 	oven.lid.close()
+
+	is_currently_depositing = false
+
+#func deposit_logs_sequence(logs : Array[PickupableFuel]) -> void:
+	#for fuel : PickupableFuel in logs:
+		#if not is_instance_valid(fuel):
+			#continue
+		#
+		#carried_fuel.erase(fuel)
+		##depositing_logs.erase(fuel)
+		#update_log_animation() # called in process
+		#
+		#
+		#fuel.global_position = player_ref.global_position
+		#fuel.oven_flight_duration = randf_range(
+			#random_flight_duration_min,
+			#random_flight_duration_max
+		#)
+		#fuel.oven_arc_height = randf_range(
+			#random_arc_min,
+			#random_arc_max
+		#)
+		#fuel.fly_to_oven(oven)
+		#await get_tree().create_timer(deposit_delay).timeout
+	#oven.lid.close()
 	
 
 func update_log_animation() -> void:
@@ -169,10 +212,9 @@ func _on_deposit_area_area_entered(area: Area2D) -> void:
 		if carried_fuel.is_empty():
 			return
 		
-		if is_currently_depositing == false:
+		if is_currently_depositing:
 			return
 			
-		is_currently_depositing = true
 		await deposit_into()
 		
 func _on_deposit_area_area_exited(area: Area2D) -> void:
