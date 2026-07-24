@@ -45,8 +45,8 @@ var push_direction : int = 1 # 1right -1left
 
 #overall movement
 @export var max_push_speed : float = 42.0
-@export var push_acceleration : float = 20.0
-@export var push_deceleration : float = 25.0
+@export var push_acceleration : float = 16.0
+@export var push_deceleration : float = 28.0
 
 #going up/down
 @export var wagon_vertical_speed : float = 12.0
@@ -54,10 +54,10 @@ var push_direction : int = 1 # 1right -1left
 @export var max_y_height : float = 185.0
 
 @export var wagon_vertical_max_speed := 12.0
-@export var wagon_vertical_acceleration := 30.0
-@export var wagon_vertical_deceleration := 55.0 # 16 very floaty
+@export var wagon_vertical_acceleration := 29.0
+@export var wagon_vertical_deceleration := 50.0 
 
-@export var minimum_steering := 0.35
+@export var minimum_steering := 0.60
 
 var vertical_speed := 0.0
 var wagon_y_direction : float = 0.0
@@ -212,7 +212,7 @@ func handle_slowing(delta : float) -> void:
 		push_state = PushState.IDLE
 
 func release_player() -> void:
-	print("released with this player_ref.input_dir: ", player_ref.input_dir)
+	#print("released with this player_ref.input_dir: ", player_ref.input_dir)
 	player_ref.is_pushing = false
 	player_ref.velocity = Vector2.ZERO
 	brace_progress = 0.0
