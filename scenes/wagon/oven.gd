@@ -66,10 +66,10 @@ const FIRE_3_SHAKE_SPEED: float = 19.0
 @export var light_1_max_energy := 0.60
 
 @export var light_2_min_energy := 0.0
-@export var light_2_max_energy := 0.2
+@export var light_2_max_energy := 0.25
 
 @export var light_3_min_energy := 0.0
-@export var light_3_max_energy := 0.3
+@export var light_3_max_energy := 0.28
 
 @export var light_1_min_scale := 0.01
 @export var light_1_max_scale := 0.65 # 0.8 seems like a good max hitbox for snow
@@ -78,7 +78,7 @@ const FIRE_3_SHAKE_SPEED: float = 19.0
 @export var light_2_max_scale := 0.65
 
 @export var light_3_min_scale := 0.01
-@export var light_3_max_scale := 0.5
+@export var light_3_max_scale := 0.65
 #endregion light
 
 func _ready() -> void:
