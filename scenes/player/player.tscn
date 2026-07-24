@@ -4,8 +4,10 @@
 [ext_resource type="Script" uid="uid://bwqcidglvj737" path="res://scenes/player/player.gd" id="1_dovo2"]
 [ext_resource type="SpriteFrames" uid="uid://bfxshyes3st6v" path="res://scenes/items/log/logSpriteFrames.tres" id="2_lvxji"]
 [ext_resource type="Script" uid="uid://brl7oy653xx02" path="res://scenes/player/hands.gd" id="3_gmlin"]
+[ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="3_qek5x"]
 [ext_resource type="Script" uid="uid://bc4m3ftv7b24a" path="res://scenes/player/snow_melter_area.gd" id="5_p47bc"]
 [ext_resource type="Script" uid="uid://cfjybfw36mbs3" path="res://scenes/player/heat_receiver.gd" id="6_75vfm"]
+[ext_resource type="PackedScene" uid="uid://ppyk6ukgqrhj" path="res://scenes/juice/freezeOverlay/FreezeOverlay.tscn" id="7_0owmy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 4.0
@@ -32,7 +34,11 @@ position = Vector2(1, -11)
 sprite_frames = ExtResource("2_lvxji")
 animation = &"down_3_log"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1660261766]
+[node name="HorizontalShaker" type="Node2D" parent="." unique_id=2112096065]
+script = ExtResource("3_qek5x")
+metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HorizontalShaker" unique_id=1660261766]
 position = Vector2(0, -16)
 sprite_frames = ExtResource("1_8afob")
 animation = &"w_down"
@@ -81,6 +87,9 @@ script = ExtResource("6_75vfm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="heatReceiver" unique_id=1776786609]
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_gyig5")
+
+[node name="FreezeOverlay" parent="." unique_id=388628974 node_paths=PackedStringArray("player_warmth") instance=ExtResource("7_0owmy")]
+player_warmth = NodePath("../heatReceiver")
 
 [connection signal="area_entered" from="Hands/pickupArea" to="Hands" method="_on_pickup_area_area_entered"]
 [connection signal="area_entered" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_entered"]

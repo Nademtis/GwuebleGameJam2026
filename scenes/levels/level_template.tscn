@@ -69,7 +69,7 @@ shader = ExtResource("12_a381f")
 shader_parameter/ice_noise = SubResource("NoiseTexture2D_505e0")
 shader_parameter/frost_texture = SubResource("NoiseTexture2D_gvdt1")
 shader_parameter/distortion_strength = 0.0
-shader_parameter/freeze_amount = 0.6000000285
+shader_parameter/freeze_amount = 0.50000002375
 
 [node name="level" type="Node2D" unique_id=976271308]
 
@@ -202,5 +202,3 @@ offset_left = -264.0
 offset_top = -30.0
 offset_right = 1153.0
 offset_bottom = 225.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1817430227]

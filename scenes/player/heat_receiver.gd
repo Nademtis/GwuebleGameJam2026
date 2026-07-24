@@ -18,7 +18,6 @@ func _ready() -> void:
 	current_warmth = max_warmth
 
 func _process(delta: float) -> void:
-	print("warmth", current_warmth)
 	if is_equal_approx(current_warmth, max_warmth) and is_in_oven_heat_range:
 		return
 
@@ -37,7 +36,7 @@ func restore_warmth(delta: float) -> void:
 		warmth_restore_speed * delta
 	)
 
-	if current_warmth > max_warmth - 0.05:
+	if current_warmth > max_warmth - 0.2:
 		current_warmth = max_warmth
 
 func lose_warmth(delta: float) -> void:
@@ -54,4 +53,5 @@ func _on_area_exited(area: Area2D) -> void:
 
 func freeze() -> void:
 	print("should restart level")
+	Events.emit_signal("restart_current_level")
 	set_process(false)

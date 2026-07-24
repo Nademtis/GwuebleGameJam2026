@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $HorizontalShaker/AnimatedSprite2D
 
 @export var max_speed: float = 65
 @export var acceleration: float = 260.0
