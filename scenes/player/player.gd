@@ -20,6 +20,8 @@ var move_dir: Vector2
 var is_pushing : bool = false
 var push_direction_is_right : bool = false
 
+var current_pos_y : float 
+
 func _ready() -> void:
 	pass
 	#if not freeze_shader_rect:
@@ -32,16 +34,15 @@ func _physics_process(delta: float) -> void:
 		snow_recovery_speed * delta
 	)
 	
-	
 	if can_move:
 		_movement(delta)
 	
 	if not is_pushing:
 		move_and_slide()
-
-
-func handle_pushing() -> void:
-	pass
+		#current_pos_y = global_position.y
+	
+	#if is_pushing:
+		#global_position.y = current_pos_y
 
 func _process(_delta: float) -> void:
 	input_dir = Input.get_vector("left", "right", "up", "down")

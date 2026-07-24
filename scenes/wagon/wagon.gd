@@ -43,14 +43,22 @@ var push_intensity : float = 0.0
 var push_state : PushState = PushState.IDLE
 var push_direction : int = 1 # 1right -1left
 
+#overall movement
 @export var max_push_speed : float = 42.0
 @export var push_acceleration : float = 20.0
 @export var push_deceleration : float = 25.0
 
+#going up/down
+@export var wagon_vertical_speed : float = 12.0
+@export var min_y_height : float = 107.0
+@export var max_y_height : float = 185.0
+
+var wagon_y_direction : float = 0.0
+
+#changed in code
 var push_speed : float = 0.0
 
 func _ready() -> void:
-	
 	if not player_ref:
 		push_error("player ref not defined")
 		
@@ -87,10 +95,10 @@ func _physics_process(delta : float) -> void:
 
 func handle_idle() -> void:
 	if player_touching_left_handle:
-		if player_ref.input_dir == Vector2.RIGHT:
+		if player_ref.input_dir.x > 0:
 			start_bracing(true)
 	if player_touching_right_handle:
-		if player_ref.input_dir == Vector2.LEFT:
+		if player_ref.input_dir.x < 0:
 			start_bracing(false)
 
 func start_bracing(going_right : bool) -> void:
@@ -108,15 +116,13 @@ func start_bracing(going_right : bool) -> void:
 
 func handle_pushing(delta : float) -> void:
 	#stop pushing when player let go
-	if push_direction == 1:
 
-		if player_ref.input_dir != Vector2.RIGHT:
+	if push_direction == 1:
+		if player_ref.input_dir.x <= 0:
 			push_state = PushState.SLOWING
 			return
 	else:
-		#wheels_animated_sprite_2d_1.play("turn")
-		#wheels_animated_sprite_2d_2.play("turn")
-		if player_ref.input_dir != Vector2.LEFT:
+		if player_ref.input_dir.x >= 0:
 			push_state = PushState.SLOWING
 			return
 
@@ -127,22 +133,31 @@ func handle_pushing(delta : float) -> void:
 	)
 	push_intensity = push_speed / max_push_speed
 
+	wagon_y_direction = get_wagon_y_input()
 	velocity.x = push_speed * push_direction
-	velocity.y = 0
+	velocity.y = wagon_y_direction * wagon_vertical_speed
 
 	move_and_slide()
 	
+	#clamp y since we don't want wagon to get out of bounds
+	global_position.y = clamp(
+		global_position.y,
+		min_y_height,
+		max_y_height
+		)
 
 	#asign the same velocity to player
 	player_ref.velocity = velocity
 	player_ref.move_and_slide()
+	
+	player_ref.global_position.y = global_position.y - 2
 
 func handle_slowing(delta : float) -> void:
 	if player_ref.is_pushing:
-		if player_ref.input_dir != Vector2.RIGHT and push_direction == 1:
+		if push_direction == 1 and player_ref.input_dir.x <= 0:
 			release_player()
 
-		if player_ref.input_dir != Vector2.LEFT and push_direction == -1:
+		if push_direction == -1 and player_ref.input_dir.x >= 0:
 			release_player()
 
 	push_speed = move_toward(
@@ -168,6 +183,7 @@ func handle_slowing(delta : float) -> void:
 		push_state = PushState.IDLE
 
 func release_player() -> void:
+	print("released with this player_ref.input_dir: ", player_ref.input_dir)
 	player_ref.is_pushing = false
 	player_ref.velocity = Vector2.ZERO
 	brace_progress = 0.0
@@ -201,9 +217,19 @@ func handle_bracing(delta : float) -> void:
 
 func player_is_still_pushing() -> bool:
 	if push_direction == 1:
-		return player_ref.input_dir == Vector2.RIGHT
+		return player_ref.input_dir.x > 0
 	else:
-		return player_ref.input_dir == Vector2.LEFT
+		return player_ref.input_dir.x < 0
+
+func get_wagon_y_input() -> float:
+	var y_input := 0.0
+
+	if player_ref.input_dir.y < 0:
+		y_input = -1
+	elif player_ref.input_dir.y > 0:
+		y_input = 1
+
+	return y_input
 
 func anim_wheels() -> void:
 	# STOPPING

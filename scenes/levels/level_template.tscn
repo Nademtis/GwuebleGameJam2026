@@ -116,7 +116,7 @@ y_sort_enabled = true
 position = Vector2(65, 166)
 
 [node name="Wagon" parent="YSORT" unique_id=756693774 node_paths=PackedStringArray("player_ref") instance=ExtResource("5_j81xe")]
-position = Vector2(66, 134)
+position = Vector2(65, 135)
 player_ref = NodePath("../Player")
 
 [node name="LogContainer" type="Node2D" parent="YSORT" unique_id=1991217267]
