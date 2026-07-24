@@ -112,18 +112,21 @@ func deposit_into() -> void:
 	#for signal_ in deposit_flights:
 	#	await signal_
 		
-	oven.lid.close()
 	is_currently_depositing = false
 	
-	await get_tree().create_timer(0.2).timeout
 	match deposit_flights.size():
 		1:
+			await get_tree().create_timer(0.15).timeout
 			fire_small.play()
 		2:
+			await get_tree().create_timer(0.22).timeout
 			fire_medium.play()
 		3:
+			await get_tree().create_timer(0.28).timeout
 			fire_big.play()
-
+	await get_tree().create_timer(0.2).timeout
+	oven.lid.close()
+	
 func update_log_animation() -> void:
 	var log_count := carried_fuel.size()
 
