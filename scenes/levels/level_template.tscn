@@ -48,7 +48,6 @@ frequency = 0.0
 metadata/_custom_type_script = "uid://dimvdouy8g0sv"
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_l3cfh"]
-frequency = 0.008
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gvdt1"]
 width = 480
@@ -61,6 +60,7 @@ seamless = true
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_505e0"]
 width = 480
 height = 200
+generate_mipmaps = false
 noise = SubResource("FastNoiseLite_d6oyh")
 seamless = true
 

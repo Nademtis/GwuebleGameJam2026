@@ -1,11 +1,12 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $HorizontalShaker/AnimatedSprite2D
-
 @export var max_speed: float = 65
 @export var acceleration: float = 260.0
 @export var deceleration: float = 260.0
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $HorizontalShaker/AnimatedSprite2D
+
 
 var can_move : bool = true
 var input_dir: Vector2
@@ -14,6 +15,10 @@ var move_dir: Vector2
 var is_pushing : bool = false
 var push_direction_is_right : bool = false
 
+func _ready() -> void:
+	pass
+	#if not freeze_shader_rect:
+		#push_error("freeze_shader_rect not defined")
 
 func _physics_process(delta: float) -> void:
 	if can_move:
