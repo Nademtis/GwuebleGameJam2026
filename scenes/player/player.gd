@@ -5,8 +5,13 @@ class_name Player
 @export var acceleration: float = 260.0
 @export var deceleration: float = 260.0
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $HorizontalShaker/AnimatedSprite2D
+#snow stuff
+@export var snow_speed_multiplier := 1.0
+@export var snow_hit_multiplier := 0.8
+@export var snow_recovery_speed := 2.5
 
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $HorizontalShaker/AnimatedSprite2D
 
 var can_move : bool = true
 var input_dir: Vector2
@@ -21,6 +26,13 @@ func _ready() -> void:
 		#push_error("freeze_shader_rect not defined")
 
 func _physics_process(delta: float) -> void:
+	snow_speed_multiplier = move_toward(
+		snow_speed_multiplier,
+		1.0,
+		snow_recovery_speed * delta
+	)
+	
+	
 	if can_move:
 		_movement(delta)
 	
@@ -40,7 +52,7 @@ func _movement(delta: float) -> void:
 		#last_move_dir = input_dir.normalized()
 		_update_animation(input_dir)
 		velocity = velocity.move_toward(
-			input_dir * max_speed,
+			input_dir * max_speed * snow_speed_multiplier,
 			acceleration * delta
 		)
 	else:
@@ -75,3 +87,9 @@ func _update_animation(dir: Vector2) -> void:
 			animated_sprite_2d.play("w_up")
 		else:
 			animated_sprite_2d.play("w_down")
+
+
+func _on_snow_melter_area_hit_snow() -> void:
+	#print("player hit snow")
+	snow_speed_multiplier *= snow_hit_multiplier
+	snow_speed_multiplier = max(snow_speed_multiplier, 0.5)

@@ -95,5 +95,6 @@ player_warmth = NodePath("../heatReceiver")
 [connection signal="area_entered" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_entered"]
 [connection signal="area_exited" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_exited"]
 [connection signal="area_entered" from="SnowMelterArea" to="SnowMelterArea" method="_on_area_entered"]
+[connection signal="hit_snow" from="SnowMelterArea" to="." method="_on_snow_melter_area_hit_snow"]
 [connection signal="area_entered" from="heatReceiver" to="heatReceiver" method="_on_area_entered"]
 [connection signal="area_exited" from="heatReceiver" to="heatReceiver" method="_on_area_exited"]

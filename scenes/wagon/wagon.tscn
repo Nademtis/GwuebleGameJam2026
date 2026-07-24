@@ -362,7 +362,7 @@ position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_gvdt1")
 
 [node name="playerHeatArea" type="Area2D" parent="Oven" unique_id=1084344960 groups=["heat"]]
-position = Vector2(0, -9)
+position = Vector2(-2, -9)
 collision_layer = 32
 
 [node name="playerHeatCollisionShape2D" type="CollisionShape2D" parent="Oven/playerHeatArea" unique_id=1484054579]
