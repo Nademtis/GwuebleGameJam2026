@@ -53,6 +53,13 @@ var push_direction : int = 1 # 1right -1left
 @export var min_y_height : float = 107.0
 @export var max_y_height : float = 185.0
 
+@export var wagon_vertical_max_speed := 12.0
+@export var wagon_vertical_acceleration := 30.0
+@export var wagon_vertical_deceleration := 55.0 # 16 very floaty
+
+@export var minimum_steering := 0.35
+
+var vertical_speed := 0.0
 var wagon_y_direction : float = 0.0
 
 #changed in code
@@ -133,9 +140,31 @@ func handle_pushing(delta : float) -> void:
 	)
 	push_intensity = push_speed / max_push_speed
 
-	wagon_y_direction = get_wagon_y_input()
+
+
+	#everything y related
+
+	var steering_strength : float = lerp(1.0, minimum_steering, push_intensity)
+	var target_vertical_speed : float = (
+		get_wagon_y_input()
+		* wagon_vertical_max_speed
+		* steering_strength
+		)
+
+	if target_vertical_speed == 0.0:
+		vertical_speed = move_toward(
+			vertical_speed,
+			0.0,
+			wagon_vertical_deceleration * delta
+		)
+	else:
+		vertical_speed = move_toward(
+			vertical_speed,
+			target_vertical_speed,
+			wagon_vertical_acceleration * delta
+		)
 	velocity.x = push_speed * push_direction
-	velocity.y = wagon_y_direction * wagon_vertical_speed
+	velocity.y = vertical_speed
 
 	move_and_slide()
 	

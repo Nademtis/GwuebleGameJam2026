@@ -136,7 +136,7 @@ radius = 8.0
 height = 24.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ganqv"]
-size = Vector2(11.0625, 16)
+size = Vector2(11, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 13.038404
@@ -307,14 +307,13 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_ganqv")
 
 [node name="handles" type="Node2D" parent="." unique_id=995195635]
-visible = false
 
 [node name="leftHandle" type="Area2D" parent="handles" unique_id=1022169205]
 position = Vector2(5, -1)
 collision_layer = 4
 
 [node name="leftHandleCollsionShape" type="CollisionShape2D" parent="handles/leftHandle" unique_id=979729039]
-position = Vector2(-19.53125, -11)
+position = Vector2(-21.5, -11)
 shape = SubResource("RectangleShape2D_ganqv")
 
 [node name="leftPlayerPushSpot" type="Marker2D" parent="handles/leftHandle" unique_id=199972813]
@@ -324,7 +323,7 @@ position = Vector2(-28, -1)
 collision_layer = 4
 
 [node name="rightHandleCollsionShape" type="CollisionShape2D" parent="handles/rightHandle" unique_id=982908636]
-position = Vector2(14.3125, -12)
+position = Vector2(16.3125, -12)
 shape = SubResource("RectangleShape2D_ganqv")
 
 [node name="rightPlayerPushSpot" type="Marker2D" parent="handles/rightHandle" unique_id=378744217]
@@ -371,6 +370,7 @@ position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_gvdt1")
 
 [node name="playerHeatArea" type="Area2D" parent="Oven" unique_id=1084344960 groups=["heat"]]
+visible = false
 position = Vector2(-2, -9)
 collision_layer = 32
 
