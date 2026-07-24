@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cismvgg78qcps"]
+
+[ext_resource type="Script" uid="uid://cf5d1ecsdmobu" path="res://scenes/juice/storm_trigger.gd" id="1_8sn8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ganqv"]
+size = Vector2(20, 384)
+
+[node name="StormTrigger" type="Area2D" unique_id=2076491983 groups=["player_triggers"]]
+collision_layer = 64
+script = ExtResource("1_8sn8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511342002]
+position = Vector2(0, 130)
+shape = SubResource("RectangleShape2D_ganqv")
+debug_color = Color(0.95728976, 4.813075e-07, 0.53597844, 0.41960785)
+
+[node name="Label" type="Label" parent="." unique_id=596213970]
+offset_left = -103.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = -55.0
+theme_override_colors/font_color = Color(1, 0, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "StormTrigger"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
