@@ -19,6 +19,8 @@
 [ext_resource type="Shader" uid="uid://cx8wclejgyyou" path="res://misc/shaders/ice_lens.gdshader" id="12_a381f"]
 [ext_resource type="PackedScene" uid="uid://c6an35nm27old" path="res://scenes/ambience/snow_chill_ColorRect.tscn" id="17_quo62"]
 [ext_resource type="PackedScene" uid="uid://ls7f32jsoev" path="res://scenes/ambience/snow_medium_ColorRect.tscn" id="18_j5y0x"]
+[ext_resource type="Script" uid="uid://cwy3ufujkos42" path="res://scenes/juice/storm_manager.gd" id="18_mvorh"]
+[ext_resource type="PackedScene" uid="uid://b1aep8wnurgdu" path="res://scenes/ambience/snow_high_ColorRect.tscn" id="21_hulh5"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fwulr"]
 scenes/1/scene = ExtResource("7_fwulr")
@@ -191,14 +193,34 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="snowShader_chill" parent="." unique_id=1732794010 instance=ExtResource("17_quo62")]
+[node name="StormManager" type="Node2D" parent="." unique_id=1291984912]
+script = ExtResource("18_mvorh")
+
+[node name="snowShader_chill" parent="StormManager" unique_id=1732794010 instance=ExtResource("17_quo62")]
 offset_left = -159.0
 offset_top = -5.0
 offset_right = 841.0
 offset_bottom = 235.0
 
-[node name="snowShader_Medium" parent="." unique_id=253774696 instance=ExtResource("18_j5y0x")]
-offset_left = 437.0
-offset_top = -5.0
-offset_right = 1457.0
-offset_bottom = 235.0
+[node name="snowShader_Medium" parent="StormManager" unique_id=253774696 instance=ExtResource("18_j5y0x")]
+offset_left = 753.0
+offset_top = -7.0
+offset_right = 1773.0
+offset_bottom = 233.0
+
+[node name="snowShader_High" parent="StormManager" unique_id=354930956 instance=ExtResource("21_hulh5")]
+offset_left = 1733.0
+offset_top = 3.0
+offset_right = 2753.0
+offset_bottom = 243.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="StormManager" unique_id=477679436]
+
+[node name="blackColorRect" type="ColorRect" parent="StormManager/CanvasLayer" unique_id=574430968]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
