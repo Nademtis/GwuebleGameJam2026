@@ -154,7 +154,7 @@ func fly_to_oven_process(delta : float) -> void:
 	
 	global_position = fuel_position
 	if progress >= 1.0:
-		print("finished flying to oven")
+		#print("finished flying to oven")
 		finish_oven_deposit()
 
 func update_shadow(progress : float, height : float) -> void:
