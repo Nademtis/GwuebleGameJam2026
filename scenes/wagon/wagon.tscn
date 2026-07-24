@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cc8cxautpdsko" path="res://scenes/wagon/wagon.gd" id="1_hmvk8"]
 [ext_resource type="Texture2D" uid="uid://bqejao32wnknl" path="res://scenes/wagon/new_assest/new_wagonAseprite_wheels.ase_layer_tex" id="2_1k2nb"]
+[ext_resource type="Script" uid="uid://byuhgympopdhx" path="res://scenes/wagon/wagon_snow_hitter.gd" id="2_33e8h"]
 [ext_resource type="SpriteFrames" uid="uid://ui3yrni77btb" path="res://scenes/wagon/new_assest/wheel/wheelsAnimAseprite_wheel.ase_layer" id="3_40rin"]
 [ext_resource type="Texture2D" uid="uid://clbcpfp8c72a7" path="res://scenes/wagon/new_assest/new_wagonAseprite_wagon.ase_layer_tex" id="3_cmnqr"]
 [ext_resource type="Texture2D" uid="uid://b1h3g6dlwvd4y" path="res://scenes/wagon/new_assest/new_wagonAseprite_fire.ase_layer_tex" id="4_q5jej"]
@@ -15,6 +16,9 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q23xm"]
 radius = 3.1622777
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ha7a2"]
+radius = 3.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w7sgt"]
 atlas = ExtResource("2_1k2nb")
@@ -144,8 +148,19 @@ radius = 64.0
 script = ExtResource("1_hmvk8")
 
 [node name="StormTriggerCollisionshape" type="CollisionShape2D" parent="." unique_id=1124384212]
-position = Vector2(0, -15)
+visible = false
+position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_q23xm")
+
+[node name="SnowHitter" type="Area2D" parent="." unique_id=191127422]
+visible = false
+position = Vector2(7, -3)
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("2_33e8h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SnowHitter" unique_id=983703803]
+shape = SubResource("CircleShape2D_ha7a2")
 
 [node name="spriteContainer" type="Node2D" parent="." unique_id=1227653735]
 position = Vector2(-1, -5)
@@ -310,6 +325,7 @@ position = Vector2(23, -2)
 script = ExtResource("6_cgiqy")
 
 [node name="depositArea" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Oven/depositArea" unique_id=1077417948]
 position = Vector2(0, -15)
@@ -336,6 +352,7 @@ texture = ExtResource("11_130wf")
 texture_scale = 0.45
 
 [node name="snowMeltArea" type="Area2D" parent="Oven" unique_id=1768253092]
+visible = false
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("11_affv2")
@@ -352,6 +369,8 @@ collision_layer = 32
 shape = SubResource("CircleShape2D_gyig5")
 debug_color = Color(0.82904565, 0.3946777, 0.020266512, 0.41960785)
 
+[connection signal="area_entered" from="SnowHitter" to="SnowHitter" method="_on_area_entered"]
+[connection signal="hit_snow" from="SnowHitter" to="." method="_on_snow_hitter_hit_snow"]
 [connection signal="body_entered" from="spriteContainer/lid/Area2D" to="spriteContainer/lid" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="spriteContainer/lid/Area2D" to="spriteContainer/lid" method="_on_area_2d_body_exited"]
 [connection signal="body_entered" from="handles/leftHandle" to="." method="_on_left_handle_body_entered"]

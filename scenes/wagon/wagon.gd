@@ -2,6 +2,10 @@ extends CharacterBody2D
 class_name Wagon
 
 @export var player_ref : Player = null
+
+#each time wagon hit snow. wagon slowed down by this in 
+@export var snow_speed_loss : float = 4.0
+
 @onready var left_player_push_spot: Marker2D = $handles/leftHandle/leftPlayerPushSpot
 @onready var right_player_push_spot: Marker2D = $handles/rightHandle/rightPlayerPushSpot
 
@@ -254,3 +258,9 @@ func _on_right_handle_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_touching_right_handle = false
 		player_stopped_pushing()
+
+
+func _on_snow_hitter_hit_snow() -> void:
+	#print(velocity)
+	push_speed = max(push_speed - snow_speed_loss, 0.0)
+	
