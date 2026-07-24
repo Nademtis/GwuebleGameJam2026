@@ -18,8 +18,8 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
-		print("should change state")
+	if body.is_in_group("wagon"):
+		#print("should change state")
 		collision_shape_2d.set_deferred("disabled", true)
 		
 		parent_storm_manager = get_parent()

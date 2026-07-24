@@ -189,8 +189,6 @@ func update_radial_shader() -> void:
 		current_circle_radius
 	)
 
-	var player_screen_position := get_viewport().get_camera_2d().get_screen_center_position()
-
 func update_radial_radius(delta: float) -> void:
 	if current_circle_radius > target_circle_radius:
 		# freezing: slowly close in

@@ -13,6 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://brsvv437dufor" path="res://scenes/wagon/oven/nice_oven_light_1.tres" id="11_130wf"]
 [ext_resource type="Script" uid="uid://dkaw6ovkq2idp" path="res://scenes/wagon/snow_melt_Oven.gd" id="11_affv2"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q23xm"]
+radius = 3.1622777
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_w7sgt"]
 atlas = ExtResource("2_1k2nb")
 region = Rect2(0, 0, 64, 64)
@@ -137,8 +140,12 @@ radius = 64.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_gyig5"]
 radius = 64.0
 
-[node name="Wagon" type="CharacterBody2D" unique_id=756693774]
+[node name="Wagon" type="CharacterBody2D" unique_id=756693774 groups=["wagon"]]
 script = ExtResource("1_hmvk8")
+
+[node name="StormTriggerCollisionshape" type="CollisionShape2D" parent="." unique_id=1124384212]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_q23xm")
 
 [node name="spriteContainer" type="Node2D" parent="." unique_id=1227653735]
 position = Vector2(-1, -5)

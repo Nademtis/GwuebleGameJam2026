@@ -12,7 +12,7 @@ class_name StormManager
 @export var snow_layers_high : Array[ColorRect]
 
 @export_group("Transition")
-@export var storm_lerp_speed := 0.8
+@export var storm_lerp_speed := 0.5
 
 @export_group("Black Flash")
 @export var flash_duration : float = 0.15
