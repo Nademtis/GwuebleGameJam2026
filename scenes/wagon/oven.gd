@@ -8,6 +8,10 @@ class_name Oven
 var heat : float = 0.0
 var fuel_queue : Array[PickupableFuel] = []
 
+#AUDIO
+@onready var audio_random_log_land_in_oven: AudioStreamPlayer2D = $AUDIO/audioRandomLogLandInOven
+
+
 #region firestuff
 
 @onready var fire_1_shaker: HorizontalShaker = $"../spriteContainer/darkBackground/fireContainer/fire1/fire1shaker"
@@ -241,6 +245,7 @@ func update_single_light(
 func add_fuel(fuel : PickupableFuel) -> void:
 	heat += fuel.heat
 	heat = clamp(heat,0.0, max_heat)
+	audio_random_log_land_in_oven.play()
 	#print("added heat - new heat: ", heat)
 	
 func _set_fire_shaker(shaker : HorizontalShaker, shake_distance : float, shake_speed : float) -> void:

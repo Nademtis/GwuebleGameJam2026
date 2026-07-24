@@ -44,12 +44,17 @@ var flight_time : float = 0.0
 @export var oven_arc_height : float = 80.0
 @export var oven_acceleration_curve : Curve
 
+signal oven_deposit_finished
+
 #log shadow
 @export var shadow_min_scale : float = 0.3
 @export var shadow_max_scale : float = 1.0
 @export var shadow_height_fade : float = 0.75
 var shadow_start_position : Vector2
 var shadow_end_position : Vector2
+
+#AUDIO
+@onready var audio_stream_random: AudioStreamPlayer2D = $AUDIO/AudioStreamRandom
 
 func _ready() -> void:
 	debug_label.queue_free()
@@ -59,7 +64,7 @@ func _process(delta: float) -> void:
 		fly_to_player_process(delta)
 
 	if flying_to_oven:
-		await fly_to_oven_process(delta)
+		fly_to_oven_process(delta)
 
 func fly_to_oven(oven : Oven) -> void:
 	self.z_index += 1
@@ -86,7 +91,9 @@ func fly_to_player(player: Node2D) -> void:
 
 	#print("removed coll on this log")
 	pickup_range_area.set_deferred("monitorable", false)
-
+	
+	audio_stream_random.play()
+	
 
 	if is_buried_in_snow:
 		var parent : SnowBlob = get_parent()
@@ -123,7 +130,6 @@ func fly_to_player_process(delta: float) -> void:
 		finish_pickup()
 
 func fly_to_oven_process(delta : float) -> void:
-
 	flight_time += delta
 	var progress := flight_time / oven_flight_duration
 	progress = clamp(progress,0.0,1.0)
@@ -148,7 +154,8 @@ func fly_to_oven_process(delta : float) -> void:
 	
 	global_position = fuel_position
 	if progress >= 1.0:
-		await finish_oven_deposit()
+		print("finished flying to oven")
+		finish_oven_deposit()
 
 func update_shadow(progress : float, height : float) -> void:
 
@@ -215,10 +222,11 @@ func finish_pickup() -> void:
 	hands.receive_log(self)
 	
 func finish_oven_deposit() -> void:
+	oven_deposit_finished.emit()
 	flying_to_oven = false
 	target_oven.add_fuel(self)
 	
-	#todo await something
+	
 	visible = false
-	await get_tree().create_timer(3).timeout
-	queue_free()
+	#await get_tree().create_timer(3).timeout
+	#queue_free()

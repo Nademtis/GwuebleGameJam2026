@@ -26,6 +26,8 @@ enum StormState{
 	HIGH}
 
 const STATES = {
+	#todo make new state where its very chill and no freeze damage
+	
 	StormState.CHILL:
 	{
 		"snow_layers": "chill",

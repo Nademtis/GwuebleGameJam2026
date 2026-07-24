@@ -10,6 +10,15 @@ const LEFT_HANDS_POSITION : Vector2 = Vector2(-3.0,-10)
 
 var oven : Oven
 
+#AUDIO
+@onready var log_stacking_audio_random: AudioStreamPlayer = $"../AUDIO/LogStackingAudioRandom"
+
+@onready var fire_small: AudioStreamPlayer2D = $"../AUDIO/FIRESOUNDS/fireSmall"
+@onready var fire_medium: AudioStreamPlayer2D = $"../AUDIO/FIRESOUNDS/fireMedium"
+@onready var fire_big: AudioStreamPlayer2D = $"../AUDIO/FIRESOUNDS/fireBig"
+
+
+
 #when depositing logs. add some random to it and delay yessss
 @export var deposit_delay : float = 0.25
 @export var random_flight_duration_min : float = 0.45
@@ -44,8 +53,8 @@ func _process(_delta: float) -> void:
 			
 func pickup(fuel: PickupableFuel) -> void:
 
-	if is_currently_depositing:
-		return
+	#if is_currently_depositing:
+	#	return
 
 	if carried_fuel.size() + incoming_pickups >= max_logs:
 		return
@@ -57,6 +66,7 @@ func receive_log(fuel: PickupableFuel) -> void:
 
 	incoming_pickups -= 1
 	carried_fuel.append(fuel)
+	log_stacking_audio_random.play()
 
 	update_log_animation()
 
@@ -66,17 +76,17 @@ func deposit_into() -> void:
 		return
 
 	is_currently_depositing = true
-
 	oven.lid.open()
-
 	var logs := carried_fuel.duplicate()
 
+	var deposit_flights : Array[Signal] = []
 	for fuel : PickupableFuel in logs:
 		if not is_instance_valid(fuel):
 			push_error("not valid fuel :()")
 			continue
+			
+		#sfx_counter += 1
 		carried_fuel.erase(fuel)
-
 		update_log_animation()
 
 		fuel.global_position = player_ref.global_position
@@ -90,39 +100,29 @@ func deposit_into() -> void:
 			random_arc_min,
 			random_arc_max
 		)
-
+	
+	
+	
 		fuel.fly_to_oven(oven)
+		deposit_flights.append(fuel.oven_deposit_finished)
 
 		await get_tree().create_timer(deposit_delay).timeout
-
-
-	oven.lid.close()
-
-	is_currently_depositing = false
-
-#func deposit_logs_sequence(logs : Array[PickupableFuel]) -> void:
-	#for fuel : PickupableFuel in logs:
-		#if not is_instance_valid(fuel):
-			#continue
-		#
-		#carried_fuel.erase(fuel)
-		##depositing_logs.erase(fuel)
-		#update_log_animation() # called in process
-		#
-		#
-		#fuel.global_position = player_ref.global_position
-		#fuel.oven_flight_duration = randf_range(
-			#random_flight_duration_min,
-			#random_flight_duration_max
-		#)
-		#fuel.oven_arc_height = randf_range(
-			#random_arc_min,
-			#random_arc_max
-		#)
-		#fuel.fly_to_oven(oven)
-		#await get_tree().create_timer(deposit_delay).timeout
-	#oven.lid.close()
 	
+	
+	#for signal_ in deposit_flights:
+	#	await signal_
+		
+	oven.lid.close()
+	is_currently_depositing = false
+	
+	await get_tree().create_timer(0.2).timeout
+	match deposit_flights.size():
+		1:
+			fire_small.play()
+		2:
+			fire_medium.play()
+		3:
+			fire_big.play()
 
 func update_log_animation() -> void:
 	var log_count := carried_fuel.size()

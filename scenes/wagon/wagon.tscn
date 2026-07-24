@@ -13,6 +13,9 @@
 [ext_resource type="Script" uid="uid://dxad7k6ivpqix" path="res://scenes/wagon/lid.gd" id="7_go74l"]
 [ext_resource type="Texture2D" uid="uid://brsvv437dufor" path="res://scenes/wagon/oven/nice_oven_light_1.tres" id="11_130wf"]
 [ext_resource type="Script" uid="uid://dkaw6ovkq2idp" path="res://scenes/wagon/snow_melt_Oven.gd" id="11_affv2"]
+[ext_resource type="AudioStream" uid="uid://bjhs7qynd7ywc" path="res://audio/sfx/log/SFX_Logs_ Into_Oven_1.ogg" id="14_we082"]
+[ext_resource type="AudioStream" uid="uid://mnw7nrhv3url" path="res://audio/sfx/log/SFX_Logs_ Into_Oven_2.ogg" id="15_ku7ai"]
+[ext_resource type="AudioStream" uid="uid://dgosaa0shal66" path="res://audio/sfx/log/SFX_Logs_ Into_Oven_3.ogg" id="16_7ummj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q23xm"]
 radius = 3.1622777
@@ -143,6 +146,12 @@ radius = 64.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gyig5"]
 radius = 64.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ganqv"]
+streams_count = 3
+stream_0/stream = ExtResource("14_we082")
+stream_1/stream = ExtResource("15_ku7ai")
+stream_2/stream = ExtResource("16_7ummj")
 
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774 groups=["wagon"]]
 script = ExtResource("1_hmvk8")
@@ -368,6 +377,12 @@ collision_layer = 32
 [node name="playerHeatCollisionShape2D" type="CollisionShape2D" parent="Oven/playerHeatArea" unique_id=1484054579]
 shape = SubResource("CircleShape2D_gyig5")
 debug_color = Color(0.82904565, 0.3946777, 0.020266512, 0.41960785)
+
+[node name="AUDIO" type="Node2D" parent="Oven" unique_id=2129727606]
+
+[node name="audioRandomLogLandInOven" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=730035637]
+stream = SubResource("AudioStreamRandomizer_ganqv")
+bus = &"sfx"
 
 [connection signal="area_entered" from="SnowHitter" to="SnowHitter" method="_on_area_entered"]
 [connection signal="hit_snow" from="SnowHitter" to="." method="_on_snow_hitter_hit_snow"]

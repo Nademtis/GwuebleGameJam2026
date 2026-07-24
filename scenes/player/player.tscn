@@ -8,6 +8,12 @@
 [ext_resource type="Script" uid="uid://bc4m3ftv7b24a" path="res://scenes/player/snow_melter_area.gd" id="5_p47bc"]
 [ext_resource type="Script" uid="uid://cfjybfw36mbs3" path="res://scenes/player/heat_receiver.gd" id="6_75vfm"]
 [ext_resource type="PackedScene" uid="uid://ppyk6ukgqrhj" path="res://scenes/juice/freezeOverlay/FreezeOverlay.tscn" id="7_0owmy"]
+[ext_resource type="AudioStream" uid="uid://rsupvtuc7edi" path="res://audio/sfx/log/SFX_Logs_Stacking_1.ogg" id="9_je7p5"]
+[ext_resource type="AudioStream" uid="uid://dstt6vt6yn4ks" path="res://audio/sfx/log/SFX_Logs_Stacking_2.ogg" id="10_fm80t"]
+[ext_resource type="AudioStream" uid="uid://dtvo1ueqayqwm" path="res://audio/sfx/log/SFX_Logs_Stacking_3.ogg" id="11_gx1jg"]
+[ext_resource type="AudioStream" uid="uid://bip0avcdwhgcx" path="res://audio/sfx/fire/SFX_Fire_Ablaze_Small.ogg" id="12_ugbui"]
+[ext_resource type="AudioStream" uid="uid://buvy7m5ofdftd" path="res://audio/sfx/fire/SFX_Fire_Ablaze_Medium.ogg" id="13_fcs02"]
+[ext_resource type="AudioStream" uid="uid://dajhph4npa45d" path="res://audio/sfx/fire/SFX_Fire_Ablaze_Big.ogg" id="14_myrg7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 4.0
@@ -23,6 +29,12 @@ radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gyig5"]
 radius = 3.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qek5x"]
+streams_count = 3
+stream_0/stream = ExtResource("9_je7p5")
+stream_1/stream = ExtResource("10_fm80t")
+stream_2/stream = ExtResource("11_gx1jg")
 
 [node name="Player" type="CharacterBody2D" unique_id=151895576 groups=["player"]]
 collision_mask = 78
@@ -90,6 +102,30 @@ shape = SubResource("CircleShape2D_gyig5")
 
 [node name="FreezeOverlay" parent="." unique_id=388628974 node_paths=PackedStringArray("player_warmth") instance=ExtResource("7_0owmy")]
 player_warmth = NodePath("../heatReceiver")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=471246327]
+current = true
+
+[node name="AUDIO" type="Node2D" parent="." unique_id=996758299]
+
+[node name="LogStackingAudioRandom" type="AudioStreamPlayer" parent="AUDIO" unique_id=1008647444]
+stream = SubResource("AudioStreamRandomizer_qek5x")
+max_polyphony = 3
+bus = &"sfx"
+
+[node name="FIRESOUNDS" type="Node2D" parent="AUDIO" unique_id=665147421]
+
+[node name="fireSmall" type="AudioStreamPlayer2D" parent="AUDIO/FIRESOUNDS" unique_id=810206076]
+stream = ExtResource("12_ugbui")
+bus = &"sfx"
+
+[node name="fireMedium" type="AudioStreamPlayer2D" parent="AUDIO/FIRESOUNDS" unique_id=539436700]
+stream = ExtResource("13_fcs02")
+bus = &"sfx"
+
+[node name="fireBig" type="AudioStreamPlayer2D" parent="AUDIO/FIRESOUNDS" unique_id=1252795157]
+stream = ExtResource("14_myrg7")
+bus = &"sfx"
 
 [connection signal="area_entered" from="Hands/pickupArea" to="Hands" method="_on_pickup_area_area_entered"]
 [connection signal="area_entered" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_entered"]

@@ -2,6 +2,12 @@
 
 [ext_resource type="Script" uid="uid://d2bka5y3mwepw" path="res://scenes/items/pickupableFuel.gd" id="1_4r1yh"]
 [ext_resource type="Texture2D" uid="uid://bn5v86wd2uler" path="res://scenes/items/log/assets/logSpritesheetAseprite.aseprite" id="1_pxkku"]
+[ext_resource type="AudioStream" uid="uid://b2j6wvb7rmcrq" path="res://audio/sfx/log/SFX_Logs_Pickup_1.ogg" id="3_wgpkl"]
+[ext_resource type="AudioStream" uid="uid://bkjjvvv1dyf00" path="res://audio/sfx/log/SFX_Logs_Pickup_2.ogg" id="4_launj"]
+[ext_resource type="AudioStream" uid="uid://bqxvxseutidve" path="res://audio/sfx/log/SFX_Logs_Pickup_3.ogg" id="5_yxere"]
+[ext_resource type="AudioStream" uid="uid://bfw5udya7l7jt" path="res://audio/sfx/log/SFX_Logs_Pickup_4.ogg" id="6_wsysw"]
+[ext_resource type="AudioStream" uid="uid://d3cqy341x8bdf" path="res://audio/sfx/log/SFX_Logs_Pickup_5.ogg" id="7_ugimx"]
+[ext_resource type="AudioStream" uid="uid://dy8oeylwi1eho" path="res://audio/sfx/log/SFX_Logs_Pickup_6.ogg" id="8_4kw24"]
 
 [sub_resource type="Curve" id="Curve_505e0"]
 _data = [Vector2(0.21262458, 0), 0.0, 1.5826085, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -9,6 +15,15 @@ point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 6.0827627
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ganqv"]
+streams_count = 6
+stream_0/stream = ExtResource("3_wgpkl")
+stream_1/stream = ExtResource("4_launj")
+stream_2/stream = ExtResource("5_yxere")
+stream_3/stream = ExtResource("6_wsysw")
+stream_4/stream = ExtResource("7_ugimx")
+stream_5/stream = ExtResource("8_4kw24")
 
 [node name="Log" type="Node2D" unique_id=72816142]
 script = ExtResource("1_4r1yh")
@@ -32,7 +47,6 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="pickupRangeArea" type="Area2D" parent="." unique_id=1073815457]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pickupRangeArea" unique_id=885164707]
 position = Vector2(0, -4)
@@ -47,3 +61,9 @@ offset_bottom = 13.0
 theme_override_colors/font_color = Color(1, 0, 1, 1)
 theme_override_font_sizes/font_size = 8
 text = "LOG"
+
+[node name="AUDIO" type="Node2D" parent="." unique_id=1975513154]
+
+[node name="AudioStreamRandom" type="AudioStreamPlayer2D" parent="AUDIO" unique_id=374525631]
+stream = SubResource("AudioStreamRandomizer_ganqv")
+bus = &"sfx"
