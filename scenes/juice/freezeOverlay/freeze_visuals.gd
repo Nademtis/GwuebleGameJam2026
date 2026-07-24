@@ -52,7 +52,7 @@ const STATES = {
 		"saturation": 0.38,
 		"darkness": 0.1,
 		"distortion": 0.00,
-		"freeze_amount": 0.2,
+		"freeze_amount": 0.15,
 		"circle_radius": 0.6
 	},
 
@@ -60,7 +60,7 @@ const STATES = {
 		"saturation": 0.50,
 		"darkness": 0.25,
 		"distortion": 0.01,
-		"freeze_amount": 0.45,
+		"freeze_amount": 0.30,
 		"circle_radius": 0.48
 	},
 
@@ -69,7 +69,7 @@ const STATES = {
 		"darkness": 0.5,
 		"distortion": 0.02,
 		"freeze_amount": 0.65,
-		"circle_radius": 0.2
+		"circle_radius": 0.25
 	}
 }
 #endregion states
