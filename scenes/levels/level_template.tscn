@@ -191,14 +191,14 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="snowShader_Medium" parent="." unique_id=73950667 instance=ExtResource("18_j5y0x")]
-offset_left = -220.0
-offset_top = 29.0
-offset_right = 1674.0
-offset_bottom = 221.0
+[node name="snowShader_chill" parent="." unique_id=1732794010 instance=ExtResource("17_quo62")]
+offset_left = -159.0
+offset_top = -5.0
+offset_right = 841.0
+offset_bottom = 235.0
 
-[node name="snowShader_chill" parent="." unique_id=460907029 instance=ExtResource("17_quo62")]
-offset_left = -264.0
-offset_top = -30.0
-offset_right = 1153.0
-offset_bottom = 225.0
+[node name="snowShader_Medium" parent="." unique_id=253774696 instance=ExtResource("18_j5y0x")]
+offset_left = 437.0
+offset_top = -5.0
+offset_right = 1457.0
+offset_bottom = 235.0

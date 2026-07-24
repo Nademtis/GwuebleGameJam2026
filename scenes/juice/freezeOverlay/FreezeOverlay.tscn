@@ -38,6 +38,7 @@ shader_parameter/circle_center = Vector2(0.5, 0.5)
 shader_parameter/outside_color = Vector3(0, 0, 0)
 
 [node name="FreezeOverlay" type="CanvasLayer" unique_id=388628974]
+visible = false
 script = ExtResource("1_pyw4h")
 
 [node name="rect" type="ColorRect" parent="." unique_id=1930267128]
@@ -51,6 +52,7 @@ grow_vertical = 2
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1801140264]
 
 [node name="freezeOverlay" type="ColorRect" parent="CanvasLayer" unique_id=406371878]
+visible = false
 material = SubResource("ShaderMaterial_u74ef")
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,6 +63,7 @@ grow_vertical = 2
 [node name="vignette" type="CanvasLayer" parent="." unique_id=1150066037]
 
 [node name="severeRadialSloop" type="ColorRect" parent="vignette" unique_id=251821151]
+visible = false
 material = SubResource("ShaderMaterial_ganqv")
 anchors_preset = 15
 anchor_right = 1.0

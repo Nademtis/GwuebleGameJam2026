@@ -10,7 +10,7 @@ class_name FreezeVisuals
 
 #when severe this radial thing chases the player
 @export var radial_freeze_speed := 0.1 # slow closing
-@export var radial_recover_speed := 1.1 # fast opening
+@export var radial_recover_speed := 0.55 # fast opening
 
 @onready var severe_radial_sloop: ColorRect = $vignette/severeRadialSloop
 var current_circle_center := Vector2(0.5,0.5)
@@ -80,6 +80,10 @@ func _ready() -> void:
 		push_error("player_warmth not defined")
 	
 	current_circle_radius = 1.2
+	visible = true
+	rect.visible = true
+	freeze_overlay.visible = true
+	severe_radial_sloop.visible = true
 
 
 func _process(delta: float) -> void:

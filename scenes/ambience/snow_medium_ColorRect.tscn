@@ -18,14 +18,13 @@ shader_parameter/slant = -0.32299996784249996
 
 [node name="snowShader_Medium" type="ColorRect" unique_id=1732794010]
 material = SubResource("ShaderMaterial_i403b")
+custom_minimum_size = Vector2(1000, 240)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -251.0
-offset_top = -39.0
-offset_right = 612.0
-offset_bottom = 218.0
+offset_right = 1020.0
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.81127876, 0.0005163467, 0.81158507, 0)
+color = Color(1, 1, 1, 0)
 metadata/_edit_lock_ = true
