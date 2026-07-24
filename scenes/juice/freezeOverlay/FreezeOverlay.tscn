@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b6cq4gkia36a2" path="res://scenes/juice/freezeOverlay/freeze_visuals.gd" id="1_pyw4h"]
 [ext_resource type="Shader" uid="uid://cw4dt8ssg1lfd" path="res://misc/shaders/FreezeOverlay.gdshader" id="2_61dpd"]
 [ext_resource type="Shader" uid="uid://cx8wclejgyyou" path="res://misc/shaders/ice_lens.gdshader" id="3_u74ef"]
+[ext_resource type="Shader" uid="uid://d08h17q64rbkw" path="res://misc/shaders/severeVignette.gdshader" id="4_ex1bj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_61dpd"]
 shader = ExtResource("2_61dpd")
@@ -29,6 +30,13 @@ shader_parameter/frost_texture = SubResource("NoiseTexture2D_w1jad")
 shader_parameter/distortion_strength = 0.0510000024225
 shader_parameter/freeze_amount = 0.522000024795
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ganqv"]
+shader = ExtResource("4_ex1bj")
+shader_parameter/circle_radius = 0.2590000123025
+shader_parameter/softness = 0.5
+shader_parameter/circle_center = Vector2(0.5, 0.5)
+shader_parameter/outside_color = Vector3(0, 0, 0)
+
 [node name="FreezeOverlay" type="CanvasLayer" unique_id=388628974]
 script = ExtResource("1_pyw4h")
 
@@ -44,6 +52,16 @@ grow_vertical = 2
 
 [node name="freezeOverlay" type="ColorRect" parent="CanvasLayer" unique_id=406371878]
 material = SubResource("ShaderMaterial_u74ef")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vignette" type="CanvasLayer" parent="." unique_id=1150066037]
+
+[node name="severeRadialSloop" type="ColorRect" parent="vignette" unique_id=251821151]
+material = SubResource("ShaderMaterial_ganqv")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

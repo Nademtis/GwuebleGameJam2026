@@ -8,6 +8,15 @@ class_name FreezeVisuals
 
 @onready var freeze_overlay: ColorRect = $CanvasLayer/freezeOverlay
 
+#when severe this radial thing chases the player
+@export var radial_freeze_speed := 0.1 # slow closing
+@export var radial_recover_speed := 1.1 # fast opening
+
+@onready var severe_radial_sloop: ColorRect = $vignette/severeRadialSloop
+var current_circle_center := Vector2(0.5,0.5)
+var current_circle_radius := 1.2
+var target_circle_radius := 1.2
+
 # 1.0 is totally warm
 # 0.0 is freezing dead 
 const LITTLE_FREEZE_THRESHOLD := 0.85
@@ -35,28 +44,32 @@ const STATES = {
 		"saturation": 0.0,
 		"darkness": 0.0,
 		"distortion": 0.0,
-		"freeze_amount": 0.0
+		"freeze_amount": 0.0,
+		"circle_radius": 1.2
 	},
 
 	FreezeState.LITTLE: {
 		"saturation": 0.38,
 		"darkness": 0.1,
 		"distortion": 0.00,
-		"freeze_amount": 0.2
+		"freeze_amount": 0.2,
+		"circle_radius": 0.6
 	},
 
 	FreezeState.MEDIUM: {
 		"saturation": 0.50,
 		"darkness": 0.25,
 		"distortion": 0.01,
-		"freeze_amount": 0.45
+		"freeze_amount": 0.45,
+		"circle_radius": 0.48
 	},
 
 	FreezeState.SEVERE: {
 		"saturation": 0.8,
 		"darkness": 0.5,
 		"distortion": 0.02,
-		"freeze_amount": 0.65
+		"freeze_amount": 0.65,
+		"circle_radius": 0.2
 	}
 }
 #endregion states
@@ -66,7 +79,7 @@ func _ready() -> void:
 	if not player_warmth:
 		push_error("player_warmth not defined")
 	
-
+	current_circle_radius = 1.2
 
 
 func _process(delta: float) -> void:
@@ -96,7 +109,11 @@ func _process(delta: float) -> void:
 		target_values["freeze_amount"],
 		visual_lerp_speed * delta
 	)
+	target_circle_radius = target_values["circle_radius"]
 
+	update_radial_radius(delta)
+	
+	update_radial_shader()
 	update_color_shader()
 	update_freeze_overlay()
 
@@ -107,7 +124,7 @@ func get_freeze_state() -> FreezeState:
 		player_warmth.max_warmth
 	)
 
-	print("warmth_percent: ", warmth_percent)
+	#print("warmth_percent: ", warmth_percent)
 
 	if warmth_percent > LITTLE_FREEZE_THRESHOLD:
 		return FreezeState.NORMAL
@@ -159,3 +176,29 @@ func update_shader() -> void:
 		"darkness",
 		current_darkness
 	)
+	
+func update_radial_shader() -> void:
+	var material := severe_radial_sloop.material as ShaderMaterial
+
+	material.set_shader_parameter(
+		"circle_radius",
+		current_circle_radius
+	)
+
+	var player_screen_position := get_viewport().get_camera_2d().get_screen_center_position()
+
+func update_radial_radius(delta: float) -> void:
+	if current_circle_radius > target_circle_radius:
+		# freezing: slowly close in
+		current_circle_radius = move_toward(
+			current_circle_radius,
+			target_circle_radius,
+			radial_freeze_speed * delta
+		)
+	else:
+		# recovering: quickly open
+		current_circle_radius = move_toward(
+			current_circle_radius,
+			target_circle_radius,
+			radial_recover_speed * delta
+		)
