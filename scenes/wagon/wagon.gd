@@ -86,10 +86,11 @@ func _physics_process(delta : float) -> void:
 			
 func handle_idle() -> void:
 	if player_touching_left_handle:
-		if player_ref.input_dir.x > 0:
+		if player_ref.input_dir == Vector2.RIGHT:
 			start_bracing(true)
+
 	if player_touching_right_handle:
-		if player_ref.input_dir.x < 0:
+		if player_ref.input_dir == Vector2.LEFT:
 			start_bracing(false)
 
 func start_bracing(going_right : bool) -> void:
@@ -108,14 +109,9 @@ func start_bracing(going_right : bool) -> void:
 func handle_pushing(delta : float) -> void:
 	#stop pushing when player let go
 
-	if push_direction == 1:
-		if player_ref.input_dir.x <= 0:
-			push_state = PushState.SLOWING
-			return
-	else:
-		if player_ref.input_dir.x >= 0:
-			push_state = PushState.SLOWING
-			return
+	if not player_is_still_pushing():
+		push_state = PushState.SLOWING
+		return
 
 	push_speed = move_toward(
 		push_speed,
@@ -145,10 +141,7 @@ func handle_pushing(delta : float) -> void:
 
 func handle_slowing(delta : float) -> void:
 	if player_ref.is_pushing:
-		if push_direction == 1 and player_ref.input_dir.x <= 0:
-			release_player()
-
-		if push_direction == -1 and player_ref.input_dir.x >= 0:
+		if not player_is_still_pushing():
 			release_player()
 
 	push_speed = move_toward(
@@ -204,9 +197,16 @@ func handle_bracing(delta : float) -> void:
 
 func player_is_still_pushing() -> bool:
 	if push_direction == 1:
-		return player_ref.input_dir.x > 0
+		return (
+			player_ref.input_dir.x > 0
+			and player_ref.input_dir.y == 0
+		)
+
 	else:
-		return player_ref.input_dir.x < 0
+		return (
+			player_ref.input_dir.x < 0
+			and player_ref.input_dir.y == 0
+		)
 
 func get_wagon_y_input() -> float:
 	var y_input := 0.0
