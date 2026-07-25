@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://d3mkafg843wsf" path="res://scenes/main/main.gd" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://06kpi22rrm3p" path="res://misc/debugOverlay.gd" id="3_k2fmo"]
+[ext_resource type="FontFile" uid="uid://cymn1rhwgxo55" path="res://misc/font/BoldPixels.ttf" id="4_6q06x"]
 [ext_resource type="Environment" uid="uid://cq2irltn5tsre" path="res://misc/Environment.tres" id="4_l3cfh"]
+[ext_resource type="PackedScene" uid="uid://c8i7cs41gdxi5" path="res://misc/ui/menu.tscn" id="5_ow5a4"]
 
 [sub_resource type="Animation" id="Animation_iuonh"]
 length = 0.001
@@ -73,8 +75,6 @@ process_physics_priority = 300
 script = ExtResource("1_ig7tw")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
-[node name="FocusMenu" type="CanvasLayer" parent="." unique_id=226060553]
-
 [node name="LevelContainer" type="Node2D" parent="." unique_id=189756781]
 
 [node name="DebugCanvasLayer" type="CanvasLayer" parent="." unique_id=553877644]
@@ -98,6 +98,34 @@ color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="fadeInOut" unique_id=655319899]
 libraries/ = SubResource("AnimationLibrary_6q06x")
+
+[node name="FocusMenu" type="CanvasLayer" parent="." unique_id=226060553]
+
+[node name="ColorRect" type="ColorRect" parent="FocusMenu" unique_id=2144553775]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.2627451)
+
+[node name="RichTextLabel" type="Label" parent="FocusMenu/ColorRect" unique_id=1914441181]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_6q06x")
+theme_override_font_sizes/font_size = 96
+text = "Press Anywhere to Focus"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="CanvasLayer" parent="." unique_id=100805100]
+
+[node name="Menu" parent="Menu" unique_id=1279162101 instance=ExtResource("5_ow5a4")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1633071072]
 environment = ExtResource("4_l3cfh")
