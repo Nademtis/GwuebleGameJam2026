@@ -172,6 +172,7 @@ current = true
 
 [node name="LogStackingAudioRandom" type="AudioStreamPlayer" parent="AUDIO" unique_id=1008647444]
 stream = SubResource("AudioStreamRandomizer_qek5x")
+volume_db = -5.0
 max_polyphony = 3
 bus = &"sfx"
 

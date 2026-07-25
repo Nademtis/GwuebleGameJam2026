@@ -58,12 +58,23 @@ var push_speed : float = 0.0
 #AUDIO
 @export var walkable_tilemap_layer: TileMapLayer # for audio
 @onready var grab_handle_random: AudioStreamPlayer = $Oven/AUDIO/GrabHandleRandom
+@onready var audio_wagon_movement: AudioStreamPlayer2D = $Oven/AUDIO/MOVEMENT_SOUNDS/audioWagonMovement # syncronized
+
+var synchronized_stream: AudioStreamSynchronized
+
+@export var snow_override_time := 3.0
+var snow_override_timer := 0.0
+var current_ground_type := ""
+
+const DIRT_STREAM := 1
+const GRASS_STREAM := 2
+const SNOW_STREAM := 3
+
+var max_rolling_db : float
+
+var debug_audio_counter := 0
 
 #endregion audio
-
-
-
-
 
 
 func _ready() -> void:
@@ -72,6 +83,16 @@ func _ready() -> void:
 		
 	if not walkable_tilemap_layer:
 		push_error("walkable_tilemap_layer not defined")
+	
+	#AUDIO
+	if audio_wagon_movement.stream is AudioStreamSynchronized:
+		synchronized_stream = audio_wagon_movement.stream
+	else:
+		push_error("Wagon movement audio is not AudioStreamSynchronized")
+	max_rolling_db = audio_wagon_movement.volume_db
+	
+	
+	audio_wagon_movement.play()
 		
 		
 	light_container.visible = true
@@ -85,8 +106,15 @@ func _ready() -> void:
 	wheels_animated_sprite_2d_2.frame = wheel_frame_2
 
 func _physics_process(delta : float) -> void:
+	#TODO remove this
+	debug_audio_counter += 1
+	if debug_audio_counter >= 10:
+		debug_audio_counter = 0
+		print_audio_debug()
+	
 	#print("braceProgress: ", brace_progress)
 	#print("PushIntensity: ", push_intensity)
+	update_wagon_audio(delta)
 	
 	match push_state:
 		PushState.IDLE:
@@ -229,15 +257,6 @@ func player_is_still_pushing() -> bool:
 			and player_ref.input_dir.y == 0
 		)
 
-func get_wagon_y_input() -> float:
-	var y_input := 0.0
-
-	if player_ref.input_dir.y < 0:
-		y_input = -1
-	elif player_ref.input_dir.y > 0:
-		y_input = 1
-
-	return y_input
 
 func anim_wheels() -> void:
 	# STOPPING
@@ -275,6 +294,74 @@ func anim_wheels() -> void:
 	wheels_animated_sprite_2d_2.speed_scale = speed
 	
 
+#region audio
+func update_wagon_audio(delta: float) -> void:
+
+	# decrease snow override timer
+	if snow_override_timer > 0:
+		snow_override_timer -= delta
+
+
+	var ground_type := ""
+
+
+	# snow override has priority
+	if snow_override_timer > 0:
+		ground_type = "snow"
+
+	else:
+		ground_type = get_ground_type()
+
+
+	if ground_type != current_ground_type:
+		current_ground_type = ground_type
+		update_wagon_audio_layer(ground_type)
+
+func get_ground_type() -> String:
+
+	var tile_position := walkable_tilemap_layer.local_to_map(
+		global_position
+	)
+
+	var tile_data := walkable_tilemap_layer.get_cell_tile_data(tile_position)
+
+	if tile_data == null:
+		return ""
+
+	return tile_data.get_custom_data("type")
+	
+func update_wagon_audio_layer(type: String) -> void:
+
+	set_layer(DIRT_STREAM, false)
+	set_layer(GRASS_STREAM, false)
+	set_layer(SNOW_STREAM, false)
+
+	match type:
+		"dirt":
+			set_layer(DIRT_STREAM, true)
+
+		"grass":
+			set_layer(GRASS_STREAM, true)
+
+		"snow":
+			set_layer(SNOW_STREAM, true)
+
+func set_layer(index: int, enabled: bool) -> void:
+	if enabled:
+		synchronized_stream.set_sync_stream_volume(index, 0)
+	else:
+		synchronized_stream.set_sync_stream_volume(index, -80)
+
+
+func print_audio_debug() -> void:
+	print(
+		"--- Wagon Audio ---\n",
+		"Base: ", synchronized_stream.get_sync_stream_volume(0), " dB\n",
+		"Dirt: ", synchronized_stream.get_sync_stream_volume(1), " dB\n",
+		"Grass: ", synchronized_stream.get_sync_stream_volume(2), " dB\n",
+		"Snow: ", synchronized_stream.get_sync_stream_volume(3), " dB"
+	)
+
 func _on_left_handle_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_touching_left_handle = true
@@ -297,4 +384,5 @@ func _on_right_handle_body_exited(body: Node2D) -> void:
 func _on_snow_hitter_hit_snow() -> void:
 	#print(velocity)
 	push_speed = max(push_speed - snow_speed_loss, 0.0)
+	snow_override_timer = snow_override_time
 	
