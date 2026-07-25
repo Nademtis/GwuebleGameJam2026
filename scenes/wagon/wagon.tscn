@@ -16,6 +16,9 @@
 [ext_resource type="AudioStream" uid="uid://bjhs7qynd7ywc" path="res://audio/sfx/log/SFX_Logs_ Into_Oven_1.ogg" id="14_we082"]
 [ext_resource type="AudioStream" uid="uid://mnw7nrhv3url" path="res://audio/sfx/log/SFX_Logs_ Into_Oven_2.ogg" id="15_ku7ai"]
 [ext_resource type="AudioStream" uid="uid://dgosaa0shal66" path="res://audio/sfx/log/SFX_Logs_ Into_Oven_3.ogg" id="16_7ummj"]
+[ext_resource type="AudioStream" uid="uid://cns8mllnhdpxn" path="res://scenes/player/audio/SFX_Player_Grab_Wagon_1.ogg" id="17_8qan4"]
+[ext_resource type="AudioStream" uid="uid://de24yplakval6" path="res://scenes/player/audio/SFX_Player_Grab_Wagon_2.ogg" id="18_7oerd"]
+[ext_resource type="AudioStream" uid="uid://b7b0dttnkwoav" path="res://scenes/player/audio/SFX_Player_Grab_Wagon_3.ogg" id="19_78jjb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q23xm"]
 
@@ -152,16 +155,18 @@ stream_0/stream = ExtResource("14_we082")
 stream_1/stream = ExtResource("15_ku7ai")
 stream_2/stream = ExtResource("16_7ummj")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5amg0"]
+streams_count = 3
+stream_0/stream = ExtResource("17_8qan4")
+stream_1/stream = ExtResource("18_7oerd")
+stream_2/stream = ExtResource("19_78jjb")
+
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774 groups=["wagon"]]
 collision_layer = 4
 collision_mask = 195
 motion_mode = 1
 safe_margin = 0.12
 script = ExtResource("1_hmvk8")
-snow_speed_loss = null
-max_push_speed = null
-push_acceleration = null
-push_deceleration = null
 
 [node name="StormTriggerCollisionshape" type="CollisionShape2D" parent="." unique_id=1124384212]
 position = Vector2(0, -10)
@@ -390,6 +395,10 @@ debug_color = Color(0.82904565, 0.3946777, 0.020266512, 0.41960785)
 
 [node name="audioRandomLogLandInOven" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=730035637]
 stream = SubResource("AudioStreamRandomizer_ganqv")
+bus = &"sfx"
+
+[node name="GrabHandleRandom" type="AudioStreamPlayer" parent="Oven/AUDIO" unique_id=1569028417]
+stream = SubResource("AudioStreamRandomizer_5amg0")
 bus = &"sfx"
 
 [connection signal="area_entered" from="SnowHitter" to="SnowHitter" method="_on_area_entered"]

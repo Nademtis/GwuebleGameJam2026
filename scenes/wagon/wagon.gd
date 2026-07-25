@@ -56,7 +56,8 @@ var push_speed : float = 0.0
 
 #region audio
 #AUDIO
-@onready var walkable_tilemap_layer: TileMapLayer # for audio
+@export var walkable_tilemap_layer: TileMapLayer # for audio
+@onready var grab_handle_random: AudioStreamPlayer = $Oven/AUDIO/GrabHandleRandom
 
 #endregion audio
 
@@ -113,6 +114,7 @@ func handle_idle() -> void:
 			start_bracing(false)
 
 func start_bracing(going_right : bool) -> void:
+	grab_handle_random.play()
 	push_state = PushState.BRACING
 	player_ref.is_pushing = true
 	#player_ref.velocity = Vector2.ZERO

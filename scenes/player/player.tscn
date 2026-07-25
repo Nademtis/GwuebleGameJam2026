@@ -14,6 +14,31 @@
 [ext_resource type="AudioStream" uid="uid://bip0avcdwhgcx" path="res://audio/sfx/fire/SFX_Fire_Ablaze_Small.ogg" id="12_ugbui"]
 [ext_resource type="AudioStream" uid="uid://buvy7m5ofdftd" path="res://audio/sfx/fire/SFX_Fire_Ablaze_Medium.ogg" id="13_fcs02"]
 [ext_resource type="AudioStream" uid="uid://dajhph4npa45d" path="res://audio/sfx/fire/SFX_Fire_Ablaze_Big.ogg" id="14_myrg7"]
+[ext_resource type="AudioStream" uid="uid://dkfgieiyl2p01" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Grass_1.ogg" id="15_j4nxn"]
+[ext_resource type="AudioStream" uid="uid://c7kgnyaq1ag" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Grass_2.ogg" id="16_28m0y"]
+[ext_resource type="AudioStream" uid="uid://dtnrvcatwtc7e" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Grass_3.ogg" id="17_uniwh"]
+[ext_resource type="AudioStream" uid="uid://u3bl6erffprt" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Grass_4.ogg" id="18_iqsei"]
+[ext_resource type="AudioStream" uid="uid://uyxtkidiesly" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Grass_5.ogg" id="19_tffgl"]
+[ext_resource type="AudioStream" uid="uid://bg8i7tm3pahao" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Grass_6.ogg" id="20_pk8ii"]
+[ext_resource type="AudioStream" uid="uid://djdd46lymo21c" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Grass_7.ogg" id="21_5mf0n"]
+[ext_resource type="AudioStream" uid="uid://b0mwbahj85yua" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Grass_8.ogg" id="22_4hvnv"]
+[ext_resource type="AudioStream" uid="uid://c03gi8k4ovff6" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Dirt_1.ogg" id="23_bbmj2"]
+[ext_resource type="AudioStream" uid="uid://dndercc7kq0ju" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Dirt_2.ogg" id="24_kxw46"]
+[ext_resource type="AudioStream" uid="uid://cdcvbvps72wbw" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Dirt_3.ogg" id="25_8qxvo"]
+[ext_resource type="AudioStream" uid="uid://dvnerlnocgl21" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Dirt_4.ogg" id="26_5q8fn"]
+[ext_resource type="AudioStream" uid="uid://ng4vy1w48seh" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Dirt_5.ogg" id="27_wva7c"]
+[ext_resource type="AudioStream" uid="uid://821gpwf0nm2s" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Through_Snow_1.ogg" id="28_wva7c"]
+[ext_resource type="AudioStream" uid="uid://q3j0ap0gwqb1" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Through_Snow_2.ogg" id="29_7obkq"]
+[ext_resource type="AudioStream" uid="uid://babl08nov0i3q" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Through_Snow_3.ogg" id="30_vo27k"]
+[ext_resource type="AudioStream" uid="uid://bh856n5ilrtw0" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Through_Snow_4.ogg" id="31_genst"]
+[ext_resource type="AudioStream" uid="uid://blseqipciwxxm" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Through_Snow_5.ogg" id="32_niom3"]
+[ext_resource type="AudioStream" uid="uid://cifjja7tdipnl" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Through_Snow_6.ogg" id="33_ttakn"]
+[ext_resource type="AudioStream" uid="uid://c0x11kgk782kc" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Through_Snow_7.ogg" id="34_rw8a5"]
+[ext_resource type="AudioStream" uid="uid://78sqjg5xshdo" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Flat_Snow_1.ogg" id="35_iwuka"]
+[ext_resource type="AudioStream" uid="uid://1xwsi06jds8d" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Flat_Snow_2.ogg" id="36_hyqqp"]
+[ext_resource type="AudioStream" uid="uid://dgst2375ivvcv" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Flat_Snow_3.ogg" id="37_ds1xl"]
+[ext_resource type="AudioStream" uid="uid://uxgsecvjl8q5" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Flat_Snow_4.ogg" id="38_1u1sw"]
+[ext_resource type="AudioStream" uid="uid://1ln0dit8kkbr" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Flat_Snow_5.ogg" id="39_2t3bg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 4.0
@@ -35,6 +60,43 @@ streams_count = 3
 stream_0/stream = ExtResource("9_je7p5")
 stream_1/stream = ExtResource("10_fm80t")
 stream_2/stream = ExtResource("11_gx1jg")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rdr40"]
+streams_count = 8
+stream_0/stream = ExtResource("15_j4nxn")
+stream_1/stream = ExtResource("16_28m0y")
+stream_2/stream = ExtResource("17_uniwh")
+stream_3/stream = ExtResource("18_iqsei")
+stream_4/stream = ExtResource("19_tffgl")
+stream_5/stream = ExtResource("20_pk8ii")
+stream_6/stream = ExtResource("21_5mf0n")
+stream_7/stream = ExtResource("22_4hvnv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q5jtg"]
+streams_count = 5
+stream_0/stream = ExtResource("23_bbmj2")
+stream_1/stream = ExtResource("24_kxw46")
+stream_2/stream = ExtResource("25_8qxvo")
+stream_3/stream = ExtResource("26_5q8fn")
+stream_4/stream = ExtResource("27_wva7c")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_j4nxn"]
+streams_count = 7
+stream_0/stream = ExtResource("28_wva7c")
+stream_1/stream = ExtResource("29_7obkq")
+stream_2/stream = ExtResource("30_vo27k")
+stream_3/stream = ExtResource("31_genst")
+stream_4/stream = ExtResource("32_niom3")
+stream_5/stream = ExtResource("33_ttakn")
+stream_6/stream = ExtResource("34_rw8a5")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_28m0y"]
+streams_count = 5
+stream_0/stream = ExtResource("35_iwuka")
+stream_1/stream = ExtResource("36_hyqqp")
+stream_2/stream = ExtResource("37_ds1xl")
+stream_3/stream = ExtResource("38_1u1sw")
+stream_4/stream = ExtResource("39_2t3bg")
 
 [node name="Player" type="CharacterBody2D" unique_id=151895576 groups=["player"]]
 collision_mask = 78
@@ -127,10 +189,31 @@ bus = &"sfx"
 stream = ExtResource("14_myrg7")
 bus = &"sfx"
 
+[node name="Footstep" type="Node" parent="AUDIO" unique_id=136764388]
+
+[node name="audioGrassRandom" type="AudioStreamPlayer" parent="AUDIO/Footstep" unique_id=466340673]
+stream = SubResource("AudioStreamRandomizer_rdr40")
+volume_db = -6.0
+bus = &"sfx"
+
+[node name="audioDirtRandom" type="AudioStreamPlayer" parent="AUDIO/Footstep" unique_id=1714396380]
+stream = SubResource("AudioStreamRandomizer_q5jtg")
+max_polyphony = 2
+bus = &"sfx"
+
+[node name="snowTallrandom" type="AudioStreamPlayer" parent="AUDIO/Footstep" unique_id=1461856901]
+stream = SubResource("AudioStreamRandomizer_j4nxn")
+bus = &"sfx"
+
+[node name="snowFlatrandom" type="AudioStreamPlayer" parent="AUDIO/Footstep" unique_id=39908118]
+stream = SubResource("AudioStreamRandomizer_28m0y")
+bus = &"sfx"
+
 [connection signal="area_entered" from="Hands/pickupArea" to="Hands" method="_on_pickup_area_area_entered"]
 [connection signal="area_entered" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_entered"]
 [connection signal="area_exited" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_exited"]
 [connection signal="area_entered" from="SnowMelterArea" to="SnowMelterArea" method="_on_area_entered"]
-[connection signal="hit_snow" from="SnowMelterArea" to="." method="_on_snow_melter_area_hit_snow"]
+[connection signal="hit_snow_flat" from="SnowMelterArea" to="." method="_on_snow_melter_area_hit_snow_flat"]
+[connection signal="hit_snow_tall" from="SnowMelterArea" to="." method="_on_snow_melter_area_hit_snow_tall"]
 [connection signal="area_entered" from="heatReceiver" to="heatReceiver" method="_on_area_entered"]
 [connection signal="area_exited" from="heatReceiver" to="heatReceiver" method="_on_area_exited"]

@@ -20,6 +20,31 @@ var move_dir: Vector2
 var is_pushing : bool = false
 var push_direction_is_right : bool = false
 
+#audio
+@export var walkable_tilemap_layer: TileMapLayer # for audio
+@onready var audio_grass_random: AudioStreamPlayer = $AUDIO/Footstep/audioGrassRandom
+@onready var audio_dirt_random: AudioStreamPlayer = $AUDIO/Footstep/audioDirtRandom
+
+@onready var snow_tall_random: AudioStreamPlayer = $AUDIO/Footstep/snowTallrandom
+@onready var snow_flat_random: AudioStreamPlayer = $AUDIO/Footstep/snowFlatrandom
+
+
+@export var footstep_cooldown := 0.32
+var footstep_timer := 0.0 # changedf in code
+
+#hacky illegal fix for snow
+enum FootstepOverride {
+	NONE,
+	SNOW_TALL,
+	SNOW_FLAT
+}
+var next_footstep_override : FootstepOverride = FootstepOverride.NONE
+
+
+func _ready() -> void:
+	if not walkable_tilemap_layer:
+		push_error("walkable_tilemap_layer not defined")
+
 func _physics_process(delta : float) -> void:
 	snow_speed_multiplier = move_toward(
 		snow_speed_multiplier,
@@ -28,6 +53,7 @@ func _physics_process(delta : float) -> void:
 	)
 	if is_pushing:
 		velocity = Vector2.ZERO
+		footstep_timer = 0.1
 		_update_push_animation()
 		return
 
@@ -35,6 +61,7 @@ func _physics_process(delta : float) -> void:
 		_movement(delta)
 
 	move_and_slide()
+	update_footsteps(delta)
 
 func _process(_delta: float) -> void:
 	input_dir = Input.get_vector("left", "right", "up", "down")
@@ -82,11 +109,65 @@ func _update_animation(dir: Vector2) -> void:
 		else:
 			animated_sprite_2d.play("w_down")
 
+func update_footsteps(delta: float) -> void:
+	footstep_timer -= delta
 
-func _on_snow_melter_area_hit_snow() -> void:
-	#print("player hit snow")
-	#get the correct snow type for correct snow sfx
+	# no footsteps while pushing or standing still
+	if is_pushing:
+		return
+
+	if velocity.length() < 5:
+		return
+
+	if footstep_timer > 0:
+		return
+
+	play_footstep()
+	footstep_timer = footstep_cooldown
+
+func play_footstep() -> void:
+
+	if next_footstep_override != FootstepOverride.NONE:
+		play_snow_footstep()
+		next_footstep_override = FootstepOverride.NONE
+		return
 	
-	#print("player hit snow") # todo play hit tall sn
+	var tile_position := walkable_tilemap_layer.local_to_map(
+		global_position
+	)
+
+	var tile_data := walkable_tilemap_layer.get_cell_tile_data(tile_position)
+
+	if tile_data == null:
+		return
+
+	var ground_type : String = tile_data.get_custom_data("type")
+
+	match ground_type:
+		"grass":
+			audio_grass_random.play()
+
+		"dirt":
+			audio_dirt_random.play()
+
+		_:
+			push_error("unknown ground:", ground_type)
+
+func play_snow_footstep() -> void:
+	match next_footstep_override:
+		FootstepOverride.SNOW_TALL:
+			snow_tall_random.play()
+
+		FootstepOverride.SNOW_FLAT:
+			snow_flat_random.play()
+
+func _on_snow_melter_area_hit_snow_tall() -> void:
+	#play tall snow sound
 	snow_speed_multiplier *= snow_hit_multiplier
 	snow_speed_multiplier = max(snow_speed_multiplier, 0.5)
+
+	next_footstep_override = FootstepOverride.SNOW_TALL
+
+
+func _on_snow_melter_area_hit_snow_flat() -> void:
+	next_footstep_override = FootstepOverride.SNOW_FLAT

@@ -115,16 +115,18 @@ metadata/_edit_lock_ = true
 [node name="YSORT" type="Node2D" parent="." unique_id=1675188736]
 y_sort_enabled = true
 
-[node name="Player" parent="YSORT" unique_id=151895576 instance=ExtResource("2_gr3xe")]
+[node name="Player" parent="YSORT" unique_id=151895576 node_paths=PackedStringArray("walkable_tilemap_layer") instance=ExtResource("2_gr3xe")]
 position = Vector2(65, 166)
+walkable_tilemap_layer = NodePath("../../walkable")
 
-[node name="Wagon" parent="YSORT" unique_id=756693774 node_paths=PackedStringArray("player_ref") instance=ExtResource("5_j81xe")]
+[node name="Wagon" parent="YSORT" unique_id=756693774 node_paths=PackedStringArray("player_ref", "walkable_tilemap_layer") instance=ExtResource("5_j81xe")]
 position = Vector2(65, 135)
 player_ref = NodePath("../Player")
 snow_speed_loss = 4.0
 max_push_speed = 42.0
 push_acceleration = 16.0
 push_deceleration = 28.0
+walkable_tilemap_layer = NodePath("../../walkable")
 
 [node name="LogContainer" type="Node2D" parent="YSORT" unique_id=1991217267]
 y_sort_enabled = true
