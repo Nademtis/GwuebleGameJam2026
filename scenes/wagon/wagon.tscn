@@ -32,6 +32,10 @@
 [ext_resource type="AudioStream" uid="uid://dfa306hecpfe4" path="res://scenes/wagon/audio/SFX_Wagon_Movement_Loop_Grass.ogg" id="30_2x5ob"]
 [ext_resource type="AudioStream" uid="uid://b2sh884dyivec" path="res://scenes/wagon/audio/SFX_Wagon_Movement_Loop_Snow.ogg" id="31_q8yfp"]
 
+[sub_resource type="Curve" id="Curve_wva7c"]
+_data = [Vector2(0, 0.74752474), 0.0, 0.0, 0, 0, Vector2(0.5966387, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_q23xm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ha7a2"]
@@ -204,6 +208,7 @@ collision_mask = 195
 motion_mode = 1
 safe_margin = 0.12
 script = ExtResource("1_hmvk8")
+rolling_volume_curve = SubResource("Curve_wva7c")
 
 [node name="StormTriggerCollisionshape" type="CollisionShape2D" parent="." unique_id=1124384212]
 position = Vector2(0, -10)
@@ -440,10 +445,12 @@ bus = &"sfx"
 
 [node name="audioLidOpenRandom" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=362129326]
 stream = SubResource("AudioStreamRandomizer_y3y78")
+volume_db = -3.0
 bus = &"sfx"
 
 [node name="audioLidCloseRandom" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=1311016805]
 stream = SubResource("AudioStreamRandomizer_gvdt1")
+volume_db = -3.0
 bus = &"sfx"
 
 [node name="MOVEMENT_SOUNDS" type="Node2D" parent="Oven/AUDIO" unique_id=272383425]

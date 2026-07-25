@@ -70,9 +70,19 @@ const DIRT_STREAM := 1
 const GRASS_STREAM := 2
 const SNOW_STREAM := 3
 
-var max_rolling_db : float
+@export var snow_layer_boost_db := 7.0
 
-var debug_audio_counter := 0
+#var MAX_ROLLING_DB : float # grabbed from the inspector in ready
+var current_rolling_db: float # changed in code
+
+@export_category("Audio")
+@export var max_rolling_db: float = 8.0
+@export var min_rolling_db: float = -80.0
+@export var rolling_volume_curve: Curve
+@export var rolling_volume_lerp_speed := 50
+
+const ABSOLUTE_MAX_AUDIO_DB := 20.0 # never louder than this
+const WARNING_AUDIO_DB := 15.0
 
 #endregion audio
 
@@ -89,9 +99,9 @@ func _ready() -> void:
 		synchronized_stream = audio_wagon_movement.stream
 	else:
 		push_error("Wagon movement audio is not AudioStreamSynchronized")
-	max_rolling_db = audio_wagon_movement.volume_db
+	#MAX_ROLLING_DB = audio_wagon_movement.volume_db
 	
-	
+	audio_wagon_movement.volume_db = min_rolling_db
 	audio_wagon_movement.play()
 		
 		
@@ -107,14 +117,15 @@ func _ready() -> void:
 
 func _physics_process(delta : float) -> void:
 	#TODO remove this
-	debug_audio_counter += 1
-	if debug_audio_counter >= 10:
-		debug_audio_counter = 0
-		print_audio_debug()
+	#debug_audio_counter += 1
+	#if debug_audio_counter >= 10:
+		#debug_audio_counter = 0
+		#print_audio_debug()
 	
 	#print("braceProgress: ", brace_progress)
 	#print("PushIntensity: ", push_intensity)
 	update_wagon_audio(delta)
+	update_rolling_volume(delta)
 	
 	match push_state:
 		PushState.IDLE:
@@ -344,22 +355,63 @@ func update_wagon_audio_layer(type: String) -> void:
 			set_layer(GRASS_STREAM, true)
 
 		"snow":
-			set_layer(SNOW_STREAM, true)
+			set_layer(SNOW_STREAM, true, snow_layer_boost_db)
 
-func set_layer(index: int, enabled: bool) -> void:
-	if enabled:
-		synchronized_stream.set_sync_stream_volume(index, 0)
-	else:
-		synchronized_stream.set_sync_stream_volume(index, -80)
+func set_layer(index: int, enabled: bool, enabled_db: float = 0.0) -> void:
+	var db := enabled_db if enabled else -80.0
+	db = get_safe_audio_db(db)
+
+	synchronized_stream.set_sync_stream_volume(index, db)
 
 
-func print_audio_debug() -> void:
-	print(
-		"--- Wagon Audio ---\n",
-		"Base: ", synchronized_stream.get_sync_stream_volume(0), " dB\n",
-		"Dirt: ", synchronized_stream.get_sync_stream_volume(1), " dB\n",
-		"Grass: ", synchronized_stream.get_sync_stream_volume(2), " dB\n",
-		"Snow: ", synchronized_stream.get_sync_stream_volume(3), " dB"
+func update_rolling_volume(delta: float) -> void:
+	var speed_percent : float = clamp(
+		push_speed / max_push_speed,
+		0.0,
+		1.0
+	)
+
+	var volume_percent := speed_percent
+	#print("volume_percent: ", volume_percent)
+	if rolling_volume_curve:
+		volume_percent = rolling_volume_curve.sample(speed_percent)
+
+	var target_db : float= lerp(
+		min_rolling_db,
+		max_rolling_db,
+		volume_percent
+	)
+
+	target_db = get_safe_audio_db(target_db)
+
+	audio_wagon_movement.volume_db = move_toward(
+		audio_wagon_movement.volume_db,
+		target_db,
+		rolling_volume_lerp_speed * delta
+	)
+
+
+#func print_audio_debug() -> void:
+	#print(
+		#"--- Wagon Audio ---\n",
+		#"Base: ", synchronized_stream.get_sync_stream_volume(0), " dB\n",
+		#"Dirt: ", synchronized_stream.get_sync_stream_volume(1), " dB\n",
+		#"Grass: ", synchronized_stream.get_sync_stream_volume(2), " dB\n",
+		#"Snow: ", synchronized_stream.get_sync_stream_volume(3), " dB\n",
+		#"overall db: ", audio_wagon_movement.volume_db
+	#)
+	
+func get_safe_audio_db(value: float) -> float:
+	if value > WARNING_AUDIO_DB:
+		push_warning(
+			"Wagon audio volume is dangerously high: " 
+			+ str(value) + " dB"
+		)
+
+	return clamp(
+		value,
+		-80.0,
+		ABSOLUTE_MAX_AUDIO_DB
 	)
 
 func _on_left_handle_body_entered(body: Node2D) -> void:

@@ -122,10 +122,6 @@ walkable_tilemap_layer = NodePath("../../walkable")
 [node name="Wagon" parent="YSORT" unique_id=756693774 node_paths=PackedStringArray("player_ref", "walkable_tilemap_layer") instance=ExtResource("5_j81xe")]
 position = Vector2(65, 135)
 player_ref = NodePath("../Player")
-snow_speed_loss = 4.0
-max_push_speed = 42.0
-push_acceleration = 16.0
-push_deceleration = 28.0
 walkable_tilemap_layer = NodePath("../../walkable")
 
 [node name="LogContainer" type="Node2D" parent="YSORT" unique_id=1991217267]
@@ -154,10 +150,10 @@ y_sort_enabled = true
 
 [node name="rockObstacle" parent="YSORT/RockContainer" unique_id=933579714 instance=ExtResource("12_icp1j")]
 y_sort_enabled = true
-position = Vector2(405, 216)
+position = Vector2(407, 230)
 
 [node name="rockObstacle2" parent="YSORT/RockContainer" unique_id=1558530888 instance=ExtResource("12_icp1j")]
-position = Vector2(225, 131)
+position = Vector2(214, 114)
 
 [node name="rockObstacle3" parent="YSORT/RockContainer" unique_id=1720404154 instance=ExtResource("13_4gpp4")]
 position = Vector2(342, 86)
@@ -166,10 +162,10 @@ position = Vector2(342, 86)
 position = Vector2(289, 87)
 
 [node name="IceBlock" parent="YSORT" unique_id=2070849842 instance=ExtResource("14_rdr40")]
-position = Vector2(610, 138)
+position = Vector2(610, 133)
 
 [node name="IceBlock2" parent="YSORT" unique_id=1487904121 instance=ExtResource("14_rdr40")]
-position = Vector2(159, 134)
+position = Vector2(148, 112)
 
 [node name="CameraContainer" type="Node" parent="." unique_id=1818375729]
 script = ExtResource("4_eokde")
@@ -279,7 +275,7 @@ offset_right = 1902.0
 offset_bottom = 236.0
 
 [node name="StormTrigger" parent="StormManager" unique_id=2076491983 instance=ExtResource("22_yw11j")]
-position = Vector2(224, 17)
+position = Vector2(238, 14)
 new_state = 1
 
 [node name="StormTrigger2" parent="StormManager" unique_id=657099098 instance=ExtResource("22_yw11j")]
