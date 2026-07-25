@@ -72,16 +72,18 @@ const DIRT_STREAM := 1
 const GRASS_STREAM := 2
 const SNOW_STREAM := 3
 
+@export var grass_layer_boost_db := 2.0
+@export var dirt_layer_boost_db := 2.0
 @export var snow_layer_boost_db := 7.0
 
 #var MAX_ROLLING_DB : float # grabbed from the inspector in ready
 var current_rolling_db: float # changed in code
 
 @export_category("Audio")
-@export var max_rolling_db: float = 5.0
+@export var max_rolling_db: float = 6.5
 @export var min_rolling_db: float = -80.0
 @export var rolling_volume_curve: Curve
-@export var rolling_volume_lerp_speed := 50
+@export var rolling_volume_lerp_speed := 150
 
 const ABSOLUTE_MAX_AUDIO_DB := 20.0 # never louder than this
 const WARNING_AUDIO_DB := 15.0
@@ -351,10 +353,10 @@ func update_wagon_audio_layer(type: String) -> void:
 
 	match type:
 		"dirt":
-			set_layer(DIRT_STREAM, true)
+			set_layer(DIRT_STREAM, true, dirt_layer_boost_db)
 
 		"grass":
-			set_layer(GRASS_STREAM, true)
+			set_layer(GRASS_STREAM, true, grass_layer_boost_db)
 
 		"snow":
 			set_layer(SNOW_STREAM, true, snow_layer_boost_db)
@@ -374,6 +376,8 @@ func update_rolling_volume(delta: float) -> void:
 	)
 
 	var volume_percent := speed_percent
+	#print(volume_percent)
+	
 	#print("volume_percent: ", volume_percent)
 	if rolling_volume_curve:
 		volume_percent = rolling_volume_curve.sample(speed_percent)
@@ -385,7 +389,7 @@ func update_rolling_volume(delta: float) -> void:
 	)
 	#print("target DB")
 	target_db = get_safe_audio_db(target_db)
-
+	
 	audio_wagon_movement.volume_db = move_toward(
 		audio_wagon_movement.volume_db,
 		target_db,

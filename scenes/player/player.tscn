@@ -194,20 +194,23 @@ bus = &"sfx"
 
 [node name="audioGrassRandom" type="AudioStreamPlayer" parent="AUDIO/Footstep" unique_id=466340673]
 stream = SubResource("AudioStreamRandomizer_rdr40")
-volume_db = -6.0
+volume_db = -5.5
 bus = &"sfx"
 
 [node name="audioDirtRandom" type="AudioStreamPlayer" parent="AUDIO/Footstep" unique_id=1714396380]
 stream = SubResource("AudioStreamRandomizer_q5jtg")
+volume_db = 0.5
 max_polyphony = 2
 bus = &"sfx"
 
 [node name="snowTallrandom" type="AudioStreamPlayer" parent="AUDIO/Footstep" unique_id=1461856901]
 stream = SubResource("AudioStreamRandomizer_j4nxn")
+volume_db = 0.5
 bus = &"sfx"
 
 [node name="snowFlatrandom" type="AudioStreamPlayer" parent="AUDIO/Footstep" unique_id=39908118]
 stream = SubResource("AudioStreamRandomizer_28m0y")
+volume_db = 0.5
 bus = &"sfx"
 
 [connection signal="area_entered" from="Hands/pickupArea" to="Hands" method="_on_pickup_area_area_entered"]

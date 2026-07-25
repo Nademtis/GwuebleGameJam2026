@@ -153,7 +153,7 @@ y_sort_enabled = true
 position = Vector2(407, 230)
 
 [node name="rockObstacle2" parent="YSORT/RockContainer" unique_id=1558530888 instance=ExtResource("12_icp1j")]
-position = Vector2(214, 114)
+position = Vector2(200, 111)
 
 [node name="rockObstacle3" parent="YSORT/RockContainer" unique_id=1720404154 instance=ExtResource("13_4gpp4")]
 position = Vector2(342, 86)

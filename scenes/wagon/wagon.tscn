@@ -33,8 +33,8 @@
 [ext_resource type="AudioStream" uid="uid://b2sh884dyivec" path="res://scenes/wagon/audio/SFX_Wagon_Movement_Loop_Snow.ogg" id="31_q8yfp"]
 
 [sub_resource type="Curve" id="Curve_wva7c"]
-_data = [Vector2(0, 0.74752474), 0.0, 0.0, 0, 0, Vector2(0.5966387, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q23xm"]
 
@@ -441,6 +441,7 @@ bus = &"sfx"
 
 [node name="GrabHandleRandom" type="AudioStreamPlayer" parent="Oven/AUDIO" unique_id=1569028417]
 stream = SubResource("AudioStreamRandomizer_5amg0")
+volume_db = 4.0
 bus = &"sfx"
 
 [node name="audioLidOpenRandom" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=362129326]

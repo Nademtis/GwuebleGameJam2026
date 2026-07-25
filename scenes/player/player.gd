@@ -146,9 +146,11 @@ func play_footstep() -> void:
 	match ground_type:
 		"grass":
 			audio_grass_random.play()
+			print("playing grass")
 
 		"dirt":
 			audio_dirt_random.play()
+			print("playing dirt")
 
 		_:
 			push_error("unknown ground:", ground_type)
@@ -157,11 +159,11 @@ func play_snow_footstep() -> void:
 	match next_footstep_override:
 		FootstepOverride.SNOW_TALL:
 			snow_tall_random.play()
-			#print("playing tall snow")
+			print("playing tall snow")
 
 		FootstepOverride.SNOW_FLAT:
 			snow_flat_random.play()
-			#print("playing flat snow")
+			print("playing flat snow")
 			
 
 func _on_snow_melter_area_hit_snow_tall() -> void:
