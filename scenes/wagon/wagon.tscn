@@ -19,6 +19,18 @@
 [ext_resource type="AudioStream" uid="uid://cns8mllnhdpxn" path="res://scenes/player/audio/SFX_Player_Grab_Wagon_1.ogg" id="17_8qan4"]
 [ext_resource type="AudioStream" uid="uid://de24yplakval6" path="res://scenes/player/audio/SFX_Player_Grab_Wagon_2.ogg" id="18_7oerd"]
 [ext_resource type="AudioStream" uid="uid://b7b0dttnkwoav" path="res://scenes/player/audio/SFX_Player_Grab_Wagon_3.ogg" id="19_78jjb"]
+[ext_resource type="AudioStream" uid="uid://c4q23w5gaoj1c" path="res://scenes/wagon/audio/Oven_Lid/SFX_Oven_Lid_Open_1.ogg" id="20_8ua2s"]
+[ext_resource type="AudioStream" uid="uid://ulml8o4qpp1e" path="res://scenes/wagon/audio/Oven_Lid/SFX_Oven_Lid_Open_2.ogg" id="21_s1dkf"]
+[ext_resource type="AudioStream" uid="uid://dinwewdl1f60u" path="res://scenes/wagon/audio/Oven_Lid/SFX_Oven_Lid_Open_3.ogg" id="22_mrdp3"]
+[ext_resource type="AudioStream" uid="uid://bggo1ok38rqi5" path="res://scenes/wagon/audio/Oven_Lid/SFX_Oven_Lid_Open_4.ogg" id="23_xccl2"]
+[ext_resource type="AudioStream" uid="uid://bxrbtco2oil4j" path="res://scenes/wagon/audio/Oven_Lid/SFX_Oven_Lid_Close_1.ogg" id="24_gx4i8"]
+[ext_resource type="AudioStream" uid="uid://dddlrp1mfya57" path="res://scenes/wagon/audio/Oven_Lid/SFX_Oven_Lid_Close_2.ogg" id="25_uft7r"]
+[ext_resource type="AudioStream" uid="uid://c81npr2u7wyia" path="res://scenes/wagon/audio/Oven_Lid/SFX_Oven_Lid_Close_3.ogg" id="26_2x5ob"]
+[ext_resource type="AudioStream" uid="uid://bn7g5l6840ocw" path="res://scenes/wagon/audio/Oven_Lid/SFX_Oven_Lid_Close_4.ogg" id="27_q8yfp"]
+[ext_resource type="AudioStream" uid="uid://ph3qerma0sjd" path="res://scenes/wagon/audio/SFX_Wagon_Movement_Loop_Baselayer.ogg" id="28_gx4i8"]
+[ext_resource type="AudioStream" uid="uid://ck5mpxdhnyyvc" path="res://scenes/wagon/audio/SFX_Wagon_Movement_Loop_Dirt.ogg" id="29_uft7r"]
+[ext_resource type="AudioStream" uid="uid://dfa306hecpfe4" path="res://scenes/wagon/audio/SFX_Wagon_Movement_Loop_Grass.ogg" id="30_2x5ob"]
+[ext_resource type="AudioStream" uid="uid://b2sh884dyivec" path="res://scenes/wagon/audio/SFX_Wagon_Movement_Loop_Snow.ogg" id="31_q8yfp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q23xm"]
 
@@ -160,6 +172,31 @@ streams_count = 3
 stream_0/stream = ExtResource("17_8qan4")
 stream_1/stream = ExtResource("18_7oerd")
 stream_2/stream = ExtResource("19_78jjb")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_y3y78"]
+streams_count = 4
+stream_0/stream = ExtResource("20_8ua2s")
+stream_1/stream = ExtResource("21_s1dkf")
+stream_2/stream = ExtResource("22_mrdp3")
+stream_3/stream = ExtResource("23_xccl2")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gvdt1"]
+streams_count = 4
+stream_0/stream = ExtResource("24_gx4i8")
+stream_1/stream = ExtResource("25_uft7r")
+stream_2/stream = ExtResource("26_2x5ob")
+stream_3/stream = ExtResource("27_q8yfp")
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_gvdt1"]
+stream_count = 4
+stream_0/stream = ExtResource("28_gx4i8")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("29_uft7r")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("30_2x5ob")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("31_q8yfp")
+stream_3/volume = 0.0
 
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774 groups=["wagon"]]
 collision_layer = 4
@@ -400,6 +437,20 @@ bus = &"sfx"
 [node name="GrabHandleRandom" type="AudioStreamPlayer" parent="Oven/AUDIO" unique_id=1569028417]
 stream = SubResource("AudioStreamRandomizer_5amg0")
 bus = &"sfx"
+
+[node name="audioLidOpenRandom" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=362129326]
+stream = SubResource("AudioStreamRandomizer_y3y78")
+bus = &"sfx"
+
+[node name="audioLidCloseRandom" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=1311016805]
+stream = SubResource("AudioStreamRandomizer_gvdt1")
+bus = &"sfx"
+
+[node name="MOVEMENT_SOUNDS" type="Node2D" parent="Oven/AUDIO" unique_id=272383425]
+
+[node name="audioWagonMovement" type="AudioStreamPlayer2D" parent="Oven/AUDIO/MOVEMENT_SOUNDS" unique_id=1329831410]
+stream = SubResource("AudioStreamSynchronized_gvdt1")
+autoplay = true
 
 [connection signal="area_entered" from="SnowHitter" to="SnowHitter" method="_on_area_entered"]
 [connection signal="hit_snow" from="SnowHitter" to="." method="_on_snow_hitter_hit_snow"]
