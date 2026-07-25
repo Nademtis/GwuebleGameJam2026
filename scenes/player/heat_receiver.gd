@@ -13,6 +13,10 @@ var is_in_oven_heat_range : bool = false
 
 var current_warmth : float = 0
 
+#juice
+@export var freeze_grace_period: float = 1.25
+var freeze_timer: float = 0.0
+
 
 func _ready() -> void:
 	current_warmth = max_warmth
@@ -20,14 +24,19 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if is_equal_approx(current_warmth, max_warmth) and is_in_oven_heat_range:
 		return
-
+	#print("freeze timer: ", freeze_timer)
 	if is_in_oven_heat_range:
 		restore_warmth(delta)
 	else:
 		lose_warmth(delta)
 
 	if current_warmth <= 0:
-		freeze()
+		freeze_timer += delta
+		
+		if freeze_timer >= freeze_grace_period:
+			freeze()
+	else:
+		freeze_timer = 0.0
 
 func restore_warmth(delta: float) -> void:
 	current_warmth = lerp(

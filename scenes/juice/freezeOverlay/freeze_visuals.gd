@@ -69,7 +69,7 @@ const STATES = {
 		"darkness": 0.5,
 		"distortion": 0.02,
 		"freeze_amount": 0.65,
-		"circle_radius": 0.25
+		"circle_radius": 0.15
 	}
 }
 #endregion states
