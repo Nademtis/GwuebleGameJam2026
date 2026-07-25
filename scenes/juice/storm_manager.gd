@@ -76,6 +76,7 @@ func apply_state(state: StormState) -> void:
 	var values:Dictionary = STATES[state]
 	storm_intensity = values["storm_intensity"]
 
+	@warning_ignore("unsafe_call_argument")
 	update_snow_layers(values["snow_layers"])
 	update_freeze_shader(values)
 	

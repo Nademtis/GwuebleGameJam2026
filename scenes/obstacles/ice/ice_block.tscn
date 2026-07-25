@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://boghf3xqrg6q1"]
+
+[ext_resource type="Texture2D" uid="uid://cqny4v76juugv" path="res://scenes/obstacles/ice/rock and ice aseprite.aseprite" id="1_cgitf"]
+[ext_resource type="Script" uid="uid://bk3bh07wof44x" path="res://scenes/obstacles/ice/ice_block.gd" id="1_pvn8g"]
+[ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="3_1tgaa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mepig"]
+atlas = ExtResource("1_cgitf")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvn8g"]
+atlas = ExtResource("1_cgitf")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tgaa"]
+atlas = ExtResource("1_cgitf")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5wp3"]
+atlas = ExtResource("1_cgitf")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fq3d1"]
+atlas = ExtResource("1_cgitf")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vc5r"]
+atlas = ExtResource("1_cgitf")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25xbu"]
+atlas = ExtResource("1_cgitf")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jva5c"]
+atlas = ExtResource("1_cgitf")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ganqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mepig")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvn8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tgaa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5wp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fq3d1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vc5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25xbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jva5c")
+}],
+"loop": 1,
+"name": &"ice",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y3y78"]
+radius = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rdr40"]
+size = Vector2(27, 25)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gvdt1"]
+radius = 13.0
+
+[node name="IceBlock" type="Node2D" unique_id=2070849842]
+script = ExtResource("1_pvn8g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=628159488]
+position = Vector2(-1, -24)
+sprite_frames = SubResource("SpriteFrames_ganqv")
+animation = &"ice"
+
+[node name="HorizontalShaker" type="Node2D" parent="AnimatedSprite2D" unique_id=316426505]
+position = Vector2(1, 24)
+script = ExtResource("3_1tgaa")
+metadata/_custom_type_script = "uid://b2elbuxdtvqkr"
+
+[node name="heatReceiver" type="Area2D" parent="." unique_id=1580355914]
+visible = false
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heatReceiver" unique_id=1400892702]
+position = Vector2(-1, -14)
+shape = SubResource("CircleShape2D_y3y78")
+debug_color = Color(0.81055444, 0.41139698, 0.047701932, 0.41960785)
+
+[node name="StaticBodyWagonBlocker" type="StaticBody2D" parent="." unique_id=1845733836]
+position = Vector2(-3, -2)
+collision_layer = 128
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyWagonBlocker" unique_id=892786199]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_rdr40")
+
+[node name="StaticBodyPlayerBlocker" type="StaticBody2D" parent="." unique_id=382511245]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyPlayerBlocker" unique_id=1072400380]
+position = Vector2(0, -14)
+shape = SubResource("CircleShape2D_gvdt1")
+
+[connection signal="area_entered" from="heatReceiver" to="." method="_on_heat_receiver_area_entered"]
+[connection signal="area_exited" from="heatReceiver" to="." method="_on_heat_receiver_area_exited"]

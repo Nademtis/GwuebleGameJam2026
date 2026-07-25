@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dy2qic1ioftp0"]
+
+[ext_resource type="PackedScene" uid="uid://dngkuy1dv06ia" path="res://scenes/obstacles/rock/rock.tscn" id="1_5flbs"]
+
+[node name="rockObstacle" type="StaticBody2D" unique_id=933579714]
+collision_layer = 2
+collision_mask = 5
+
+[node name="rock4" parent="." unique_id=1538793027 instance=ExtResource("1_5flbs")]
+position = Vector2(-33, -43)
+
+[node name="rock" parent="." unique_id=1891711785 instance=ExtResource("1_5flbs")]
+position = Vector2(-16, -33)
+
+[node name="rock2" parent="." unique_id=1564774382 instance=ExtResource("1_5flbs")]
+position = Vector2(-8, -14)
+
+[node name="rock3" parent="." unique_id=704986075 instance=ExtResource("1_5flbs")]
+position = Vector2(3, -1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1331703507]
+position = Vector2(-1, -33)
+polygon = PackedVector2Array(-45, -21, -20, 15, -9, 25, 1, 28, 18, 24, 17, 11, 3, -10, -19, -38, -31, -44, -43, -34)

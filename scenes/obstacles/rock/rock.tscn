@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dngkuy1dv06ia"]
+
+[ext_resource type="Texture2D" uid="uid://j0ex1dsbjq53" path="res://scenes/obstacles/rock/asset/rock_demo.png" id="1_atjlv"]
+
+[node name="rock" type="Node2D" unique_id=1538793027]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1261497073]
+position = Vector2(0, -20)
+texture = ExtResource("1_atjlv")

@@ -20,29 +20,21 @@ var move_dir: Vector2
 var is_pushing : bool = false
 var push_direction_is_right : bool = false
 
-var current_pos_y : float 
-
-func _ready() -> void:
-	pass
-	#if not freeze_shader_rect:
-		#push_error("freeze_shader_rect not defined")
-
-func _physics_process(delta: float) -> void:
+func _physics_process(delta : float) -> void:
 	snow_speed_multiplier = move_toward(
 		snow_speed_multiplier,
 		1.0,
 		snow_recovery_speed * delta
 	)
-	
+	if is_pushing:
+		velocity = Vector2.ZERO
+		_update_push_animation()
+		return
+
 	if can_move:
 		_movement(delta)
-	
-	if not is_pushing:
-		move_and_slide()
-		#current_pos_y = global_position.y
-	
-	#if is_pushing:
-		#global_position.y = current_pos_y
+
+	move_and_slide()
 
 func _process(_delta: float) -> void:
 	input_dir = Input.get_vector("left", "right", "up", "down")
@@ -63,15 +55,16 @@ func _movement(delta: float) -> void:
 			deceleration * delta
 		)
 		
-func _update_animation(dir: Vector2) -> void:
-	if is_pushing:
-		if push_direction_is_right:
-			animated_sprite_2d.play("p_right")
-		else:
-			animated_sprite_2d.flip_h = dir.x < 0
-			animated_sprite_2d.play("p_right")
-		return
+func _update_push_animation() -> void:
+	if push_direction_is_right:
+		animated_sprite_2d.flip_h = false
+	else:
+		animated_sprite_2d.flip_h = true
+	animated_sprite_2d.play("p_right")
 	
+
+func _update_animation(dir: Vector2) -> void:
+
 	#todo should be idle
 	animated_sprite_2d.play("w_down")
 	

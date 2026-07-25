@@ -4,7 +4,7 @@ class_name SnowManager
 
 @export var player: Player
 
-@export var process_distance: float = 500.0
+@export var process_distance: float = 450.0
 @export var snow_check_interval: float = 5.0
 
 
@@ -12,7 +12,8 @@ var snow_blobs: Array[SnowBlob] = []
 var check_timer := 0.0
 
 func _ready() -> void:
-
+	visible = true
+	
 	if not player:
 		push_error("SnowManager: Player missing")
 		
@@ -40,8 +41,10 @@ func update_snow_activity() -> void:
 			< max_distance_squared
 		)
 		snow.meltbox.disabled = not active
-
+		
 		if active:
+			#snow.visible = true
 			snow.start_melting()
 		else:
+			#snow.visible = false
 			snow.set_process(false)

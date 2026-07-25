@@ -7,6 +7,7 @@ size = Vector2(20, 384)
 
 [node name="StormTrigger" type="Area2D" unique_id=2076491983 groups=["player_triggers"]]
 collision_layer = 64
+collision_mask = 4
 script = ExtResource("1_8sn8i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1511342002]

@@ -49,19 +49,19 @@ var push_direction : int = 1 # 1right -1left
 @export var push_deceleration : float = 28.0
 
 #going up/down
-@export var wagon_vertical_speed : float = 12.0
-@export var min_y_height : float = 107.0
-@export var max_y_height : float = 185.0
+#@export var wagon_vertical_speed : float = 12.0
+#@export var min_y_height : float = 107.0
+#@export var max_y_height : float = 185.0
 
-@export var wagon_vertical_max_speed := 12.0
-@export var wagon_vertical_acceleration := 22.0
-@export var wagon_vertical_deceleration := 50.0 
+#@export var wagon_vertical_max_speed := 12.0
+#@export var wagon_vertical_acceleration := 22.0
+#@export var wagon_vertical_deceleration := 50.0 
 
-@export var maximum_steering := 0.1 # never above 1.0 - this is best steering 
-@export var minimum_steering := 0.60
+#@export var maximum_steering := 0.1 # never above 1.0 - this is best steering 
+#@export var minimum_steering := 0.60
 
-var vertical_speed := 0.0
-var wagon_y_direction : float = 0.0
+#var vertical_speed := 0.0
+#var wagon_y_direction : float = 0.0
 
 #changed in code
 var push_speed : float = 0.0
@@ -112,7 +112,7 @@ func handle_idle() -> void:
 func start_bracing(going_right : bool) -> void:
 	push_state = PushState.BRACING
 	player_ref.is_pushing = true
-	player_ref.velocity = Vector2.ZERO
+	#player_ref.velocity = Vector2.ZERO
 	if going_right:
 		push_direction = 1
 		player_ref.push_direction_is_right = true
@@ -144,43 +144,47 @@ func handle_pushing(delta : float) -> void:
 
 
 	#everything y related
-
-	var steering_strength : float = lerp(maximum_steering, minimum_steering, push_intensity)
-	var target_vertical_speed : float = (
-		get_wagon_y_input()
-		* wagon_vertical_max_speed
-		* steering_strength
-		)
-
-	if target_vertical_speed == 0.0:
-		vertical_speed = move_toward(
-			vertical_speed,
-			0.0,
-			wagon_vertical_deceleration * delta
-		)
-	else:
-		vertical_speed = move_toward(
-			vertical_speed,
-			target_vertical_speed,
-			wagon_vertical_acceleration * delta
-		)
+	#var steering_strength : float = lerp(maximum_steering, minimum_steering, push_intensity)
+	#var target_vertical_speed : float = (
+		#get_wagon_y_input()
+		#* wagon_vertical_max_speed
+		#* steering_strength
+		#)
+#
+	#if target_vertical_speed == 0.0:
+		#vertical_speed = move_toward(
+			#vertical_speed,
+			#0.0,
+			#wagon_vertical_deceleration * delta
+		#)
+	#else:
+		#vertical_speed = move_toward(
+			#vertical_speed,
+			#target_vertical_speed,
+			#wagon_vertical_acceleration * delta
+		#)
 	velocity.x = push_speed * push_direction
-	velocity.y = vertical_speed
+	#velocity.y = vertical_speed
 
 	move_and_slide()
 	
 	#clamp y since we don't want wagon to get out of bounds
-	global_position.y = clamp(
-		global_position.y,
-		min_y_height,
-		max_y_height
-		)
+	#global_position.y = clamp(
+		#global_position.y,
+		#min_y_height,
+		#max_y_height
+		#)
+		
+	if push_direction == 1:
+		player_ref.global_position = left_player_push_spot.global_position
+	else:
+		player_ref.global_position = right_player_push_spot.global_position
 
 	#asign the same velocity to player
-	player_ref.velocity = velocity
-	player_ref.move_and_slide()
+	#player_ref.velocity = velocity
+	#player_ref.move_and_slide()
 	
-	player_ref.global_position.y = global_position.y - 2
+	#player_ref.global_position.y = global_position.y - 2
 
 func handle_slowing(delta : float) -> void:
 	if player_ref.is_pushing:
@@ -203,9 +207,9 @@ func handle_slowing(delta : float) -> void:
 	move_and_slide()
 
 	# only move player if still attached
-	if player_ref.is_pushing:
-		player_ref.velocity = velocity
-		player_ref.move_and_slide()
+	#if player_ref.is_pushing:
+	#	player_ref.velocity = velocity
+	#	player_ref.move_and_slide()
 
 	# full stop
 	if push_speed <= 0.01:

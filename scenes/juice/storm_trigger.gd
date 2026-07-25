@@ -5,6 +5,7 @@ class_name StormTrigger
 
 @onready var label: Label = $Label
 
+@warning_ignore("int_as_enum_without_cast", "int_as_enum_without_match")
 @export var new_state : StormManager.StormState = -1
 
 var parent_storm_manager : StormManager

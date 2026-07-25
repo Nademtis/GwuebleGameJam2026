@@ -251,3 +251,6 @@ func add_fuel(fuel : PickupableFuel) -> void:
 func _set_fire_shaker(shaker : HorizontalShaker, shake_distance : float, shake_speed : float) -> void:
 	shaker.shake_distance = shake_distance
 	shaker.shake_speed = shake_speed
+	
+func get_heat_percentage() -> float:
+	return clamp(heat / max_heat, 0.0, 1.0)
