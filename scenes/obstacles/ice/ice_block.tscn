@@ -4,6 +4,10 @@
 [ext_resource type="Script" uid="uid://bk3bh07wof44x" path="res://scenes/obstacles/ice/ice_block.gd" id="1_pvn8g"]
 [ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="3_1tgaa"]
 
+[sub_resource type="Curve" id="Curve_pvn8g"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.8129032, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_mepig"]
 atlas = ExtResource("1_cgitf")
 region = Rect2(0, 0, 48, 48)
@@ -79,6 +83,7 @@ radius = 13.0
 
 [node name="IceBlock" type="Node2D" unique_id=2070849842]
 script = ExtResource("1_pvn8g")
+melt_heat_curve = SubResource("Curve_pvn8g")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=628159488]
 position = Vector2(-1, -24)

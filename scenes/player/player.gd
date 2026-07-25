@@ -85,5 +85,8 @@ func _update_animation(dir: Vector2) -> void:
 
 func _on_snow_melter_area_hit_snow() -> void:
 	#print("player hit snow")
+	#get the correct snow type for correct snow sfx
+	
+	#print("player hit snow") # todo play hit tall sn
 	snow_speed_multiplier *= snow_hit_multiplier
 	snow_speed_multiplier = max(snow_speed_multiplier, 0.5)

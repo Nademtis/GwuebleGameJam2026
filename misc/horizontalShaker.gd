@@ -10,6 +10,7 @@ var target_node: Node2D
 var shaking: bool = false
 var shake_time_left: float = 0.0
 
+var reset_tween: Tween
 
 func _ready() -> void:
 	target_node = get_parent()
@@ -32,6 +33,8 @@ func start_shaking() -> void:
 	if not target_node:
 		return
 	
+	original_position = target_node.position
+	
 	shaking = true
 	shake_time_left = INF
 
@@ -43,8 +46,11 @@ func stop_shaking() -> void:
 	shaking = false
 	shake_time_left = 0
 
-	var tween : Tween = create_tween()
-	tween.tween_property(
+	if reset_tween:
+		reset_tween.kill()
+
+	reset_tween = create_tween()
+	reset_tween.tween_property(
 		target_node,
 		"position",
 		original_position,
