@@ -157,9 +157,12 @@ func play_snow_footstep() -> void:
 	match next_footstep_override:
 		FootstepOverride.SNOW_TALL:
 			snow_tall_random.play()
+			print("playing tall snow")
 
 		FootstepOverride.SNOW_FLAT:
 			snow_flat_random.play()
+			print("playing flat snow")
+			
 
 func _on_snow_melter_area_hit_snow_tall() -> void:
 	#play tall snow sound

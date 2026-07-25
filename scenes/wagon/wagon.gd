@@ -185,7 +185,7 @@ func handle_pushing(delta : float) -> void:
 	var previous_position := global_position
 	move_and_slide()
 	actual_speed = abs(global_position.x - previous_position.x) / delta
-	print("actual speed: ", actual_speed)
+	#print("actual speed: ", actual_speed)
 	#TODO
 	#use this below to impact ice block
 	#var hit : int = get_slide_collision_count()
@@ -221,7 +221,7 @@ func handle_slowing(delta : float) -> void:
 	var previous_position := global_position
 	move_and_slide()
 	actual_speed = abs(global_position.x - previous_position.x) / delta
-	print("actual speed: ", actual_speed)
+	#print("actual speed: ", actual_speed)
 
 	# full stop
 	if push_speed <= 0.01:
