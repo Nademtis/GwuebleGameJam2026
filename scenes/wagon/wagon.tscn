@@ -457,7 +457,6 @@ bus = &"sfx"
 
 [node name="audioWagonMovement" type="AudioStreamPlayer2D" parent="Oven/AUDIO/MOVEMENT_SOUNDS" unique_id=1329831410]
 stream = SubResource("AudioStreamSynchronized_gvdt1")
-volume_db = 9.763
 
 [connection signal="area_entered" from="SnowHitter" to="SnowHitter" method="_on_area_entered"]
 [connection signal="hit_snow" from="SnowHitter" to="." method="_on_snow_hitter_hit_snow"]

@@ -165,7 +165,7 @@ position = Vector2(289, 87)
 position = Vector2(610, 133)
 
 [node name="IceBlock2" parent="YSORT" unique_id=1487904121 instance=ExtResource("14_rdr40")]
-position = Vector2(148, 112)
+position = Vector2(278, 134)
 
 [node name="CameraContainer" type="Node" parent="." unique_id=1818375729]
 script = ExtResource("4_eokde")

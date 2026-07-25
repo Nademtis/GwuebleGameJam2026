@@ -49,7 +49,9 @@ var push_direction : int = 1 # 1right -1left
 @export var push_acceleration : float = 16.0
 @export var push_deceleration : float = 28.0
 
+
 var push_speed : float = 0.0
+var actual_speed : float = 0.0
 
 #endregion movement
 
@@ -76,7 +78,7 @@ const SNOW_STREAM := 3
 var current_rolling_db: float # changed in code
 
 @export_category("Audio")
-@export var max_rolling_db: float = 8.0
+@export var max_rolling_db: float = 5.0
 @export var min_rolling_db: float = -80.0
 @export var rolling_volume_curve: Curve
 @export var rolling_volume_lerp_speed := 50
@@ -180,8 +182,10 @@ func handle_pushing(delta : float) -> void:
 	)
 	push_intensity = push_speed / max_push_speed
 	velocity.x = push_speed * push_direction
+	var previous_position := global_position
 	move_and_slide()
-	
+	actual_speed = abs(global_position.x - previous_position.x) / delta
+	print("actual speed: ", actual_speed)
 	#TODO
 	#use this below to impact ice block
 	#var hit : int = get_slide_collision_count()
@@ -214,12 +218,10 @@ func handle_slowing(delta : float) -> void:
 	velocity.x = push_speed * push_direction
 	velocity.y = 0
 
+	var previous_position := global_position
 	move_and_slide()
-
-	# only move player if still attached
-	#if player_ref.is_pushing:
-	#	player_ref.velocity = velocity
-	#	player_ref.move_and_slide()
+	actual_speed = abs(global_position.x - previous_position.x) / delta
+	print("actual speed: ", actual_speed)
 
 	# full stop
 	if push_speed <= 0.01:
@@ -299,7 +301,7 @@ func anim_wheels() -> void:
 		# restore from previous frame
 		wheels_animated_sprite_2d_1.set_frame_and_progress(wheel_frame_1,wheel_progress_1)
 		wheels_animated_sprite_2d_2.set_frame_and_progress(wheel_frame_2, wheel_progress_2)
-	var speed : float = max(push_speed / max_push_speed, 0.1)
+	var speed : float = max(actual_speed / max_push_speed, 0.1)
 
 	wheels_animated_sprite_2d_1.speed_scale = speed
 	wheels_animated_sprite_2d_2.speed_scale = speed
@@ -366,7 +368,7 @@ func set_layer(index: int, enabled: bool, enabled_db: float = 0.0) -> void:
 
 func update_rolling_volume(delta: float) -> void:
 	var speed_percent : float = clamp(
-		push_speed / max_push_speed,
+		actual_speed / max_push_speed,
 		0.0,
 		1.0
 	)
@@ -381,7 +383,7 @@ func update_rolling_volume(delta: float) -> void:
 		max_rolling_db,
 		volume_percent
 	)
-
+	#print("target DB")
 	target_db = get_safe_audio_db(target_db)
 
 	audio_wagon_movement.volume_db = move_toward(
