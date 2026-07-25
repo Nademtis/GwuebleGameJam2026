@@ -53,7 +53,7 @@ func update_melting(delta: float) -> void:
 		return
 
 	var heat_percent := oven.get_heat_percentage()
-	#print(heat_percent)
+	#(heat_percent)
 
 	var melt_multiplier := melt_heat_curve.sample(heat_percent)
 	#print("melt multiplayer: ", melt_multiplier)
@@ -121,7 +121,7 @@ func update_shake(delta: float) -> void:
 
 	if not current_shake_distance <= 0.01:
 		if not horizontal_shaker.shaking:
-			print("starts shaking")
+			#print("starts shaking")
 			horizontal_shaker.start_shaking()
 
 
@@ -132,15 +132,14 @@ func _on_heat_receiver_area_entered(area: Area2D) -> void:
 		var oven_ref: Oven = parent
 		oven = oven_ref
 		is_in_oven_heat_range = true
-		print("Ice entered heat")
+		#print("Ice entered heat")
 
 
 func _on_heat_receiver_area_exited(area: Area2D) -> void:
 	var parent := area.get_parent()
 
 	if parent is Oven:
-		print("Ice left heat")
-		
+		#print("Ice left heat")
 		var oven_ref: Oven = parent
 		oven = oven_ref
 		is_in_oven_heat_range = false

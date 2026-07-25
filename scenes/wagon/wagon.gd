@@ -48,22 +48,6 @@ var push_direction : int = 1 # 1right -1left
 @export var push_acceleration : float = 16.0
 @export var push_deceleration : float = 28.0
 
-#going up/down
-#@export var wagon_vertical_speed : float = 12.0
-#@export var min_y_height : float = 107.0
-#@export var max_y_height : float = 185.0
-
-#@export var wagon_vertical_max_speed := 12.0
-#@export var wagon_vertical_acceleration := 22.0
-#@export var wagon_vertical_deceleration := 50.0 
-
-#@export var maximum_steering := 0.1 # never above 1.0 - this is best steering 
-#@export var minimum_steering := 0.60
-
-#var vertical_speed := 0.0
-#var wagon_y_direction : float = 0.0
-
-#changed in code
 var push_speed : float = 0.0
 
 func _ready() -> void:
@@ -100,7 +84,6 @@ func _physics_process(delta : float) -> void:
 			
 	anim_wheels()
 			
-
 func handle_idle() -> void:
 	if player_touching_left_handle:
 		if player_ref.input_dir.x > 0:
@@ -140,51 +123,25 @@ func handle_pushing(delta : float) -> void:
 		push_acceleration * delta
 	)
 	push_intensity = push_speed / max_push_speed
-
-
-
-	#everything y related
-	#var steering_strength : float = lerp(maximum_steering, minimum_steering, push_intensity)
-	#var target_vertical_speed : float = (
-		#get_wagon_y_input()
-		#* wagon_vertical_max_speed
-		#* steering_strength
-		#)
-#
-	#if target_vertical_speed == 0.0:
-		#vertical_speed = move_toward(
-			#vertical_speed,
-			#0.0,
-			#wagon_vertical_deceleration * delta
-		#)
-	#else:
-		#vertical_speed = move_toward(
-			#vertical_speed,
-			#target_vertical_speed,
-			#wagon_vertical_acceleration * delta
-		#)
 	velocity.x = push_speed * push_direction
-	#velocity.y = vertical_speed
-
 	move_and_slide()
 	
-	#clamp y since we don't want wagon to get out of bounds
-	#global_position.y = clamp(
-		#global_position.y,
-		#min_y_height,
-		#max_y_height
-		#)
-		
+	#TODO
+	#use this below to impact ice block
+	#var hit : int = get_slide_collision_count()
+	#print("hit amount: ", hit)
+	#if hit > 0:
+		#for i in get_slide_collision_count():
+			#var collision := get_slide_collision(i)
+			#var collider := collision.get_collider()
+#
+			#if collider is StaticBody2D:
+				#print("Wagon hit static object:", collider.name)
+	
 	if push_direction == 1:
 		player_ref.global_position = left_player_push_spot.global_position
 	else:
 		player_ref.global_position = right_player_push_spot.global_position
-
-	#asign the same velocity to player
-	#player_ref.velocity = velocity
-	#player_ref.move_and_slide()
-	
-	#player_ref.global_position.y = global_position.y - 2
 
 func handle_slowing(delta : float) -> void:
 	if player_ref.is_pushing:
@@ -224,11 +181,7 @@ func release_player() -> void:
 	#player_ref.velocity = Vector2(-push_direction * 100, 0) # fun bounce away when detaching from wagon
 
 func player_stopped_pushing() -> void:
-	#print("player stopped pushing")
-	#push_initiated = false
 	player_ref.is_pushing = false
-	#moving_to_push_position = false
-
 
 func handle_bracing(delta : float) -> void:
 
