@@ -3,6 +3,7 @@ class_name Wagon
 
 @export var player_ref : Player = null
 
+#region movement
 #each time wagon hit snow. wagon slowed down by this in 
 @export var snow_speed_loss : float = 4.0
 
@@ -50,9 +51,27 @@ var push_direction : int = 1 # 1right -1left
 
 var push_speed : float = 0.0
 
+#endregion movement
+
+
+#region audio
+#AUDIO
+@onready var walkable_tilemap_layer: TileMapLayer # for audio
+
+#endregion audio
+
+
+
+
+
+
 func _ready() -> void:
 	if not player_ref:
 		push_error("player ref not defined")
+		
+	if not walkable_tilemap_layer:
+		push_error("walkable_tilemap_layer not defined")
+		
 		
 	light_container.visible = true
 		

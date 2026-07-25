@@ -158,6 +158,10 @@ collision_mask = 195
 motion_mode = 1
 safe_margin = 0.12
 script = ExtResource("1_hmvk8")
+snow_speed_loss = null
+max_push_speed = null
+push_acceleration = null
+push_deceleration = null
 
 [node name="StormTriggerCollisionshape" type="CollisionShape2D" parent="." unique_id=1124384212]
 position = Vector2(0, -10)
@@ -364,6 +368,7 @@ texture = ExtResource("11_130wf")
 texture_scale = 0.45
 
 [node name="snowMeltArea" type="Area2D" parent="Oven" unique_id=1768253092]
+visible = false
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("11_affv2")
