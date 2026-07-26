@@ -182,11 +182,11 @@ y_sort_enabled = true
 tile_set = SubResource("TileSet_y3y78")
 
 [node name="Player" parent="YSORT" unique_id=151895576 node_paths=PackedStringArray("walkable_tilemap_layer") instance=ExtResource("2_gr3xe")]
-position = Vector2(14, 157)
+position = Vector2(-74, 133)
 walkable_tilemap_layer = NodePath("../../walkable")
 
 [node name="Wagon" parent="YSORT" unique_id=756693774 node_paths=PackedStringArray("player_ref", "walkable_tilemap_layer") instance=ExtResource("5_j81xe")]
-position = Vector2(65, 135)
+position = Vector2(-31, 135)
 player_ref = NodePath("../Player")
 walkable_tilemap_layer = NodePath("../../walkable")
 

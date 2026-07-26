@@ -66,6 +66,7 @@ var actual_speed : float = 0.0
 
 var synchronized_stream: AudioStreamSynchronized
 
+
 @export var snow_override_time := 3.0
 var snow_override_timer := 0.0
 var current_ground_type := ""
@@ -89,6 +90,9 @@ var current_rolling_db: float # changed in code
 
 const ABSOLUTE_MAX_AUDIO_DB := 20.0 # never louder than this
 const WARNING_AUDIO_DB := 15.0
+
+@onready var audio_brace: AudioStreamPlayer = $Oven/AUDIO/AudioBrace
+
 
 #endregion audio
 
@@ -162,6 +166,8 @@ func handle_idle() -> void:
 
 func start_bracing(going_right : bool) -> void:
 	grab_handle_random.play()
+	audio_brace.play()
+	
 	push_state = PushState.BRACING
 	player_ref.is_pushing = true
 	#player_ref.velocity = Vector2.ZERO
@@ -179,6 +185,8 @@ func handle_pushing(delta : float) -> void:
 
 	if not player_is_still_pushing():
 		push_state = PushState.SLOWING
+		
+		audio_brace.stop()
 		return
 
 	push_speed = move_toward(
@@ -248,6 +256,7 @@ func handle_bracing(delta : float) -> void:
 
 	if not player_is_still_pushing():
 		release_player()
+		audio_brace.stop()
 		push_state = PushState.IDLE
 		brace_progress = 0.0
 		return

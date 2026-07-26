@@ -33,6 +33,10 @@
 [ext_resource type="AudioStream" uid="uid://b2sh884dyivec" path="res://scenes/wagon/audio/SFX_Wagon_Movement_Loop_Snow.ogg" id="31_q8yfp"]
 [ext_resource type="AudioStream" uid="uid://dtoy3euileqga" path="res://audio/sfx/fire/SFX_Fire_Dies_Out.ogg" id="32_2x5ob"]
 [ext_resource type="AudioStream" uid="uid://dpjnktjbihpyp" path="res://audio/sfx/fire/SFX_Oven_Fire_Lit_Loop.ogg" id="33_q8yfp"]
+[ext_resource type="AudioStream" uid="uid://bt0sawj3l3cp2" path="res://scenes/wagon/audio/brace/SFX_Wagon_Bracing_1.ogg" id="34_hfjlk"]
+[ext_resource type="AudioStream" uid="uid://dlthkqr2hi3hu" path="res://scenes/wagon/audio/brace/SFX_Wagon_Bracing_2.ogg" id="35_cci2n"]
+[ext_resource type="AudioStream" uid="uid://cudo3mm71hmu1" path="res://scenes/wagon/audio/brace/SFX_Wagon_Bracing_3.ogg" id="36_oapf7"]
+[ext_resource type="AudioStream" uid="uid://dn12j6d5of5mo" path="res://audio/melting/SFX_Snow_Melting_Loop.ogg" id="37_cci2n"]
 
 [sub_resource type="Curve" id="Curve_wva7c"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0362117, 0.8014184), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -207,6 +211,12 @@ stream_2/stream = ExtResource("30_2x5ob")
 stream_2/volume = 0.0
 stream_3/stream = ExtResource("31_q8yfp")
 stream_3/volume = 0.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gyig5"]
+streams_count = 3
+stream_0/stream = ExtResource("34_hfjlk")
+stream_1/stream = ExtResource("35_cci2n")
+stream_2/stream = ExtResource("36_oapf7")
 
 [node name="Wagon" type="CharacterBody2D" unique_id=756693774 groups=["wagon"]]
 collision_layer = 4
@@ -433,6 +443,9 @@ script = ExtResource("11_affv2")
 position = Vector2(0, -9)
 shape = SubResource("CircleShape2D_gvdt1")
 
+[node name="audioSnowMelting" type="AudioStreamPlayer" parent="Oven/snowMeltArea" unique_id=665724911]
+stream = ExtResource("37_cci2n")
+
 [node name="playerHeatArea" type="Area2D" parent="Oven" unique_id=1084344960 groups=["heat"]]
 visible = false
 position = Vector2(-2, -9)
@@ -477,6 +490,11 @@ bus = &"sfx"
 stream = ExtResource("33_q8yfp")
 max_distance = 500.0
 attenuation = 2.0000005
+bus = &"sfx"
+
+[node name="AudioBrace" type="AudioStreamPlayer" parent="Oven/AUDIO" unique_id=1748576890]
+stream = SubResource("AudioStreamRandomizer_gyig5")
+volume_db = -11.0
 bus = &"sfx"
 
 [connection signal="area_entered" from="SnowHitter" to="SnowHitter" method="_on_area_entered"]

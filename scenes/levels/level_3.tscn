@@ -197,6 +197,9 @@ position = Vector2(44, 102)
 [node name="Log2" parent="YSORT/LogContainer" unique_id=662851503 instance=ExtResource("7_6c6bd")]
 position = Vector2(168, 177)
 
+[node name="Log5" parent="YSORT/LogContainer" unique_id=951486419 instance=ExtResource("7_6c6bd")]
+position = Vector2(547, 200)
+
 [node name="Log3" parent="YSORT/LogContainer" unique_id=557206288 instance=ExtResource("7_6c6bd")]
 position = Vector2(108, 150)
 

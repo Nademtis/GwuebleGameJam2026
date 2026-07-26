@@ -94,14 +94,17 @@ func _update_push_animation() -> void:
 func _update_animation(dir: Vector2) -> void:
 
 	#todo should be idle
-	animated_sprite_2d.play("w_down")
+	#animated_sprite_2d.play("idle")
 	
 	if dir == Vector2.ZERO:
-		#animated_sprite_2d.play("idle")
+		animated_sprite_2d.play("idle")
 		return
 
 	if abs(dir.x) > abs(dir.y):
 		animated_sprite_2d.play("w_right")
+		#print("walking right")
+		#print(animated_sprite_2d.animation, " ", animated_sprite_2d.frame)
+		#print(animated_sprite_2d.is_playing())
 		animated_sprite_2d.flip_h = dir.x < 0
 	else:
 		animated_sprite_2d.flip_h = false
@@ -109,6 +112,10 @@ func _update_animation(dir: Vector2) -> void:
 			animated_sprite_2d.play("w_up")
 		else:
 			animated_sprite_2d.play("w_down")
+
+func play_anim(anim: String) -> void:
+	if animated_sprite_2d.animation != anim:
+		animated_sprite_2d.play(anim)
 
 func update_footsteps(delta: float) -> void:
 	footstep_timer -= delta
