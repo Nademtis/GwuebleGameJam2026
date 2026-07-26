@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 		target_db,
 		volume_lerp_speed * delta
 	)
-	print("snow melting playing with: ", audio_snow_melting.volume_db)
+	#print("snow melting playing with: ", audio_snow_melting.volume_db)
 
 
 func _on_area_entered(area: Area2D) -> void:

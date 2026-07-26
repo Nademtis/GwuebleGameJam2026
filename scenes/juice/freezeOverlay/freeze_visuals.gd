@@ -198,11 +198,12 @@ func update_radial_shader() -> void:
 	)
 
 func update_freeze_audio(delta: float) -> void:
-	if current_freeze_amount >= 0.3:
+	print("current freeze amount: ", current_freeze_amount)
+	if current_freeze_amount >= 0.25:
 		if not audio_player_freeze.playing:
 			audio_player_freeze.play()
 
-		audio_player_freeze.volume_db = -6
+		audio_player_freeze.volume_db = -11 # 8.5 
 
 	else:
 		audio_player_freeze.volume_db = move_toward(
