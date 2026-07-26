@@ -6,10 +6,10 @@ class_name IceBlock
 @export var melt_heat_curve : Curve
 
 @export var min_shake_distance := 0.0
-@export var max_shake_distance := 2.1
+@export var max_shake_distance := 1.5
 
 @export var min_shake_speed := 0.0
-@export var max_shake_speed := 5.0
+@export var max_shake_speed := 3.0
 
 var melt_progress := 0.0 # 0solid 1melted
 
