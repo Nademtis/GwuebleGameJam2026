@@ -314,4 +314,4 @@ func get_heat_percentage() -> float:
 	
 func set_heat(new_heat : float) -> void:
 	heat = clamp(heat, new_heat, max_heat)
-	print("from set, set heat = ", heat)
+	#print("from set, set heat = ", heat)

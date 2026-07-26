@@ -23,5 +23,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("wagon"):
-		print("hit wagon")
+		#print("hit wagon")
+		fading_in = true
+	elif body.is_in_group("player"):
 		fading_in = true
