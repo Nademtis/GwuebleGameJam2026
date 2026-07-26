@@ -116,14 +116,14 @@ func _process(delta : float) -> void:
 	
 	if get_heat_percentage() < 0.05 and not fire_died:
 		if not fire_die_audio.playing:
-			print("played fire die")
+			#print("played fire die")
 			fire_die_audio.play(0.5)
 			fire_died = true
 	
 	if not fire_died:
 		if not fire_loop_audio.playing:
 			fire_loop_audio.play()
-			print("start playing fire loop")
+			#print("start playing fire loop")
 	else:
 		fire_loop_audio.stop()
 	
@@ -296,7 +296,7 @@ func update_fire_audio(delta: float) -> void:
 		target_db,
 		fire_loop_volume_lerp_speed * delta
 	)
-	print("actual db: ", fire_loop_audio.volume_db)
+	#print("actual db: ", fire_loop_audio.volume_db)
 
 func add_fuel(fuel : PickupableFuel) -> void:
 	heat += fuel.heat

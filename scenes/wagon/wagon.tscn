@@ -159,7 +159,7 @@ height = 24.0
 size = Vector2(11, 16)
 
 [sub_resource type="Curve" id="Curve_2x5ob"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.048991352, 0.102941155), 0.0, 0.0, 0, 0, Vector2(0.8559078, 0.79411757), 1.0934868, 1.0934868, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.048991352, 0.102941155), 0.0, 0.0, 0, 0, Vector2(0.6763804, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
@@ -392,7 +392,7 @@ position = Vector2(23, -2)
 
 [node name="Oven" type="Node2D" parent="." unique_id=1304160645]
 script = ExtResource("6_cgiqy")
-fire_loop_max_db = 0.5
+fire_loop_max_db = 1.8
 fire_loop_volume_curve = SubResource("Curve_2x5ob")
 fire_lerp_speed = 10.0
 
@@ -455,12 +455,12 @@ bus = &"sfx"
 
 [node name="audioLidOpenRandom" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=362129326]
 stream = SubResource("AudioStreamRandomizer_y3y78")
-volume_db = -3.0
+volume_db = -4.5
 bus = &"sfx"
 
 [node name="audioLidCloseRandom" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=1311016805]
 stream = SubResource("AudioStreamRandomizer_gvdt1")
-volume_db = -3.0
+volume_db = -4.5
 bus = &"sfx"
 
 [node name="MOVEMENT_SOUNDS" type="Node2D" parent="Oven/AUDIO" unique_id=272383425]

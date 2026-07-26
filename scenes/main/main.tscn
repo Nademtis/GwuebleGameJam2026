@@ -4,20 +4,36 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cohs7a745jqay" path="res://misc/music_manager.gd" id="2_hujxm"]
 [ext_resource type="Script" uid="uid://06kpi22rrm3p" path="res://misc/debugOverlay.gd" id="3_k2fmo"]
+[ext_resource type="AudioStream" uid="uid://cdftiw1t4bccg" path="res://audio/ambience/Ambience_State_None.ogg" id="3_ouso4"]
 [ext_resource type="FontFile" uid="uid://cymn1rhwgxo55" path="res://misc/font/BoldPixels.ttf" id="4_6q06x"]
+[ext_resource type="AudioStream" uid="uid://bjp0tl5w4lwqj" path="res://audio/ambience/Ambience_State_Chill.ogg" id="4_blune"]
 [ext_resource type="Environment" uid="uid://cq2irltn5tsre" path="res://misc/Environment.tres" id="4_l3cfh"]
 [ext_resource type="PackedScene" uid="uid://c8i7cs41gdxi5" path="res://misc/ui/menu.tscn" id="5_ow5a4"]
+[ext_resource type="AudioStream" uid="uid://ja7xk7v573ib" path="res://audio/ambience/Ambience_State_Medium.ogg" id="5_th5th"]
+[ext_resource type="AudioStream" uid="uid://c52ptxnb4a6nf" path="res://audio/ambience/Ambience_State_High.ogg" id="6_7smn1"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_ganqv"]
 clip_count = 4
 clip_0/name = &"NONE"
+clip_0/stream = ExtResource("3_ouso4")
 clip_0/auto_advance = 0
 clip_1/name = &"CHILL"
+clip_1/stream = ExtResource("4_blune")
 clip_1/auto_advance = 0
 clip_2/name = &"MEDIUM"
+clip_2/stream = ExtResource("5_th5th")
 clip_2/auto_advance = 0
 clip_3/name = &"HIGH"
+clip_3/stream = ExtResource("6_7smn1")
 clip_3/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 1.0,
+"fade_mode": 3,
+"from_time": 0,
+"to_time": 0
+}
+}
 
 [sub_resource type="Animation" id="Animation_iuonh"]
 length = 0.001
@@ -80,6 +96,7 @@ script = ExtResource("2_hujxm")
 
 [node name="AudioAmbienceInteractive" type="AudioStreamPlayer" parent="AudioManager" unique_id=1109453616]
 stream = SubResource("AudioStreamInteractive_ganqv")
+bus = &"ambience"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1506560489]
 top_level = true
