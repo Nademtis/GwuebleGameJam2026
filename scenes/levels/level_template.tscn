@@ -303,4 +303,4 @@ position = Vector2(113, 12)
 new_state = 1
 
 [node name="LevelSwapper" parent="." unique_id=1913094264 instance=ExtResource("26_q5jtg")]
-position = Vector2(1132, 91)
+position = Vector2(1132, 79)
