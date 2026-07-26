@@ -5,10 +5,11 @@ class_name AudioManager
 var interactive_stream: AudioStreamInteractive
 var playback: AudioStreamPlaybackInteractive
 
+#use this for when sara is a perfectionist
 const NONE_LAYER_BONUS: float = -4.0
-const CHILL_LAYER_BONUS: float = 0.0
-const MEDIUM_LAYER_BONUS: float = 0.0
-const HIGH_LAYER_BONUS: float = 0.0
+const CHILL_LAYER_BONUS: float = 1.0
+const MEDIUM_LAYER_BONUS: float = 2.0
+const HIGH_LAYER_BONUS: float = 1.0
 
 const STARTUP_VOLUME_DB := -40.0
 @export var ambience_volume_lerp_speed := 3.0
