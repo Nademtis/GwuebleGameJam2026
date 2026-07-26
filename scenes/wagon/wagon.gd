@@ -81,7 +81,7 @@ var current_rolling_db: float # changed in code
 
 @export_category("Audio")
 @export var max_rolling_db: float = 6.5
-@export var min_rolling_db: float = -80.0
+@export var min_rolling_db: float = -15.0
 @export var rolling_volume_curve: Curve
 @export var rolling_volume_lerp_speed := 150
 
@@ -389,6 +389,11 @@ func update_rolling_volume(delta: float) -> void:
 	)
 	#print("target DB")
 	target_db = get_safe_audio_db(target_db)
+	print("actual_speed: ", actual_speed)
+	if actual_speed < 0.5:
+		target_db = lerp(-40.0, max_rolling_db, volume_percent)
+	else:
+		target_db = lerp(min_rolling_db, max_rolling_db, volume_percent)
 	
 	audio_wagon_movement.volume_db = move_toward(
 		audio_wagon_movement.volume_db,
