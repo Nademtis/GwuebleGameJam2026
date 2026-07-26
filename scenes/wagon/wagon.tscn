@@ -159,8 +159,8 @@ height = 24.0
 size = Vector2(11, 16)
 
 [sub_resource type="Curve" id="Curve_2x5ob"]
-_data = [Vector2(0, 0.5073529), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.048991352, 0.102941155), 0.0, 0.0, 0, 0, Vector2(0.8559078, 0.79411757), 1.0934868, 1.0934868, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 13.038404
@@ -392,7 +392,9 @@ position = Vector2(23, -2)
 
 [node name="Oven" type="Node2D" parent="." unique_id=1304160645]
 script = ExtResource("6_cgiqy")
+fire_loop_max_db = 0.5
 fire_loop_volume_curve = SubResource("Curve_2x5ob")
+fire_lerp_speed = 10.0
 
 [node name="depositArea" type="Area2D" parent="Oven" unique_id=1100737684 groups=["oven"]]
 visible = false
@@ -473,8 +475,8 @@ bus = &"sfx"
 
 [node name="fireLoopAudio" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=1232912883]
 stream = ExtResource("33_q8yfp")
-max_distance = 250.0
-attenuation = 2.9281707
+max_distance = 500.0
+attenuation = 2.0000005
 bus = &"sfx"
 
 [connection signal="area_entered" from="SnowHitter" to="SnowHitter" method="_on_area_entered"]

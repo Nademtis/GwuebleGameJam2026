@@ -101,7 +101,7 @@ func _ready() -> void:
 	heat = max_heat/2
 	
 	fire_loop_audio.volume_db = fire_loop_min_db
-	fire_loop_audio.play()
+	#fire_loop_audio.play()
 	
 	_set_fire_shaker(fire_1_shaker, FIRE_1_SHAKE_DISTANCE, FIRE_1_SHAKE_SPEED)
 	_set_fire_shaker(fire_2_shaker, FIRE_2_SHAKE_DISTANCE, FIRE_2_SHAKE_SPEED)
@@ -114,14 +114,22 @@ func _ready() -> void:
 func _process(delta : float) -> void:
 	heat = max(heat - delta, 0.0)
 	
-	
-	if get_heat_percentage() < 0.09 and not fire_died:
+	if get_heat_percentage() < 0.05 and not fire_died:
 		if not fire_die_audio.playing:
 			print("played fire die")
 			fire_die_audio.play(0.5)
 			fire_died = true
 	
+	if not fire_died:
+		if not fire_loop_audio.playing:
+			fire_loop_audio.play()
+			print("start playing fire loop")
+	else:
+		fire_loop_audio.stop()
+	
+	
 	update_fire_audio(delta)
+	
 	update_fire_visuals(delta)
 	update_light_visuals(delta)
 	update_snow_melt_area_and_heat_area(delta)
@@ -266,24 +274,29 @@ func update_single_light(
 	
 
 func update_fire_audio(delta: float) -> void:
+	if fire_died:
+		return
+	
 	var heat_percent := get_heat_percentage()
 
 	var volume_percent := heat_percent
 	if fire_loop_volume_curve:
 		volume_percent = fire_loop_volume_curve.sample(heat_percent)
-
+		#print("volume percent: ", volume_percent)
+	
 	var target_db : float = lerp(
 		fire_loop_min_db,
 		fire_loop_max_db,
 		volume_percent
 	)
-
+	#print("target_db", target_db)
+	
 	fire_loop_audio.volume_db = move_toward(
 		fire_loop_audio.volume_db,
 		target_db,
 		fire_loop_volume_lerp_speed * delta
 	)
-
+	print("actual db: ", fire_loop_audio.volume_db)
 
 func add_fuel(fuel : PickupableFuel) -> void:
 	heat += fuel.heat
