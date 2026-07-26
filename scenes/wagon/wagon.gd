@@ -83,7 +83,7 @@ var current_rolling_db: float # changed in code
 @export var max_rolling_db: float = 6.5
 @export var min_rolling_db: float = -15.0
 @export var rolling_volume_curve: Curve
-@export var rolling_volume_lerp_speed := 150
+@export var rolling_volume_lerp_speed := 95
 
 const ABSOLUTE_MAX_AUDIO_DB := 20.0 # never louder than this
 const WARNING_AUDIO_DB := 15.0

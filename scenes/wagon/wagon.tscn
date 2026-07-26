@@ -33,7 +33,7 @@
 [ext_resource type="AudioStream" uid="uid://b2sh884dyivec" path="res://scenes/wagon/audio/SFX_Wagon_Movement_Loop_Snow.ogg" id="31_q8yfp"]
 
 [sub_resource type="Curve" id="Curve_wva7c"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.06406685, 0.8368794), 0.0, 0.0, 0, 0, Vector2(0.53203344, 0.5957446), 0.0, 0.0, 0, 0, Vector2(1, 0.822695), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0362117, 0.8014184), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q23xm"]
