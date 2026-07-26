@@ -136,6 +136,9 @@ position = Vector2(139, 146)
 [node name="Log3" parent="YSORT/LogContainer" unique_id=557206288 instance=ExtResource("4_ulyey")]
 position = Vector2(17, 153)
 
+[node name="q" parent="YSORT/LogContainer" unique_id=1083419350 instance=ExtResource("4_ulyey")]
+position = Vector2(108, 139)
+
 [node name="SnowTileMap" type="TileMapLayer" parent="YSORT" unique_id=1313412674 node_paths=PackedStringArray("player")]
 visible = false
 y_sort_enabled = true

@@ -389,7 +389,7 @@ func update_rolling_volume(delta: float) -> void:
 	)
 	#print("target DB")
 	target_db = get_safe_audio_db(target_db)
-	print("actual_speed: ", actual_speed)
+	#print("actual_speed: ", actual_speed)
 	if actual_speed < 0.5:
 		target_db = lerp(-40.0, max_rolling_db, volume_percent)
 	else:
@@ -415,7 +415,7 @@ func update_rolling_volume(delta: float) -> void:
 func get_safe_audio_db(value: float) -> float:
 	if value > WARNING_AUDIO_DB:
 		push_warning(
-			"Wagon audio volume is dangerously high: " 
+			"This audio volume is dangerously high: " 
 			+ str(value) + " dB"
 		)
 
