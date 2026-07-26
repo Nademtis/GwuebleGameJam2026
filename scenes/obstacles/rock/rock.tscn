@@ -2,8 +2,20 @@
 
 [ext_resource type="Texture2D" uid="uid://j0ex1dsbjq53" path="res://scenes/obstacles/rock/asset/rock_demo.png" id="1_atjlv"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ganqv"]
+radius = 7.0
+
 [node name="rock" type="Node2D" unique_id=1538793027]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1261497073]
 position = Vector2(0, -20)
 texture = ExtResource("1_atjlv")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=914578087]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2121437906]
+position = Vector2(-1, -8)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_ganqv")

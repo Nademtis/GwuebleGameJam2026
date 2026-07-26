@@ -44,7 +44,7 @@ vertical_alignment = 1
 [node name="Label2" parent="CanvasLayer/Control/VBoxContainer" unique_id=1107716466 instance=ExtResource("1_e0qna")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 96
-text = "Why is it cold?"
+text = "Why is it freezing?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -65,6 +65,6 @@ vertical_alignment = 1
 [node name="Label4" parent="CanvasLayer/Control/VBoxContainer" unique_id=1521831518 instance=ExtResource("1_e0qna")]
 layout_mode = 2
 theme_override_font_sizes/font_size = 96
-text = "Freezing can feel like burning..."
+text = "The Cold Burns..."
 horizontal_alignment = 1
 vertical_alignment = 1

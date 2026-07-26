@@ -18,7 +18,6 @@ var level_list : Array[String] = [
 	"res://scenes/levels/level_5.tscn", # should be medium --> with 1 ice
 	"res://scenes/levels/level_6.tscn", # should be high --> with 1 ice
 	"res://scenes/levels/end_screen.tscn",#"thanks for playing" "more snow??"
-	# playground with snow and perhaps stats if i can manage
 ]
 
 var level_index : int = 0 # start with 0
@@ -65,6 +64,12 @@ func _setup_new_level() -> void:
 	
 	var level_name : String = next_level_path.get_file().get_basename()
 	Events.new_level_path.emit(level_name) # for debug
+	
+	if level_name == "res://scenes/levels/level_5.tscn":
+		print("play loop")
+	
+	if level_name == "res://scenes/levels/level_5.tscn":
+		print("play sick theme here")
 	
 	#fade_in_sfx.play() # level start
 	if level_index == 0:

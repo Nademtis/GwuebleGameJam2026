@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://fvgk8k2dvy7g" path="res://scenes/items/log/log.tscn" id="7_8hw10"]
 [ext_resource type="TileSet" uid="uid://cjqdmea75c2bl" path="res://scenes/tiles/SnowTileset.tres" id="8_1s8bw"]
 [ext_resource type="Script" uid="uid://bhfrxrlqm8lh6" path="res://scenes/snow/snow_tile_map_manager.gd" id="9_seltb"]
+[ext_resource type="PackedScene" uid="uid://dngkuy1dv06ia" path="res://scenes/obstacles/rock/rock.tscn" id="10_ahsud"]
 [ext_resource type="PackedScene" uid="uid://boghf3xqrg6q1" path="res://scenes/obstacles/ice/ice_block.tscn" id="10_vm1kt"]
 [ext_resource type="Script" uid="uid://ccjvvqoxad4x0" path="res://scenes/levels/camera_container.gd" id="12_4luak"]
 [ext_resource type="PackedScene" uid="uid://b7kajvrlpdt2r" path="res://scenes/camera/p_cam.tscn" id="13_6b6qc"]
@@ -19,6 +20,7 @@
 [ext_resource type="Script" uid="uid://cwy3ufujkos42" path="res://scenes/juice/storm_manager.gd" id="18_kqkch"]
 [ext_resource type="PackedScene" uid="uid://c6an35nm27old" path="res://scenes/ambience/snow_chill_ColorRect.tscn" id="19_iblbt"]
 [ext_resource type="PackedScene" uid="uid://ls7f32jsoev" path="res://scenes/ambience/snow_medium_ColorRect.tscn" id="20_syeym"]
+[ext_resource type="PackedScene" uid="uid://cismvgg78qcps" path="res://scenes/juice/storm_trigger.tscn" id="20_vm1kt"]
 [ext_resource type="PackedScene" uid="uid://b1aep8wnurgdu" path="res://scenes/ambience/snow_high_ColorRect.tscn" id="21_05jat"]
 [ext_resource type="PackedScene" uid="uid://dprx8xggcdysn" path="res://misc/level_swapper.tscn" id="23_fwhj0"]
 
@@ -227,6 +229,27 @@ metadata/_edit_lock_ = true
 y_sort_enabled = true
 metadata/_edit_lock_ = true
 
+[node name="rock" parent="YSORT/RockContainer" unique_id=1538793027 instance=ExtResource("10_ahsud")]
+position = Vector2(249, 97)
+
+[node name="rock2" parent="YSORT/RockContainer" unique_id=570311063 instance=ExtResource("10_ahsud")]
+position = Vector2(251, 209)
+
+[node name="rock3" parent="YSORT/RockContainer" unique_id=76896735 instance=ExtResource("10_ahsud")]
+position = Vector2(449, 98)
+
+[node name="rock4" parent="YSORT/RockContainer" unique_id=215097701 instance=ExtResource("10_ahsud")]
+position = Vector2(606, 100)
+
+[node name="rock5" parent="YSORT/RockContainer" unique_id=1523968880 instance=ExtResource("10_ahsud")]
+position = Vector2(734, 101)
+
+[node name="rock6" parent="YSORT/RockContainer" unique_id=199915247 instance=ExtResource("10_ahsud")]
+position = Vector2(962, 97)
+
+[node name="rock7" parent="YSORT/RockContainer" unique_id=1167117011 instance=ExtResource("10_ahsud")]
+position = Vector2(1059, 105)
+
 [node name="IceBlock" parent="YSORT" unique_id=2070849842 instance=ExtResource("10_vm1kt")]
 position = Vector2(484, 133)
 
@@ -328,18 +351,20 @@ offset_right = 1882.0
 offset_bottom = 233.0
 
 [node name="snowShader_High" parent="StormManager" unique_id=354930956 instance=ExtResource("21_05jat")]
-visible = false
 offset_left = -100.0
 offset_top = -5.0
 offset_right = 920.0
 offset_bottom = 235.0
 
 [node name="snowShader_High2" parent="StormManager" unique_id=1804926366 instance=ExtResource("21_05jat")]
-visible = false
 offset_left = 882.0
 offset_top = -4.0
 offset_right = 1902.0
 offset_bottom = 236.0
+
+[node name="StormTrigger" parent="StormManager" unique_id=2076491983 instance=ExtResource("20_vm1kt")]
+position = Vector2(341, 20)
+new_state = 3
 
 [node name="LevelSwapper" parent="." unique_id=1913094264 instance=ExtResource("23_fwhj0")]
 position = Vector2(1132, 79)

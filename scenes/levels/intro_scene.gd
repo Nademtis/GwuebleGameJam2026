@@ -13,7 +13,7 @@ extends Node2D
 @export var label_1_delay := 1.0
 @export var label_2_delay := 1.0
 @export var label_3_delay := 1.0
-@export var label_4_delay := 2.5
+@export var label_4_delay := 2.0
 
 @export var level_change_delay := 5.0
 

@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://fvgk8k2dvy7g" path="res://scenes/items/log/log.tscn" id="7_lynn5"]
 [ext_resource type="TileSet" uid="uid://cjqdmea75c2bl" path="res://scenes/tiles/SnowTileset.tres" id="8_d2xr8"]
 [ext_resource type="Script" uid="uid://bhfrxrlqm8lh6" path="res://scenes/snow/snow_tile_map_manager.gd" id="9_k7ksp"]
+[ext_resource type="PackedScene" uid="uid://dngkuy1dv06ia" path="res://scenes/obstacles/rock/rock.tscn" id="10_sb0xc"]
 [ext_resource type="PackedScene" uid="uid://boghf3xqrg6q1" path="res://scenes/obstacles/ice/ice_block.tscn" id="11_61ant"]
 [ext_resource type="Script" uid="uid://ccjvvqoxad4x0" path="res://scenes/levels/camera_container.gd" id="12_nryth"]
 [ext_resource type="PackedScene" uid="uid://b7kajvrlpdt2r" path="res://scenes/camera/p_cam.tscn" id="13_l04iu"]
@@ -220,6 +221,27 @@ metadata/_edit_lock_ = true
 [node name="RockContainer" type="Node2D" parent="YSORT" unique_id=1549059169]
 y_sort_enabled = true
 metadata/_edit_lock_ = true
+
+[node name="rock" parent="YSORT/RockContainer" unique_id=1538793027 instance=ExtResource("10_sb0xc")]
+position = Vector2(351, 104)
+
+[node name="rock2" parent="YSORT/RockContainer" unique_id=1026776853 instance=ExtResource("10_sb0xc")]
+position = Vector2(230, 107)
+
+[node name="rock3" parent="YSORT/RockContainer" unique_id=1806210723 instance=ExtResource("10_sb0xc")]
+position = Vector2(681, 105)
+
+[node name="rock4" parent="YSORT/RockContainer" unique_id=1681841493 instance=ExtResource("10_sb0xc")]
+position = Vector2(746, 195)
+
+[node name="rock5" parent="YSORT/RockContainer" unique_id=1550249925 instance=ExtResource("10_sb0xc")]
+position = Vector2(1034, 100)
+
+[node name="rock6" parent="YSORT/RockContainer" unique_id=708004495 instance=ExtResource("10_sb0xc")]
+position = Vector2(1037, 191)
+
+[node name="rock7" parent="YSORT/RockContainer" unique_id=1268593157 instance=ExtResource("10_sb0xc")]
+position = Vector2(1099, 109)
 
 [node name="IceBlock" parent="YSORT" unique_id=2070849842 instance=ExtResource("11_61ant")]
 position = Vector2(448.66602, 133)
