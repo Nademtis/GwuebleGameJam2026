@@ -123,6 +123,12 @@ theme_override_fonts/font = ExtResource("4_6q06x")
 theme_override_font_sizes/font_size = 46
 text = "FPS: "
 
+[node name="levelPath" type="Label" parent="DebugCanvasLayer/VBoxContainer" unique_id=1800833150]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_6q06x")
+theme_override_font_sizes/font_size = 46
+text = "FPS: "
+
 [node name="currentStormState" type="Label" parent="DebugCanvasLayer/VBoxContainer" unique_id=1603082619]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_6q06x")

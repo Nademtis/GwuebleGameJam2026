@@ -63,6 +63,10 @@ func _setup_new_level() -> void:
 	level_container.add_child(new_level_instance)
 	
 	animation_player.play("fade_out")
+	
+	var level_name : String = next_level_path.get_file().get_basename()
+	Events.new_level_path.emit(level_name) # for debug
+	
 	#fade_in_sfx.play() # level start
 	if level_index == 0:
 		await get_tree().create_timer(1).timeout
