@@ -383,9 +383,9 @@ to move around"
 horizontal_alignment = 1
 
 [node name="tutorialTextMENU" parent="." unique_id=12072384 node_paths=PackedStringArray("label") instance=ExtResource("24_7o3do")]
-position = Vector2(529, 90)
+position = Vector2(523, 88)
 label = NodePath("Label")
-fade_speed = 0.25
+fade_speed = 0.55
 
 [node name="Label" parent="tutorialTextMENU" unique_id=656240110 instance=ExtResource("25_o7j4k")]
 custom_minimum_size = Vector2(3.995, 0)

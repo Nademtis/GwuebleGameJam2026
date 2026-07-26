@@ -10,7 +10,7 @@ extends Node2D
 
 
 var level_list : Array[String] = [
-	
+	"res://scenes/levels/intro_scene.tscn",
 	"res://scenes/levels/level_1.tscn", 
 	"res://scenes/levels/level_2.tscn", 
 	"res://scenes/levels/level_3.tscn", #chill --> freeze start

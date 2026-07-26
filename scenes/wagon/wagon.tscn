@@ -480,6 +480,7 @@ bus = &"sfx"
 
 [node name="audioWagonMovement" type="AudioStreamPlayer2D" parent="Oven/AUDIO/MOVEMENT_SOUNDS" unique_id=1329831410]
 stream = SubResource("AudioStreamSynchronized_gvdt1")
+bus = &"sfx"
 
 [node name="fireDieAudio" type="AudioStreamPlayer2D" parent="Oven/AUDIO" unique_id=1075671251]
 stream = ExtResource("32_2x5ob")
