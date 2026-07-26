@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dbmhpgck7vjo5"]
+
+[ext_resource type="PackedScene" uid="uid://bx6i1uyy4tp16" path="res://misc/ui/cool_label.tscn" id="1_e0qna"]
+[ext_resource type="Script" uid="uid://beskk6mvcwkpd" path="res://scenes/levels/intro_scene.gd" id="1_n203w"]
+
+[node name="Node2D" type="Node2D" unique_id=1047652213]
+script = ExtResource("1_n203w")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2041850795]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1054052047]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control" unique_id=371082101]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=2138410994]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" parent="CanvasLayer/Control/VBoxContainer" unique_id=2112062982 instance=ExtResource("1_e0qna")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Something is wrong"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" parent="CanvasLayer/Control/VBoxContainer" unique_id=1107716466 instance=ExtResource("1_e0qna")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Why is it cold?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" parent="CanvasLayer/Control/VBoxContainer" unique_id=402457054 instance=ExtResource("1_e0qna")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "We thought it was summer"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="nothing" parent="CanvasLayer/Control/VBoxContainer" unique_id=641767498 instance=ExtResource("1_e0qna")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" parent="CanvasLayer/Control/VBoxContainer" unique_id=1521831518 instance=ExtResource("1_e0qna")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Freezing can feel like burning..."
+horizontal_alignment = 1
+vertical_alignment = 1

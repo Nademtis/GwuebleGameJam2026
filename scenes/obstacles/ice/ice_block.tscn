@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cqny4v76juugv" path="res://scenes/obstacles/ice/rock and ice aseprite.aseprite" id="1_cgitf"]
 [ext_resource type="Script" uid="uid://bk3bh07wof44x" path="res://scenes/obstacles/ice/ice_block.gd" id="1_pvn8g"]
 [ext_resource type="Script" uid="uid://b2elbuxdtvqkr" path="res://misc/horizontalShaker.gd" id="3_1tgaa"]
+[ext_resource type="AudioStream" uid="uid://dfycn3opqj2yg" path="res://audio/melting/SFX_Ice_Melting_Loop.ogg" id="4_1tgaa"]
 
 [sub_resource type="Curve" id="Curve_pvn8g"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.8129032, 1), 0.0, 0.0, 0, 0]
@@ -136,6 +137,11 @@ collision_layer = 2
 position = Vector2(-1, -8)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_ganqv")
+
+[node name="audioIceMelting" type="AudioStreamPlayer2D" parent="." unique_id=1967220580]
+stream = ExtResource("4_1tgaa")
+max_distance = 500.0
+bus = &"sfx"
 
 [connection signal="area_entered" from="heatReceiver" to="." method="_on_heat_receiver_area_entered"]
 [connection signal="area_exited" from="heatReceiver" to="." method="_on_heat_receiver_area_exited"]

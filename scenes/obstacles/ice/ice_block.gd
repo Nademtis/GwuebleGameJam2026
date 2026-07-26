@@ -21,6 +21,20 @@ var is_in_oven_heat_range : bool = false
 @onready var collision_shape_2d_wagon: CollisionShape2D = $StaticBodyWagonBlocker/CollisionShape2D
 @onready var collision_shape_2d_player: CollisionShape2D = $StaticBodyPlayerBlocker/CollisionShape2D
 
+@onready var audio_ice_melting: AudioStreamPlayer2D = $audioIceMelting
+#region audio
+
+@export_group("Ice Melting Audio")
+
+@export var min_melting_volume_db := -20.0
+@export var max_melting_volume_db := 15.0
+
+@export var melting_audio_lerp_speed := 25.0
+
+var current_melting_audio_db := -40.0
+@export var audio_stop_threshold := -79.0
+#endregion
+
 
 var current_shake_distance := 0.0
 var current_shake_speed := 0.0
@@ -32,17 +46,22 @@ var oven : Oven
 var is_dead : bool = false
 
 func _ready() -> void:
-	pass
-	#current_warmth = max_warmth
+	audio_ice_melting.volume_db = min_melting_volume_db
+	audio_ice_melting.play()
 
 func _process(delta: float) -> void:
 	if is_dead:
-		set_process(false)
+		update_melting_audio(delta)
+		if audio_ice_melting.volume_db <= audio_stop_threshold:
+			audio_ice_melting.stop()
 		return
+	
 	
 	if is_in_oven_heat_range:
 		update_melting(delta)
-
+	
+	#print("ice playing with: ", current_melting_audio_db)
+	update_melting_audio(delta)
 	update_visuals(delta)
 
 	if melt_progress >= 1.0:
@@ -77,11 +96,13 @@ func update_visuals(delta : float) -> void:
 func remove() -> void:
 	#animated_sprite_2d.modulate = Color(1.0, 1.0, 1.0, 0.157)
 	is_dead = true
+	#min_melting_volume_db = -80
+	#max_melting_volume_db = -40
+	
 	
 	collision_shape_2d_wagon.set_deferred("disabled", true)
 	collision_shape_2d_player.set_deferred("disabled", true)
 	horizontal_shaker.stop_shaking()
-	
 	#"should remove collision and player last frame maybe procces=false")
 	
 
@@ -123,6 +144,26 @@ func update_shake(delta: float) -> void:
 		if not horizontal_shaker.shaking:
 			#print("starts shaking")
 			horizontal_shaker.start_shaking()
+
+func update_melting_audio(delta: float) -> void:
+	var melt_strength := 0.0
+
+	if oven != null and is_in_oven_heat_range:
+		var heat := oven.get_heat_percentage()
+		melt_strength = melt_heat_curve.sample(heat)
+
+	var target_db : float = lerp(
+		min_melting_volume_db,
+		max_melting_volume_db,
+		melt_strength
+	)
+	#print("target DB, ", target_db)
+
+	audio_ice_melting.volume_db = move_toward(
+		audio_ice_melting.volume_db,
+		target_db,
+		melting_audio_lerp_speed * delta
+	)
 
 
 func _on_heat_receiver_area_entered(area: Area2D) -> void:

@@ -16,9 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://dnh24suv8v15a" path="res://scenes/environment/assets/background/parallaxAseprite_dark_trees_foreground.ase_layer_tex" id="19_y7n6r"]
 [ext_resource type="Shader" uid="uid://cx8wclejgyyou" path="res://misc/shaders/ice_lens.gdshader" id="20_ly8gl"]
 [ext_resource type="Script" uid="uid://cwy3ufujkos42" path="res://scenes/juice/storm_manager.gd" id="21_30ben"]
+[ext_resource type="PackedScene" uid="uid://bruqhnfrsiu3l" path="res://misc/ui/tutorial_text.tscn" id="22_kdsi4"]
 [ext_resource type="PackedScene" uid="uid://c6an35nm27old" path="res://scenes/ambience/snow_chill_ColorRect.tscn" id="22_xlt7h"]
 [ext_resource type="PackedScene" uid="uid://ls7f32jsoev" path="res://scenes/ambience/snow_medium_ColorRect.tscn" id="23_0y66q"]
+[ext_resource type="PackedScene" uid="uid://bx6i1uyy4tp16" path="res://misc/ui/cool_label.tscn" id="23_kva3v"]
 [ext_resource type="PackedScene" uid="uid://b1aep8wnurgdu" path="res://scenes/ambience/snow_high_ColorRect.tscn" id="24_ovq3l"]
+[ext_resource type="PackedScene" uid="uid://cismvgg78qcps" path="res://scenes/juice/storm_trigger.tscn" id="25_tki50"]
 [ext_resource type="PackedScene" uid="uid://dprx8xggcdysn" path="res://misc/level_swapper.tscn" id="26_p5qcu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rd3p3"]
@@ -200,6 +203,12 @@ position = Vector2(168, 177)
 [node name="Log5" parent="YSORT/LogContainer" unique_id=951486419 instance=ExtResource("7_6c6bd")]
 position = Vector2(547, 200)
 
+[node name="Log6" parent="YSORT/LogContainer" unique_id=1069387284 instance=ExtResource("7_6c6bd")]
+position = Vector2(309, 93)
+
+[node name="Log7" parent="YSORT/LogContainer" unique_id=229040589 instance=ExtResource("7_6c6bd")]
+position = Vector2(375, 175)
+
 [node name="Log3" parent="YSORT/LogContainer" unique_id=557206288 instance=ExtResource("7_6c6bd")]
 position = Vector2(108, 150)
 
@@ -292,14 +301,12 @@ snow_layers_medium = [NodePath("snowShader_Medium"), NodePath("snowShader_Medium
 snow_layers_high = [NodePath("snowShader_High"), NodePath("snowShader_High2")]
 
 [node name="snowShader_chill" parent="StormManager" unique_id=1732794010 instance=ExtResource("22_xlt7h")]
-visible = false
 offset_left = -159.0
 offset_top = -5.0
 offset_right = 841.0
 offset_bottom = 235.0
 
 [node name="snowShader_chill2" parent="StormManager" unique_id=423043313 instance=ExtResource("22_xlt7h")]
-visible = false
 offset_left = 787.0
 offset_top = -6.0
 offset_right = 1787.0
@@ -333,5 +340,22 @@ offset_top = -4.0
 offset_right = 1902.0
 offset_bottom = 236.0
 
+[node name="StormTrigger - chill" parent="StormManager" unique_id=2076491983 instance=ExtResource("25_tki50")]
+position = Vector2(50, 63)
+new_state = 1
+
 [node name="LevelSwapper" parent="." unique_id=1913094264 instance=ExtResource("26_p5qcu")]
 position = Vector2(1132, 79)
+
+[node name="tutorialText" parent="." unique_id=1154691161 node_paths=PackedStringArray("label") instance=ExtResource("22_kdsi4")]
+position = Vector2(58, 79)
+label = NodePath("Label")
+fade_speed = 0.2
+
+[node name="Label" parent="tutorialText" unique_id=2112062982 instance=ExtResource("23_kva3v")]
+offset_left = 21.0
+offset_top = -29.0
+offset_right = 181.0
+offset_bottom = 3.0
+theme_override_font_sizes/font_size = 16
+text = "Stay warm..."

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://domtq2xsa60k3"]
+
+[ext_resource type="Script" uid="uid://bfh5ynnm5tt40" path="res://scenes/levels/end_screen.gd" id="1_07kon"]
+[ext_resource type="PackedScene" uid="uid://bx6i1uyy4tp16" path="res://misc/ui/cool_label.tscn" id="1_53urn"]
+
+[node name="End cutscene" type="Node2D" unique_id=1047652213]
+script = ExtResource("1_07kon")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2041850795]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1054052047]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control" unique_id=371082101]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" parent="CanvasLayer/Control" unique_id=2112062982 instance=ExtResource("1_53urn")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 96
+text = "Thanks for playing :)"
+horizontal_alignment = 1
+vertical_alignment = 1
