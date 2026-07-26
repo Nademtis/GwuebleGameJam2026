@@ -7,6 +7,7 @@ class_name StormManager
 @export var init_storm_state : StormState 
 
 @export_group("Snow Layers")
+@export var snow_layers_none : Array[ColorRect]
 @export var snow_layers_chill : Array[ColorRect]
 @export var snow_layers_medium : Array[ColorRect]
 @export var snow_layers_high : Array[ColorRect]
@@ -21,13 +22,22 @@ class_name StormManager
 @export var flash_count : int = 3
 
 enum StormState{
+	NONE, # player can't freeze here
 	CHILL,
 	MEDIUM,
-	HIGH}
+	HIGH
+	}
+
 
 const STATES = {
 	#todo make new state where its very chill and no freeze damage
-	
+		StormState.NONE:
+	{
+		"snow_layers": "none",
+		"freeze_amount": 0.25,
+		"distortion_strength": 0.0,
+		"storm_intensity": 0.10
+	},
 	StormState.CHILL:
 	{
 		"snow_layers": "chill",
@@ -53,7 +63,7 @@ const STATES = {
 	}
 }
 
-var current_state : StormState = StormState.CHILL
+var current_state : StormState
 var storm_intensity := 0.0
 var freeze_material : ShaderMaterial
 
@@ -61,6 +71,7 @@ func _ready() -> void:
 
 	freeze_material = freeze_shader.material as ShaderMaterial
 
+	current_state = init_storm_state
 	apply_state(init_storm_state)
 	
 func change_state(new_state: StormState) -> void:
@@ -73,6 +84,9 @@ func change_state(new_state: StormState) -> void:
 	
 		
 func apply_state(state: StormState) -> void:
+	#print("applying state: ", state)
+	Events.storm_state_changed.emit(state)
+	
 	var values:Dictionary = STATES[state]
 	storm_intensity = values["storm_intensity"]
 
@@ -82,11 +96,14 @@ func apply_state(state: StormState) -> void:
 	
 func update_snow_layers(layer_name: String) -> void:
 
+	hide_layers(snow_layers_none)
 	hide_layers(snow_layers_chill)
 	hide_layers(snow_layers_medium)
 	hide_layers(snow_layers_high)
 
 	match layer_name:
+		"none":
+			show_layers(snow_layers_none)
 		"chill":
 			show_layers(snow_layers_chill)
 		"medium":

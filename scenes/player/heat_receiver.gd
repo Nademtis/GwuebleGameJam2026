@@ -17,13 +17,23 @@ var current_warmth : float = 0
 @export var freeze_grace_period: float = 1.25
 var freeze_timer: float = 0.0
 
+var storm_state_is_none : bool = false # nofreezing
+
 
 func _ready() -> void:
 	current_warmth = max_warmth
+	Events.connect("storm_state_changed", check_storm_state)
 
 func _process(delta: float) -> void:
 	if is_equal_approx(current_warmth, max_warmth) and is_in_oven_heat_range:
 		return
+		
+	#only if storm state is none. no freezing here
+	if storm_state_is_none:
+		restore_warmth(delta)
+		return
+		
+	
 	#print("freeze timer: ", freeze_timer)
 	if is_in_oven_heat_range:
 		restore_warmth(delta)
@@ -51,6 +61,14 @@ func restore_warmth(delta: float) -> void:
 func lose_warmth(delta: float) -> void:
 	current_warmth -= warmth_loss_speed * delta
 
+
+func check_storm_state(storm_state : StormManager.StormState) -> void:
+	#print("from player heat: ", storm_state)
+	if storm_state == StormManager.StormState.NONE:
+		storm_state_is_none = true
+	else:
+		storm_state_is_none = false
+		
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("heat"):
 		is_in_oven_heat_range = true

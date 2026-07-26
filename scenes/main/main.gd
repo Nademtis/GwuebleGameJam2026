@@ -11,6 +11,8 @@ extends Node2D
 
 var level_list : Array[String] = [
 "res://scenes/levels/level_template.tscn",
+"res://scenes/levels/level_template.tscn",
+
 #"res://levels/level_2.tscn", 
 ]
 

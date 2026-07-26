@@ -80,11 +80,21 @@ metadata/_custom_type_script = "uid://bd046eokvcnu2"
 [node name="DebugCanvasLayer" type="CanvasLayer" parent="." unique_id=553877644]
 script = ExtResource("3_k2fmo")
 
-[node name="fpsLabel" type="Label" parent="DebugCanvasLayer" unique_id=1933653377]
+[node name="VBoxContainer" type="VBoxContainer" parent="DebugCanvasLayer" unique_id=998023088]
 offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 32
+offset_bottom = 40.0
+
+[node name="fpsLabel" type="Label" parent="DebugCanvasLayer/VBoxContainer" unique_id=1933653377]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_6q06x")
+theme_override_font_sizes/font_size = 46
 text = "FPS: "
+
+[node name="currentStormState" type="Label" parent="DebugCanvasLayer/VBoxContainer" unique_id=1603082619]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_6q06x")
+theme_override_font_sizes/font_size = 32
+text = "test text"
 
 [node name="fadeInOut" type="CanvasLayer" parent="." unique_id=2005028278]
 
