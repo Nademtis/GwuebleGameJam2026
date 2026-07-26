@@ -15,6 +15,8 @@ const STARTUP_VOLUME_DB := -40.0
 @export var ambience_volume_lerp_speed := 20.0 # 15
 var target_ambience_db: float = 0.0
 
+
+
 func _ready() -> void:
 	Events.connect("storm_state_changed", update_ambience_audio)
 	

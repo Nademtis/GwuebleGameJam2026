@@ -8,6 +8,13 @@ extends Node2D
 
 @onready var animation_player: AnimationPlayer = $fadeInOut/AnimationPlayer
 
+@onready var music_loop_intro_levels: AudioStreamPlayer = $AudioManager/music_loop_intro_levels
+@onready var music_epic_theme: AudioStreamPlayer = $AudioManager/music_epic_theme
+
+@export_group("Music Fade In")
+@export var music_fade_duration := 4.0
+@export var music_start_db := -40.0
+@export var music_target_db := 0.0
 
 var level_list : Array[String] = [
 	"res://scenes/levels/intro_scene.tscn",
@@ -65,11 +72,17 @@ func _setup_new_level() -> void:
 	var level_name : String = next_level_path.get_file().get_basename()
 	Events.new_level_path.emit(level_name) # for debug
 	
-	if level_name == "res://scenes/levels/level_5.tscn":
-		print("play loop")
+	if level_name == "level_1":
+		if not music_loop_intro_levels.playing:
+			fade_in_audio(music_loop_intro_levels)
+			print_debug("started intro song")
 	
-	if level_name == "res://scenes/levels/level_5.tscn":
-		print("play sick theme here")
+	if level_name == "level_6":
+		music_loop_intro_levels.stop()
+
+		if not music_epic_theme.playing:
+			fade_in_audio(music_epic_theme)
+			print_debug("started epic theme")
 	
 	#fade_in_sfx.play() # level start
 	if level_index == 0:
@@ -85,6 +98,18 @@ func remove_active_cam() -> void:
 		for cam : PhantomCamera2D in list:
 			cam.priority = 0
 			
+
+func fade_in_audio(audio: AudioStreamPlayer) -> void:
+	audio.volume_db = music_start_db
+	audio.play()
+
+	var tween := create_tween()
+	tween.tween_property(
+		audio,
+		"volume_db",
+		music_target_db,
+		music_fade_duration
+	).set_trans(Tween.TRANS_LINEAR)
 
 func _on_window_focus_entered() -> void:
 	focus_menu.visible = false

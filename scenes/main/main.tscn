@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://c8i7cs41gdxi5" path="res://misc/ui/menu.tscn" id="5_ow5a4"]
 [ext_resource type="AudioStream" uid="uid://ja7xk7v573ib" path="res://audio/ambience/Ambience_State_Medium.ogg" id="5_th5th"]
 [ext_resource type="AudioStream" uid="uid://c52ptxnb4a6nf" path="res://audio/ambience/Ambience_State_High.ogg" id="6_7smn1"]
+[ext_resource type="AudioStream" uid="uid://baj1fb1obhu8d" path="res://audio/music/Music_First_Levels.ogg" id="7_th5th"]
+[ext_resource type="AudioStream" uid="uid://bpbnktea6rkga" path="res://audio/music/Music_Epic_Theme.ogg" id="8_7smn1"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_ganqv"]
 clip_count = 4
@@ -97,6 +99,16 @@ script = ExtResource("2_hujxm")
 [node name="AudioAmbienceInteractive" type="AudioStreamPlayer" parent="AudioManager" unique_id=1109453616]
 stream = SubResource("AudioStreamInteractive_ganqv")
 bus = &"ambience"
+
+[node name="music_loop_intro_levels" type="AudioStreamPlayer" parent="AudioManager" unique_id=1543740692]
+stream = ExtResource("7_th5th")
+volume_db = -5.0
+bus = &"music"
+
+[node name="music_epic_theme" type="AudioStreamPlayer" parent="AudioManager" unique_id=186912602]
+stream = ExtResource("8_7smn1")
+volume_db = -5.0
+bus = &"music"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1506560489]
 top_level = true
