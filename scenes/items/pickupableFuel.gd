@@ -192,7 +192,7 @@ func play_dig_up_animation() -> void:
 	tween.set_trans(Tween.TRANS_QUAD)
 	tween.set_ease(Tween.EASE_OUT)
 
-	# Pop out of the snow.
+	#pop out of the snow
 	tween.tween_property(
 		sprite_container,
 		"position:y",
