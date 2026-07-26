@@ -102,12 +102,12 @@ bus = &"ambience"
 
 [node name="music_loop_intro_levels" type="AudioStreamPlayer" parent="AudioManager" unique_id=1543740692]
 stream = ExtResource("7_th5th")
-volume_db = -5.0
+volume_db = -4.0
 bus = &"music"
 
 [node name="music_epic_theme" type="AudioStreamPlayer" parent="AudioManager" unique_id=186912602]
 stream = ExtResource("8_7smn1")
-volume_db = -5.0
+volume_db = -4.0
 bus = &"music"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1506560489]

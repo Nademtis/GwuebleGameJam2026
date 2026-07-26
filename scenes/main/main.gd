@@ -47,7 +47,7 @@ func start_new_level(to_restart : bool) -> void:
 	if not to_restart:
 		level_index += 1 
 		
-	print("main booting level: ", level_index)
+	#print("main booting level: ", level_index)
 	next_level_path = level_list[level_index]
 	animation_player.play("fade_to_black")
 	await animation_player.animation_finished
