@@ -10,6 +10,15 @@ var fuel_queue : Array[PickupableFuel] = []
 
 #AUDIO
 @onready var audio_random_log_land_in_oven: AudioStreamPlayer2D = $AUDIO/audioRandomLogLandInOven
+@onready var fire_die_audio: AudioStreamPlayer2D = $AUDIO/fireDieAudio
+@onready var fire_loop_audio: AudioStreamPlayer2D = $AUDIO/fireLoopAudio
+
+@export_group("Fire Audio")
+
+@export var fire_loop_min_db := -25.0
+@export var fire_loop_max_db := 0.0
+@export var fire_loop_volume_lerp_speed := 10.0
+@export var fire_loop_volume_curve: Curve
 
 
 #region firestuff
@@ -37,6 +46,8 @@ var fuel_queue : Array[PickupableFuel] = []
 #everything player heat
 @onready var player_heat_collision_shape_2d: CollisionShape2D = $playerHeatArea/playerHeatCollisionShape2D
 const HEAT_AREA_MULTIPLIER : float = 1.15
+
+var fire_died : bool = false
 
 #region fire const
 #fire sprites can never go below this value. that would exceed the oven
@@ -89,6 +100,9 @@ func _ready() -> void:
 	visible = true
 	heat = max_heat/2
 	
+	fire_loop_audio.volume_db = fire_loop_min_db
+	fire_loop_audio.play()
+	
 	_set_fire_shaker(fire_1_shaker, FIRE_1_SHAKE_DISTANCE, FIRE_1_SHAKE_SPEED)
 	_set_fire_shaker(fire_2_shaker, FIRE_2_SHAKE_DISTANCE, FIRE_2_SHAKE_SPEED)
 	_set_fire_shaker(fire_3_shaker, FIRE_3_SHAKE_DISTANCE, FIRE_3_SHAKE_SPEED)
@@ -99,6 +113,15 @@ func _ready() -> void:
 
 func _process(delta : float) -> void:
 	heat = max(heat - delta, 0.0)
+	
+	
+	if get_heat_percentage() < 0.09 and not fire_died:
+		if not fire_die_audio.playing:
+			print("played fire die")
+			fire_die_audio.play(0.5)
+			fire_died = true
+	
+	update_fire_audio(delta)
 	update_fire_visuals(delta)
 	update_light_visuals(delta)
 	update_snow_melt_area_and_heat_area(delta)
@@ -242,10 +265,31 @@ func update_single_light(
 	#	update_snow_melt_area(target_scale, delta)
 	
 
+func update_fire_audio(delta: float) -> void:
+	var heat_percent := get_heat_percentage()
+
+	var volume_percent := heat_percent
+	if fire_loop_volume_curve:
+		volume_percent = fire_loop_volume_curve.sample(heat_percent)
+
+	var target_db : float = lerp(
+		fire_loop_min_db,
+		fire_loop_max_db,
+		volume_percent
+	)
+
+	fire_loop_audio.volume_db = move_toward(
+		fire_loop_audio.volume_db,
+		target_db,
+		fire_loop_volume_lerp_speed * delta
+	)
+
+
 func add_fuel(fuel : PickupableFuel) -> void:
 	heat += fuel.heat
 	heat = clamp(heat,0.0, max_heat)
 	audio_random_log_land_in_oven.play()
+	fire_died = false # for audio
 	#print("added heat - new heat: ", heat)
 	
 func _set_fire_shaker(shaker : HorizontalShaker, shake_distance : float, shake_speed : float) -> void:
