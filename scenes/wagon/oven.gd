@@ -20,6 +20,7 @@ var fuel_queue : Array[PickupableFuel] = []
 @export var fire_loop_volume_lerp_speed := 10.0
 @export var fire_loop_volume_curve: Curve
 
+var init_heat : float # set by wagon as export
 
 #region firestuff
 
@@ -98,7 +99,6 @@ const FIRE_3_SHAKE_SPEED: float = 19.0
 
 func _ready() -> void:
 	visible = true
-	heat = max_heat/2
 	
 	fire_loop_audio.volume_db = fire_loop_min_db
 	#fire_loop_audio.play()
@@ -311,3 +311,7 @@ func _set_fire_shaker(shaker : HorizontalShaker, shake_distance : float, shake_s
 	
 func get_heat_percentage() -> float:
 	return clamp(heat / max_heat, 0.0, 1.0)
+	
+func set_heat(new_heat : float) -> void:
+	heat = clamp(heat, new_heat, max_heat)
+	print("from set, set heat = ", heat)

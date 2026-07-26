@@ -497,6 +497,22 @@ texture = ExtResource("1_pf38f")
 0:8/0/terrain = 0
 0:8/0/terrains_peering_bit/right_side = 0
 0:8/0/custom_data_0 = "dirt"
+6:0/0 = 0
+6:0/0/custom_data_0 = "grass"
+7:0/0 = 0
+7:0/0/custom_data_0 = "grass"
+7:1/0 = 0
+7:1/0/custom_data_0 = "grass"
+6:1/0 = 0
+6:1/0/custom_data_0 = "grass"
+5:1/0 = 0
+5:1/0/custom_data_0 = "grass"
+5:2/0 = 0
+5:2/0/custom_data_0 = "grass"
+6:2/0 = 0
+6:2/0/custom_data_0 = "grass"
+7:2/0 = 0
+7:2/0/custom_data_0 = "grass"
 
 [resource]
 physics_layer_0/collision_layer = 2

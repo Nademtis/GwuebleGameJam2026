@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Wagon
 
 @export var player_ref : Player = null
+@export var init_heat : float = 7.5
 
 #region movement
 #each time wagon hit snow. wagon slowed down by this in 
@@ -11,6 +12,7 @@ class_name Wagon
 @onready var right_player_push_spot: Marker2D = $handles/rightHandle/rightPlayerPushSpot
 
 @onready var light_container: Node2D = $Oven/lightContainer
+@onready var oven: Oven = $Oven
 
 @onready var wheels_animated_sprite_2d_1: AnimatedSprite2D = $spriteContainer/wheelContainer/wheelsAnimatedSprite2d
 @onready var wheels_animated_sprite_2d_2: AnimatedSprite2D = $spriteContainer/wheelContainer/wheelsAnimatedSprite2d2
@@ -97,6 +99,8 @@ func _ready() -> void:
 		
 	if not walkable_tilemap_layer:
 		push_error("walkable_tilemap_layer not defined")
+	
+	oven.set_heat(init_heat)
 	
 	#AUDIO
 	if audio_wagon_movement.stream is AudioStreamSynchronized:
