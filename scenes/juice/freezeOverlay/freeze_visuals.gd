@@ -17,6 +17,10 @@ var current_circle_center := Vector2(0.5,0.5)
 var current_circle_radius := 1.2
 var target_circle_radius := 1.2
 
+@onready var audio_player_freeze: AudioStreamPlayer = $"../AUDIO/audioPlayerFreeze"
+@export var freeze_audio_fade_out_speed := 35.0
+@export var freeze_audio_min_volume_db := -40.0
+
 # 1.0 is totally warm
 # 0.0 is freezing dead 
 const LITTLE_FREEZE_THRESHOLD := 0.85
@@ -115,8 +119,12 @@ func _process(delta: float) -> void:
 	)
 	target_circle_radius = target_values["circle_radius"]
 
-	update_radial_radius(delta)
+	print("volume: ", audio_player_freeze.volume_db)
 	
+	#if audio_player_freeze.playing:
+	update_freeze_audio(delta)
+
+	update_radial_radius(delta)
 	update_radial_shader()
 	update_color_shader()
 	update_freeze_overlay()
@@ -188,6 +196,23 @@ func update_radial_shader() -> void:
 		"circle_radius",
 		current_circle_radius
 	)
+
+func update_freeze_audio(delta: float) -> void:
+	if current_freeze_amount >= 0.3:
+		if not audio_player_freeze.playing:
+			audio_player_freeze.play()
+
+		audio_player_freeze.volume_db = 0.0
+
+	else:
+		audio_player_freeze.volume_db = move_toward(
+			audio_player_freeze.volume_db,
+			-80.0,
+			freeze_audio_fade_out_speed * delta
+		)
+
+		if audio_player_freeze.volume_db <= -79.0:
+			audio_player_freeze.stop()
 
 func update_radial_radius(delta: float) -> void:
 	if current_circle_radius > target_circle_radius:

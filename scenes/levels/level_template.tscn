@@ -299,7 +299,7 @@ position = Vector2(1017, 58)
 new_state = 0
 
 [node name="StormTrigger5" parent="StormManager" unique_id=1615509090 instance=ExtResource("22_yw11j")]
-position = Vector2(113, 12)
+position = Vector2(65, 18)
 new_state = 1
 
 [node name="LevelSwapper" parent="." unique_id=1913094264 instance=ExtResource("26_q5jtg")]

@@ -29,6 +29,7 @@ var push_direction_is_right : bool = false
 @onready var snow_flat_random: AudioStreamPlayer = $AUDIO/Footstep/snowFlatrandom
 
 
+
 @export var footstep_cooldown := 0.32
 var footstep_timer := 0.0 # changedf in code
 

@@ -39,6 +39,9 @@
 [ext_resource type="AudioStream" uid="uid://dgst2375ivvcv" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Flat_Snow_3.ogg" id="37_ds1xl"]
 [ext_resource type="AudioStream" uid="uid://uxgsecvjl8q5" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Flat_Snow_4.ogg" id="38_1u1sw"]
 [ext_resource type="AudioStream" uid="uid://1ln0dit8kkbr" path="res://scenes/player/audio/Footsteps/SFX_Player_Footstep_Flat_Snow_5.ogg" id="39_2t3bg"]
+[ext_resource type="AudioStream" uid="uid://b3o8qqrmcki1t" path="res://audio/sfx/freeze/SFX_Freeze_To_Death_1.ogg" id="40_genst"]
+[ext_resource type="AudioStream" uid="uid://bo2s4l466kthp" path="res://audio/sfx/freeze/SFX_Freeze_To_Death_2.ogg" id="41_niom3"]
+[ext_resource type="AudioStream" uid="uid://07kfhe0l2w45" path="res://audio/sfx/freeze/SFX_Freeze_To_Death_3.ogg" id="42_ttakn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ganqv"]
 radius = 4.0
@@ -97,6 +100,12 @@ stream_1/stream = ExtResource("36_hyqqp")
 stream_2/stream = ExtResource("37_ds1xl")
 stream_3/stream = ExtResource("38_1u1sw")
 stream_4/stream = ExtResource("39_2t3bg")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ganqv"]
+streams_count = 3
+stream_0/stream = ExtResource("40_genst")
+stream_1/stream = ExtResource("41_niom3")
+stream_2/stream = ExtResource("42_ttakn")
 
 [node name="Player" type="CharacterBody2D" unique_id=151895576 groups=["player"]]
 collision_mask = 78
@@ -212,6 +221,10 @@ bus = &"sfx"
 stream = SubResource("AudioStreamRandomizer_28m0y")
 volume_db = 0.5
 bus = &"sfx"
+
+[node name="audioPlayerFreeze" type="AudioStreamPlayer" parent="AUDIO" unique_id=765651447]
+stream = SubResource("AudioStreamRandomizer_ganqv")
+volume_db = -1.5
 
 [connection signal="area_entered" from="Hands/pickupArea" to="Hands" method="_on_pickup_area_area_entered"]
 [connection signal="area_entered" from="Hands/depositArea" to="Hands" method="_on_deposit_area_area_entered"]
