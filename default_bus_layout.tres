@@ -41,5 +41,5 @@ bus/7/name = &"ambience"
 bus/7/solo = false
 bus/7/mute = false
 bus/7/bypass_fx = false
-bus/7/volume_db = -3.7683105
+bus/7/volume_db = -4.002995
 bus/7/send = &"player_ambience"

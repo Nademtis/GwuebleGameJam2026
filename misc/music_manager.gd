@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	)
 
 func update_ambience_audio(new_state : StormManager.StormState) -> void:
-	print("from audio Manager, ", new_state)
+	#print("from audio Manager, ", new_state)
 	playback.switch_to_clip(new_state)
 	match new_state:
 		StormManager.StormState.NONE:

@@ -2,7 +2,7 @@ extends Node2D
 class_name StormManager
 
 
-@onready var freeze_shader: ColorRect = $"../Node2D/SnowDustShaderGoingLeft/freezeShader" # has ice_lens shader
+@onready var freeze_shader: ColorRect = $"../frostShaderContainer/SnowDustShaderGoingLeft/freezeShader" # has ice_lens shader
 
 @export var init_storm_state : StormState 
 

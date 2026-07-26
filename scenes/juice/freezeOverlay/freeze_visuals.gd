@@ -119,7 +119,7 @@ func _process(delta: float) -> void:
 	)
 	target_circle_radius = target_values["circle_radius"]
 
-	print("volume: ", audio_player_freeze.volume_db)
+	#print("volume: ", audio_player_freeze.volume_db)
 	
 	#if audio_player_freeze.playing:
 	update_freeze_audio(delta)
