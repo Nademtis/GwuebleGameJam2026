@@ -203,7 +203,7 @@ func update_freeze_audio(delta: float) -> void:
 		if not audio_player_freeze.playing:
 			audio_player_freeze.play()
 
-		audio_player_freeze.volume_db = -11 # 8.5 
+		audio_player_freeze.volume_db = -9 # 8.5 
 
 	else:
 		audio_player_freeze.volume_db = move_toward(

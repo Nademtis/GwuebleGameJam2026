@@ -16,7 +16,9 @@ extends Node2D
 @export var music_start_db := -40.0
 @export var music_target_db := 0.0
 
+
 var level_list : Array[String] = [
+	#"res://scenes/levels/hack_level_for_video_capture.tscn",
 	"res://scenes/levels/intro_scene.tscn",
 	"res://scenes/levels/level_1.tscn", 
 	"res://scenes/levels/level_2.tscn", 

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cksa4vfpkg26i"]
+
+[ext_resource type="Script" uid="uid://cxbrkcbnqsbi3" path="res://scenes/levels/hack_level_for_video_capture.gd" id="1_idsbe"]
+
+[node name="Node2D" type="Node2D" unique_id=836467922]
+script = ExtResource("1_idsbe")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1368632151]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1156386393]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
